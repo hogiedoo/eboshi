@@ -1,7 +1,7 @@
 # Be sure to restart your server when you modify this file
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.1.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -11,6 +11,7 @@ Rails::Initializer.run do |config|
   #config.gem 'ZenTest', :version => '>= 3.10.0'
   #config.gem 'rspec', :version => '>= 1.1.4'
   config.gem 'rcov', :version => '>= 0.8.1.2.0'
+  config.gem 'mysql'
   config.gem 'haml'
 
   config.action_controller.session = {
