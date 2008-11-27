@@ -2,8 +2,14 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Client do
   before(:each) do
-  	@client = clients(:NANETS)
-  	@user = users(:Micah)
+  	@client = Factory :client
+  	@invoice = Factory :invoice, :client => @client
+  	@user = Factory :user, :rate => 65
+  	@unbilled = [
+  	  Factory(:work, :client => @client, :user => @user, :invoice => nil),
+    	Factory(:work, :client => @client, :user => @user, :invoice => nil)
+    ]
+  	Factory :work, :client => @client, :user => @user, :invoice => @invoice
   end
 
   it "should create a new instance given valid attributes" do
@@ -11,7 +17,8 @@ describe Client do
   end
 	  
   it "should calculate the balance correctly" do
-  	@client.balance.should == 100
+  	puts @client.line_items.inspect
+  	@client.balance.should eql 100.0
   end
   
   it "should calculate the credits correctly" do
@@ -23,7 +30,8 @@ describe Client do
   end
 
 	it "should provide a todo list" do
-		@client.todos.length.should == 2
+	  Factory :todo, :client => @client, :user => @user
+		@client.todos.length.should eql 1
 	end
 	
 	it "should calculate a default rate given a user" do
@@ -40,6 +48,6 @@ describe Client do
 	it "should return an unsaved invoice with all unbilled line items" do
 	  i = @client.build_invoice_from_unbilled
 	  i.new_record?.should be_true
-	  i.line_items.should == LineItem.unbilled
+	  i.line_items.should == @unbilled
 	end
 end
