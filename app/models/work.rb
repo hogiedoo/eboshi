@@ -4,7 +4,9 @@ class Work < LineItem
 	
 	def self.merge_from_ids(ids)
 	  works = Work.find ids, :order => "finish DESC"
-	  works.each { |w| w.notes += '.' unless w.notes.last == '.' }
+	  works.each do |w|
+	    w.notes += '.' unless w.notes.nil? or w.notes.last.match /[.?]/
+	  end
 	  returning work = works.first do
 	    unless works.empty?
 	      work.hours = works.sum(&:hours)

@@ -1,7 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe UsersController do
-
+  fixtures :all
+  #integrate_views
+  
 	before(:each) do
 		controller.stub!(:authenticate_or_request_with_http_basic).and_return(true)
 		controller.stub!(:current_user).and_return(users(:Micah))

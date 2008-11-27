@@ -7,8 +7,7 @@ class Todo < ActiveRecord::Base
 
 	def user_name=(name)
 		unless name.nil?
-			user = User.find_by_login(name)
-			user_id = user.try(:id)
+			self.user = User.find_by_login!(name)
 		end
 	end
 end

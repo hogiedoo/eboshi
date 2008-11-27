@@ -1,32 +1,32 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Adjustment do
-	before(:each) do
-		@line_item = line_items(:adjustment1)
-	end
+  before(:each) do
+    @adjustment = Factory :adjustment
+  end
 
-	it "should calculate the hours correctly" do
-		@line_item.hours.should == 0
-	end
+  it "should not have any hours" do
+    @adjustment.hours.should eql 0
+  end
 
-	it "should calculate the total correctly" do
-		@line_item.total.should == -25
-	end
+  it "should calculate the total correctly" do
+    @adjustment.rate = -25
+    @adjustment.total.should eql -25
+  end
 
-	it "should be greater than all other line items" do
-		(@line_item > line_items(:billed1)).should == true
-		(@line_item < line_items(:billed1)).should == false
-		(@line_item == line_items(:adjustment1)).should == true
-		(@line_item == line_items(:billed1)).should == false
-		(@line_item <=> line_items(:billed1)).should == 1
-	end
-	
-	it "should not be checked" do
-		@line_item.checked?.should be_false
-	end
+  it "should be greater than all other line items" do
+    @work = Factory :work
+    @adjustment.should > @work
+    @adjustment.should_not < @work
+    @adjustment.should_not eql @work
+  end
+  
+  it "should not be checked" do
+    @adjustment.checked?.should be_false
+  end
 
-	it "should respond via total" do
-		a = Adjustment.new(:total => 50)
-		a.total.should == 50
-	end
+  it "should respond via total" do
+    @adjustment = Adjustment.new :total => 50
+    @adjustment.total.should eql 50
+  end
 end
