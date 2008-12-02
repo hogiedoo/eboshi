@@ -1,3 +1,8 @@
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+
+require 'factory_girl'
+require 'faker'
+
 Factory.define :client do |c|
   c.name { Faker::Company.name }
   c.address { Faker::Address.street_address }
