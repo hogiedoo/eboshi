@@ -15,12 +15,11 @@ describe Client do
   it "should create a new instance given valid attributes" do
     Client.create!(@client.attributes)
   end
-	  
+
   it "should calculate the balance correctly" do
-  	puts @client.line_items.inspect
   	@client.balance.should eql 100.0
   end
-  
+
   it "should calculate the credits correctly" do
   	@client.credits.should == 150
   end
@@ -33,7 +32,7 @@ describe Client do
 	  Factory :todo, :client => @client, :user => @user
 		@client.todos.length.should eql 1
 	end
-	
+
 	it "should calculate a default rate given a user" do
 		@client.default_rate(@user).should == 50
 		Client.new.default_rate(@user).should == 65

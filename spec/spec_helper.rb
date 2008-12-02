@@ -4,8 +4,6 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'spec'
 require 'spec/rails'
-require 'factory_girl'
-require 'faker'
 require 'spec/factories/factories.rb'
 
 Spec::Runner.configure do |config|
