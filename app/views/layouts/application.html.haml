@@ -18,30 +18,38 @@
 
 %body
   #wrapper
-    #header
-      #login
-        == Welcome, #{current_user.name}!<br>
-        ==[#{link_to 'my account', edit_user_path(current_user)}]
-      %h1 
-        %a{:href => "/"} BOTandROSE Invoicing
-      %p Simple rails invoicing application
-      %h2= yield :title
-      = yield :header
-
-    #sidebar
-      %h2 clients
-      - @clients.each do |client|
-        %ul
-          %li
-            = link_to h(client.name), invoices_path(client)
-            \- 
-            = number_to_currency client.balance
-  
-    #page
-      #content
-        %p#flash_notice= flash[:notice]
-        %p#flash_error= flash[:error]
-        = yield
+    #header_container
+      #header
+        #login
+          %span== Welcome, #{current_user.name}!
+          %span==(#{link_to 'view account', edit_user_path(current_user)})
+        %h1 
+          %a{:href => "/"} BOTandROSE Invoicing
+        %p Simple rails invoicing application
+        #ampersand
+        
+    #breadcrumbs_container
+      #breadcrumbs
+        %h2= yield :title
+        = yield :header
+        
+    #all_content_container
+      #all_content
+        #sidebar
+          %h2 client list
+          - @clients.each do |client|
+            %ul
+              %li
+                = link_to h(client.name), invoices_path(client)
+          %p= link_to '+ Add Client', new_client_path
+        #page
+          #content
+            %p#flash_notice= flash[:notice]
+            %p#flash_error= flash[:error]
+            = yield
+        .clear
+      .clear
       
-    #footer
-      = yield :footer
+    #footer_container
+      #footer
+        = yield :footer
