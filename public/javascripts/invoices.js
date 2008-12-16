@@ -20,20 +20,8 @@ document.observe('dom:loaded', function() {
     e.stop()
     new Ajax.Updater('new_line_items', this.form.action, {
       parameters: this.form.serialize(),
-      insertion: 'after'
-    })
-  })
-  
-  $$('.clock_out').each(function(a) {
-    a.observe('click', function(e) {
-      e.stop()
-      new Ajax.Request(a.href, {
-        onComplete: function(response) {
-          eval('object = '+response.responseText);
-          a.up('tr').replace(object.line_item)
-          b.up('tbody').down('td.total').innerHTML = number_to_currency(object.total)
-        }
-      })
+      insertion: 'after',
+      onComplete: clock_out_links
     })
   })
   
@@ -66,6 +54,7 @@ document.observe('dom:loaded', function() {
   })
   
   ajax_mini_invoice_show_links()
+  clock_out_links()
 })
 
 function ajax_mini_invoice_show_links() {
@@ -75,6 +64,21 @@ function ajax_mini_invoice_show_links() {
       new Ajax.Request(a.href, { method: 'get', onComplete: function(response) {
         a.up('div').replace(response.responseText)
       }})
+    })
+  })
+}
+
+function clock_out_links() {
+  $$('.clock_out').each(function(a) {
+    a.observe('click', function(e) {
+      e.stop()
+      new Ajax.Request(a.href, {
+        onComplete: function(response) {
+          eval('object = '+response.responseText);
+          a.up('tr').replace(object.line_item)
+          b.up('tbody').down('td.total').innerHTML = number_to_currency(object.total)
+        }
+      })
     })
   })
 }
