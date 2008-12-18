@@ -1,3 +1,7 @@
+jQuery.ajaxSetup({ 
+  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+})
+
 Date.prototype.toSQL = function() {
   return this.getFullYear() + '-' +
     (this.getMonth() + 1).toPaddedString(2) + '-' +
