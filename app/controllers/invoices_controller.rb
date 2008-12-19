@@ -22,7 +22,7 @@ class InvoicesController < ApplicationController
 	end
 
 	def new
-		@invoice = @client.build_invoice_from_unbilled 
+		@invoice = @client.build_invoice_from_unbilled(params[:line_item_ids])
 	end
 
 	def edit

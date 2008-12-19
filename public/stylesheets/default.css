@@ -219,6 +219,14 @@ a:hover { background: transparent url('/images/underline2.png') repeat-x center 
 
 /* Line Items */
 
+tr.line_item_over {
+  background-color: white;
+}
+
+tr.line_item_selected {
+  background-color: blue;
+}
+
 .total {
   text-align: right;
   font-weight: bold;

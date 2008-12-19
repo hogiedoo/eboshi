@@ -1,80 +1,70 @@
-document.observe('dom:loaded', function() {
-  $$('input[type=submit].delete').each(function(b) {
-    b.onclick = null
-    b.observe('click', function(e) {
-      e.stop()
-      if(confirm('Are you sure?')) {
-        new Ajax.Request(b.form.action, {
-          parameters: b.form.serialize(),
-          onComplete: function(response) {
-            eval('total = '+response.responseText);
-            b.up('tbody').down('td.total').innerHTML = number_to_currency(total)
-            b.up('tr').remove()
-          }
-        })
-      }
-    })
+$(function() {
+  $("tr#new_line_items ~ tr").livequery('mouseover', function() {
+    $(this).addClass("line_item_over")
   })
-  
-  $('clock_in').observe('click', function(e) {
-    e.stop()
-    new Ajax.Updater('new_line_items', this.form.action, {
-      parameters: this.form.serialize(),
-      insertion: 'after'
-    })
-  })
-  
-  $$('.clock_out').each(function(a) {
-    a.observe('click', function(e) {
-      e.stop()
-      new Ajax.Request(a.href, {
-        onComplete: function(response) {
-          eval('object = '+response.responseText);
-          a.up('tr').replace(object.line_item)
-          b.up('tbody').down('td.total').innerHTML = number_to_currency(object.total)
-        }
-      })
-    })
-  })
-  
-  $$('a.merge').each(function(a) {
-    a.observe('click', function(e) {
-      e.stop()
-      var checkboxes = $$('input:checked')
-      var first = checkboxes.first()
-      var others = checkboxes.reject(function(cb) { return cb.value == first.value })
-      new Ajax.Request(a.href+'?'+Form.serializeElements(checkboxes), { onComplete: function(response) {
-        first.up('tr').replace(response.responseText)
-        others.each(function(cb) { cb.up('tr').remove() })
-      }})
-    })
-  })
-  
-  $('show_paid_invoices').observe('click', function(e) {
-    e.stop()
-    var el = $('paid_invoices')
-    if(el.cleanWhitespace().innerHTML == '') {
-      el.hide()
-      new Ajax.Updater(el, $('show_paid_invoices').href, { method: 'get', onComplete: function() {
-        ajax_mini_invoice_show_links()
-        new Effect.BlindDown(el)
-      }})
-    } else {
-      if(el.style.display == 'none') new Effect.BlindDown(el)
-      else new Effect.BlindUp(el)
-    }
-  })
-  
-  ajax_mini_invoice_show_links()
-})
 
-function ajax_mini_invoice_show_links() {
-  $$('.mini_invoice_show_details').each(function(a) {
-    a.observe('click', function(e) {
-      e.stop()
-      new Ajax.Request(a.href, { method: 'get', onComplete: function(response) {
-        a.up('div').replace(response.responseText)
-      }})
-    })
+  $("tr#new_line_items ~ tr").livequery('mouseout', function() {
+    $(this).removeClass("line_item_over")
   })
-}
+
+  $("tr#new_line_items ~ tr").livequery('mousedown', function() {
+    $(this).toggleClass("line_item_selected")
+    $(this).find(":checkbox").toggleChecks()
+  })
+  
+  $("a#create_invoice").click(function() {
+    var line_items = $(this).parents("tbody").find(":checkbox:checked").serialize()
+    location.href = this.href+"?"+line_items
+    return false
+  })
+
+  $("form:has(#clock_in)").POST(function(data) {
+    $("#new_line_items").after(data)
+  })
+
+  $("a.clock_out").POST(function(data) {
+    this.parents("tr").replaceWith(data.line_item)
+    this.parents("tbody").find("td.total").text(number_to_currency(data.total))
+  }, "json")
+
+  $("form:has(input.delete)").livequery('click', function() {
+    var form = $(this)
+    if(confirm('Are you sure you want to delete this line item?')) {
+      $.post(form.attr("action"), form.serialize(), function(data) {
+        form.parents("tbody").find("td.total").text(number_to_currency(data))
+        form.parents("tr").remove()
+      }, 'json')
+    }
+    return false
+  })
+  
+  $("a#merge").click(function() {
+    var checkboxes = $(this).parents("table").find(":checkbox:checked")
+    if(checkboxes.length > 0) {
+      $.post(this.href, checkboxes.serialize(), function(data) {
+        $(checkboxes[0]).parents("tr").replaceWith(data)
+        checkboxes.slice(1).parents("tr").remove()
+      })
+    }
+    return false
+  })
+
+  $("a#show_paid_invoices").click(function() {
+    var el = $("#paid_invoices")
+    if(el.is(":empty")) {
+      el.hide()
+      $.get(this.href, '', function(data) {
+        el.html(data)
+        el.slideDown("normal")
+      }, 'html')
+    } else {
+      el.slideToggle("normal")
+    }
+    return false
+  })
+
+  $("a.mini_invoice_show_details").GET(function(data) {
+    this.parents("div:first").replaceWith(data)
+  })
+
+})

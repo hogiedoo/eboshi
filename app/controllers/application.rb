@@ -16,12 +16,17 @@ class ApplicationController < ActionController::Base
   protected
 
 		def authenticate
-			authenticate_or_request_with_http_basic('Bot and Rose Invoice Application') do |username, password|
-				current_user = User.authenticate(username, password)
+      if Rails.env.test?
+        current_user = User.first
+      else
+			  authenticate_or_request_with_http_basic('Bot and Rose Invoice Application') do |username, password|
+				  current_user = User.authenticate(username, password)
+			  end
 			end
 		end
 		
 		def get_clients
       @clients = Client.all :order => 'name'
 		end
+		
 end
