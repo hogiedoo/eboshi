@@ -1,6 +1,6 @@
 - @line_item = work
 %td
-  = check_box_tag 'line_item_ids[]', work.id
+  = check_box_tag 'line_item_ids[]', work.id, nil, :style => "display: none"
   = work.start.to_s(:slash)
 %td=h work.user.login
 %td= work.start.to_s(:time)

@@ -1,27 +1,23 @@
-jQuery.fn.POST = function(callback, type) {
-  return jQueryGETorPOST.call(this, "POST", callback, type)
-}
+$(function() {
+  $("tr#new_line_items ~ tr").livequery('mouseover', function() {
+    $(this).addClass("line_item_over")
+  })
 
-jQuery.fn.GET = function(callback, type) {
-  return jQueryGETorPOST.call(this, "GET", callback, type)
-}
+  $("tr#new_line_items ~ tr").livequery('mouseout', function() {
+    $(this).removeClass("line_item_over")
+  })
 
-function jQueryGETorPOST(method, callback, type) {
-  method = (method == "GET" ? $.get : $.post)
-  if(!type) type = "html"
-  var event = this.is("form") ? "submit" : "click"
-  this.livequery(event, function() {
-    var el = $(this)
-    var url = el.is("form") ? el.attr("action") : el.attr("href")
-    var params = el.is("form") ? el.serialize() : null
-    method(url, params, function(data, textStatus) { callback.call(el, data, textStatus) }, type)
+  $("tr#new_line_items ~ tr").livequery('mousedown', function() {
+    $(this).toggleClass("line_item_selected")
+    $(this).find(":checkbox").toggleChecks()
+  })
+  
+  $("a#create_invoice").click(function() {
+    var line_items = $(this).parents("tbody").find(":checkbox:checked").serialize()
+    location.href = this.href+"?"+line_items
     return false
   })
-  return this
-  
-}
 
-$(function() {
   $("form:has(#clock_in)").POST(function(data) {
     $("#new_line_items").after(data)
   })
@@ -42,7 +38,7 @@ $(function() {
     return false
   })
   
-  $("a.merge").click(function() {
+  $("a#merge").click(function() {
     var checkboxes = $(this).parents("table").find(":checkbox:checked")
     if(checkboxes.length > 0) {
       $.post(this.href, checkboxes.serialize(), function(data) {
