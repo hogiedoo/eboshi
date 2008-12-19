@@ -5,8 +5,6 @@ class LineItem < ActiveRecord::Base
 	
 	named_scope :unbilled, :conditions => "invoice_id IS NULL AND start IS NOT NULL", :order => 'start DESC'
 
-	validates_presence_of :client_id
-	
 	def total
 		0
 	end

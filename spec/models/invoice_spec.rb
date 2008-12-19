@@ -21,10 +21,11 @@ describe Invoice do
   
   it "should handle the total attribute through mass assignment" do
     @invoice = Factory :invoice
+    5.times { @invoice.works.create! Factory(:work).attributes }
     total = @invoice.total
     @invoice.attributes = { :total => total-50 }
     @invoice.save
-    @invoice.reload.total.should eql total-50
+    @invoice.reload.total.should == total-50
   end
 
   it "should not create an adjustment item when a total is assigned that equals the sum of the line items" do
