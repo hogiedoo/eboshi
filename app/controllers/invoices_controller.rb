@@ -59,15 +59,6 @@ class InvoicesController < ApplicationController
 	  redirect_to invoices_path(@client)
 	end
 	
-	def paid
-	  if @invoice.update_attribute :paid, Date.today
-	    flash[:notice] = 'Invoice was successfully updated.'
-	    redirect_to invoices_path(@client)
-	  else
-	    render :action => "edit" 
-	  end
-	end
-	
 	protected 
 		def get_client
 			@client = @invoice.try(:client) || Client.find(params[:client_id])

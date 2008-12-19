@@ -16,7 +16,7 @@ Factory.define :client do |c|
 end
 
 Factory.define :user do |u|
-  u.login { Faker::Name.first_name.downcase }
+  u.login { Faker::Name.name.underscore }
   u.email { Faker::Internet.email }
   u.crypted_password 'cd7a52bc8c5d424b198392ec9110ce1e7c4c7c01'
   u.salt '0025f53d85b10176ef12c8320e9c08c000974840'
@@ -43,14 +43,8 @@ Factory.define :adjustment do |a|
   a.notes "adjustment"
 end
 
-Factory.define :todo do |t|
-  t.user { Factory :user }
-  t.notes { Faker::Lorem.sentence rand(5) }
-end
-
 Factory.define :invoice do |i|
   i.client { Factory :client }
   i.date Date.today
-  i.paid Date.today + 1.month
   i.project_name { Faker::Company.name }
 end

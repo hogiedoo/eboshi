@@ -1,0 +1,12 @@
+- f = form
+%p
+  %b Date
+  %br
+  = f.date_select :created_at
+  
+%p
+  %b Total
+  %br
+  = f.text_field :total
+
+%p= f.submit @payment.new_record? ? "Create" : "Update"	

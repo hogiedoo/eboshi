@@ -19,7 +19,11 @@ class Work < LineItem
 	end
 	
 	def total
-		(hours * rate).round(2)
+		(rate * hours).round(2)
+	end
+	
+	def total=(value)
+	  self.hours = value/rate
 	end
 	
 	def hours=(total)

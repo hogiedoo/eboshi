@@ -4,7 +4,6 @@ class LineItemsController < ApplicationController
 
 	in_place_edit_for :line_item, :notes
 	in_place_edit_for :line_item, :rate
-	in_place_edit_for :todo, :notes
 	
   def new
     @line_item = @client.line_items.new

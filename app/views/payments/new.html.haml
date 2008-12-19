@@ -1,0 +1,9 @@
+- content_for :title do
+  New payment
+
+= error_messages_for :payment
+
+- form_for @payment do |f|
+  = render :partial => 'form', :object => f
+
+= link_to 'Cancel', invoices_path(@invoice.client)

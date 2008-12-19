@@ -28,11 +28,6 @@ describe Client do
   	@client.debits.should == 50
   end
 
-	it "should provide a todo list" do
-	  Factory :todo, :client => @client, :user => @user
-		@client.todos.length.should eql 1
-	end
-
 	it "should calculate a default rate given a user" do
 		@client.default_rate(@user).should == 50
 		Client.new.default_rate(@user).should == 65

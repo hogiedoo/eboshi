@@ -11,7 +11,7 @@ class LineItem < ActiveRecord::Base
 
 	def hours
 		return 0 unless finish and start
-		(finish - start) / 60 / 60
+		BigDecimal ((finish - start) / 60 / 60).to_s
 	end
 	
 	def == (target)

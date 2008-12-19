@@ -1,12 +1,17 @@
 class Invoice < ActiveRecord::Base
 	belongs_to :client
 	has_many :line_items, :dependent => :destroy
-	has_many :todos
 	has_many :works
 	has_many :adjustments
+	has_many :payments, :order => 'created_at DESC'
 	
-	named_scope :unpaid, :conditions => "paid = '0000-00-00 00:00:00' OR paid IS NULL", :order => "`date` DESC"
-	named_scope :paid, :conditions => "paid > 0", :order => "`date` DESC"
+	def self.unpaid
+	  self.all(:order => "`date` DESC").reject(&:paid?)
+	end
+	
+	def self.paid
+	  self.all(:order => "`date` DESC").select(&:paid?)
+	end
 	
 	validates_presence_of :client, :date, :project_name
 
@@ -25,16 +30,18 @@ class Invoice < ActiveRecord::Base
 		return total if difference.abs < 0.01
 		line_items << adjustments.build(:total => difference)
 	end
+	
+	def balance
+	  total - payments.sum(:total)
+	end
 
-  def attributes=(attrs)
-    # check for nulling checkbox
-    attrs.delete_if { |k,v| k =~ /^paid\([1-3]i\)$/ } if attrs['paid'] == "0"
-    super
-  end
-  
   def status
     return 'unbilled' if new_record?
-    return paid ? 'paid' : 'unpaid'
+    return paid? ? 'paid' : 'unpaid'
   end
-
+  
+  def paid?
+    !line_items.empty? && !payments.empty? && balance == 0
+  end
+  
 end

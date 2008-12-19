@@ -1,13 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ClientsController do
-  fixtures :all
-  integrate_views
+  extend ControllerSpecHelperMethods
   
 	before(:each) do
-		controller.stub!(:authenticate_or_request_with_http_basic).and_return(true)
-		controller.stub!(:current_user).and_return(users(:Micah))
-		@client = clients(:NANETS)
+		@client = Factory :client
 	end
 
   describe "should not error out" do
