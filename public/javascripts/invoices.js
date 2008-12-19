@@ -49,20 +49,6 @@ $(function() {
     return false
   })
 
-  $("a#show_paid_invoices").click(function() {
-    var el = $("#paid_invoices")
-    if(el.is(":empty")) {
-      el.hide()
-      $.get(this.href, '', function(data) {
-        el.html(data)
-        el.slideDown("normal")
-      }, 'html')
-    } else {
-      el.slideToggle("normal")
-    }
-    return false
-  })
-
   $("a.mini_invoice_show_details").GET(function(data) {
     this.parents("div:first").replaceWith(data)
   })
