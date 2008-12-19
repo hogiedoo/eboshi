@@ -1,14 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe LineItemsController do
-  fixtures :all
-  integrate_views
+  extend ControllerSpecHelperMethods
+  setup_env
   
-	before(:each) do
-		controller.stub!(:authenticate_or_request_with_http_basic).and_return(true)
-		controller.stub!(:current_user).and_return(users(:Micah))
-		@client = clients(:NANETS)
-		@line_item = @client.works.first
+  before :each do
+		@client = Factory :client
+		@line_item = Factory :work, :client => @client
 	end
 
   describe "should not error out" do
@@ -32,7 +30,7 @@ describe LineItemsController do
       get :clock_in, :client_id => @client.id
     end
 		it "on clock_out" do
-			@line_item = line_items(:incomplete1)
+			@line_item = Factory :work, :start => Date.today, :finish => Date.today
 			get :clock_out, :client_id => @client.id, :id => @line_item.id
 		end
     it "on merge" do

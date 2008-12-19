@@ -5,10 +5,36 @@ describe Invoice do
     Invoice.create! Factory.attributes_for(:invoice)
   end
   
-  it "should default date and paid to nil" do
+  it "should not be paid if there are no payments" do
+    @invoice = Factory :invoice
+    2.times { Factory :work, :invoice => @invoice, :rate => 50, :total => 100 }
+    @invoice.balance.should == 200
+    @invoice.should_not be_paid
+  end
+  
+  it "unpaid scope should return unpaid invoices and partially paid invoices" do
+    @unpaid = Factory :invoice
+    3.times { Factory(:work, :invoice => @unpaid) }
+    
+    @partpaid = Factory :invoice
+    3.times { Factory(:work, :invoice => @partpaid) }
+    @partpaid.payments << Payment.new(:total => 50)
+    
+    @paid = Factory :invoice
+    3.times do
+      Factory(:work, :invoice => @paid)
+      @paid.payments << Payment.new(:total => 50)
+    end
+    
+    Invoice.unpaid.should have(2).invoices
+    Invoice.unpaid.should include(@unpaid, @partpaid)
+    Invoice.unpaid.should_not include(@paid)
+  end
+  
+  it "should default date and paid to false" do
   	@invoice = Invoice.new
   	@invoice.date.should eql Time.today
-  	@invoice.paid.should be_nil
+  	@invoice.should_not be_paid
   end
   
   it "should create an adjustment item when a total is assigned that doesnt equal the sum of the line items" do
@@ -21,10 +47,11 @@ describe Invoice do
   
   it "should handle the total attribute through mass assignment" do
     @invoice = Factory :invoice
+    5.times { @invoice.works.create! Factory(:work).attributes }
     total = @invoice.total
     @invoice.attributes = { :total => total-50 }
     @invoice.save
-    @invoice.reload.total.should eql total-50
+    @invoice.reload.total.should == total-50
   end
 
   it "should not create an adjustment item when a total is assigned that equals the sum of the line items" do
@@ -34,16 +61,4 @@ describe Invoice do
   	@invoice.adjustments.length.should eql count
   end
   
-  it "should handle the paid boolean through mass assignment" do
-    @invoice = Invoice.new "paid(1i)" => "2008", "paid(2i)" => "10", "paid(3i)" => "1", "paid" => "0"
-    @invoice.paid.should be_nil
-
-    @invoice = Invoice.new 
-    @invoice.attributes = { "paid(1i)" => "2008", "paid(2i)" => "10", "paid(3i)" => "1", "paid" => "1" }
-    @invoice.paid.to_s(:slash).should == "10/01/08"
-    
-    @invoice = Factory :invoice
-    @invoice = Invoice.new "paid(1i)" => "2008", "paid(2i)" => "10", "paid(3i)" => "1", "paid" => "0"
-    @invoice.paid.should be_nil
-  end
 end

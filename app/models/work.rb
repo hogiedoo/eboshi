@@ -1,6 +1,6 @@
 class Work < LineItem
   include Comparable
-	validates_presence_of :user_id, :rate, :start, :finish
+	validates_presence_of :client_id, :user_id, :rate, :start, :finish
 	
 	def self.merge_from_ids(ids)
 	  works = Work.find ids, :order => "finish DESC"
@@ -19,7 +19,11 @@ class Work < LineItem
 	end
 	
 	def total
-		(hours * rate).round(2)
+		(rate * hours).round(2)
+	end
+	
+	def total=(value)
+	  self.hours = value/rate
 	end
 	
 	def hours=(total)

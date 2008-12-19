@@ -20,7 +20,7 @@
           &nbsp;
           &raquo;
           = link_to 'Merge', merge_line_items_path(@client), :id => 'merge'
-        %td.total= number_to_currency invoice.total
+        %td.total= number_to_currency invoice.balance
         %td
           %b Current Balance
     - else
@@ -28,15 +28,15 @@
         %td{ :colspan => 6 }
           Invoiced on:
           = invoice.date.to_s(:slash) if invoice.date
-        %td.total= number_to_currency invoice.total
+        %td.total= number_to_currency invoice.balance
         %td
-          - if invoice.paid
-            %b PAID
-            on:
-            = invoice.paid.to_s(:slash)
+          - if invoice.paid?
+            %b PAYMENTS:
+            - invoice.payments.each do |p|
+              %li= number_to_currency(p.total)+' '+p.created_at.to_s(:slash)
           - else
             %b.red UNPAID
-            = button_to 'Mark as Paid', paid_invoice_path(invoice)
+            =# button_to 'Mark as Paid', paid_invoice_path(invoice)
         %td{ :colspan => 2 }
           &raquo;
           = link_to 'Export PDF', invoice_path(:id => invoice.id, :format => :pdf)
