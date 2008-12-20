@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PaymentsController do
-  extend ControllerSpecHelperMethods
+  extend ControllerSpecHelpers
   setup_env
 	
 	it "should not error out on new" do

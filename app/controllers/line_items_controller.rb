@@ -2,9 +2,6 @@ class LineItemsController < ApplicationController
 	before_filter :get_line_item, :only => [:show, :edit, :update, :destroy, :clock_out]
 	before_filter :get_client
 
-	in_place_edit_for :line_item, :notes
-	in_place_edit_for :line_item, :rate
-	
   def new
     @line_item = @client.line_items.new
   end

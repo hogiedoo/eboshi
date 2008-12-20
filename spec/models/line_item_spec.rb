@@ -6,6 +6,7 @@ describe LineItem do
     @line_item.total = 200
     @line_item.total.should == 200
   end
+  
   it "should be able to set user name manually" do
     @line_item = Factory :work
     @user = Factory :user

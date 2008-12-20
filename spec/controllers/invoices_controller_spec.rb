@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe InvoicesController do
-  extend ControllerSpecHelperMethods
+  extend ControllerSpecHelpers
   setup_env
   
   before :each do

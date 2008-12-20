@@ -7,9 +7,30 @@ describe Invoice do
   
   it "should not be paid if there are no payments" do
     @invoice = Factory :invoice
-    2.times { Factory :work, :invoice => @invoice, :rate => 50, :total => 100 }
-    @invoice.balance.should == 200
+    2.times do
+      work = Factory :work, :invoice => @invoice, :rate => 50
+      work.update_attribute(:total, 100)
+    end
     @invoice.should_not be_paid
+  end
+  
+  it "should calculate total as sum of line items" do
+    @invoice = Factory :invoice
+    2.times do
+      work = Factory :work, :invoice => @invoice, :rate => 50
+      work.update_attribute(:total, 100)
+    end
+    @invoice.total.should == 200
+  end
+  
+  it "should calculate balance as sum of line items minus sum of payments" do
+    @invoice = Factory :invoice
+    2.times do
+      work = Factory :work, :invoice => @invoice, :rate => 50
+      work.update_attribute(:total, 100)
+    end
+    @invoice.payments.create(:total => 100)
+    @invoice.balance.should == 100
   end
   
   it "unpaid scope should return unpaid invoices and partially paid invoices" do
