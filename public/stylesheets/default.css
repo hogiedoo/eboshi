@@ -2,12 +2,12 @@ body {
   margin: 0;
   padding: 0;
   background-color: black;
-  font-size: 13px;
   color: #8C8C8C; }
 
 body, th, td, input, textarea, select, option {
+  font-size: 13px;
   text-transform: lowercase;
-  font-family: "Trebuchet MS", "Times New Roman", Arial, Times, serif; }
+  font-family: 'Trebuchet MS', 'Times New Roman', Arial, Times, serif; }
 
 h1, h2, h3 {
   font-weight: normal;
@@ -187,10 +187,18 @@ a {
   #footer a {
     color: #003300; }
 
-tr.line_item_over {
-  background-color: white; }
-tr.line_item_selected {
-  background-color: blue; }
+tr#new_line_items ~ tr.line_item_over {
+  background-color: white;
+  color: black; }
+tr#new_line_items ~ tr.line_item_selected {
+  background-color: blue;
+  color: black; }
+tr#new_line_items ~ tr td.rate, tr#new_line_items ~ tr td.total {
+  text-align: right; }
+tr#new_line_items ~ tr td.notes textarea {
+  border: 0;
+  background-color: black;
+  color: #8C8C8C; }
 
 .total {
   text-align: right;
