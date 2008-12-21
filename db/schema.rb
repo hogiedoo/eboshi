@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081219062945) do
+ActiveRecord::Schema.define(:version => 20081221073123) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20081219062945) do
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
     t.decimal  "rate",                                    :precision => 10, :scale => 2
+    t.string   "color"
   end
 
 end
