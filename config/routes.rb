@@ -2,10 +2,11 @@ ActionController::Routing::Routes.draw do |map|
 	map.root :controller => 'clients', :action => 'index'
 
   map.resources :clients, :shallow => true do |client|
-	  client.resources :invoices, :name_prefix => nil do |invoice|
-	    invoice.resources :payments, :name_prefix => nil
+	  client.resources :invoices, :shallow => true, :name_prefix => nil do |invoice|
+	    invoice.resources :payments, :shallow => true, :name_prefix => nil
 	  end
     client.resources :line_items,
+      :shallow => true,
       :except => [:index, :show],
       :member => [:set_line_item_rate, :set_line_item_notes],
       :collection => [:merge],

@@ -23,9 +23,15 @@ class LineItemsController < ApplicationController
   def update
     if @line_item.update_attributes params[@line_item.class.to_s.underscore]
       flash[:notice] = 'LineItem was successfully updated.'
-      redirect_to invoices_path(@client) 
+      respond_to do |format|
+        format.html { redirect_to invoices_path(@client) }
+        format.js { render :nothing => true }
+      end
     else
-      render :action => "edit" 
+      respond_to do |format|
+        format.html { render :action => "edit" }
+        format.js { exit }
+      end
     end
   end
 

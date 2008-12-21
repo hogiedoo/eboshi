@@ -18,6 +18,9 @@ describe LineItemsController do
     it "on update" do
       put :update, :client_id => @client.id, :id => @line_item.id, :line_item => @line_item.attributes
     end
+    it "on shallow update" do
+      put :update, :id => @line_item.id, :line_item => @line_item.attributes
+    end
     it "on destroy" do
       delete :destroy, :client_id => @client.id, :id => @line_item.id
     end

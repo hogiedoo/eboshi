@@ -14,5 +14,5 @@
 %td.rate= number_to_per_hour work.rate
 %td.total= number_to_currency work.total
 %td.notes
-  %textarea
+  %textarea{ :id => "notes_#{work.id}" }
     =work.notes
