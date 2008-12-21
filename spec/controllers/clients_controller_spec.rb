@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ClientsController do
-  extend ControllerSpecHelpers
+  include ControllerSpecHelpers
   
 	before(:each) do
 		@client = Factory :client

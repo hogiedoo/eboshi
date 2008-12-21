@@ -7,13 +7,15 @@ require 'spec/rails'
 require 'spec/factories/factories.rb'
 
 module ControllerSpecHelpers
-  def setup_env
-	  integrate_views
+  def self.included(klass)
+    klass.instance_eval <<-end_eval
+      integrate_views
 	
-	  before(:each) do
-		  controller.stub!(:authenticate_or_request_with_http_basic).and_return(true)
-		  controller.stub!(:current_user).and_return(Factory :user)
-	  end
+	    before(:each) do
+	      controller.stub!(:authenticate_or_request_with_http_basic).and_return(true)
+	      controller.stub!(:current_user).and_return(Factory :user)
+      end
+    end_eval
 	end
 end
 

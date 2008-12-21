@@ -1,8 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe LineItemsController do
-  extend ControllerSpecHelpers
-  setup_env
+  include ControllerSpecHelpers
   
   before :each do
 		@client = Factory :client
