@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081221073123) do
+ActiveRecord::Schema.define(:version => 20081221223618) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -54,14 +54,19 @@ ActiveRecord::Schema.define(:version => 20081221073123) do
   create_table "users", :force => true do |t|
     t.string   "login"
     t.string   "email"
-    t.string   "crypted_password",          :limit => 40
-    t.string   "salt",                      :limit => 40
+    t.string   "crypted_password"
+    t.string   "password_salt"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remember_token"
-    t.datetime "remember_token_expires_at"
-    t.decimal  "rate",                                    :precision => 10, :scale => 2
+    t.decimal  "rate",              :precision => 10, :scale => 2
     t.string   "color"
+    t.string   "persistence_token"
+    t.integer  "login_count"
+    t.datetime "last_request_at"
+    t.datetime "last_login_at"
+    t.datetime "current_login_at"
+    t.string   "last_login_ip"
+    t.string   "current_login_ip"
   end
 
 end

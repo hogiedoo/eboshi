@@ -14,6 +14,7 @@ Rails::Initializer.run do |config|
   config.gem 'mysql'
   config.gem 'haml'
   config.gem 'resource_controller'
+  config.gem 'authlogic'
 
   config.action_controller.session = {
     :session_key => '_invoice_session',

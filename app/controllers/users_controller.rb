@@ -1,19 +1,37 @@
-class UsersController < ResourceController::Base
- 
-  actions :all, :except => :show
+class UsersController < ApplicationController
+  def index
+    @users = User.all
+  end
+
+  def new
+    @user = User.new
+  end
 
   def create
-    cookies.delete :auth_token
     @user = User.new(params[:user])
     if @user.save
-      self.current_user = @user
-      redirect_back_or_default('/')
-      flash[:notice] = "Thanks for signing up!"
+      flash[:notice] = "Account registered!"
+      redirect_back_or_default account_url
     else
-      render :action => 'new'
+      render :action => :new
     end
   end
-  
-  update.wants.html { redirect_to users_path }
 
+  def show
+    @user = @current_user
+  end
+
+  def edit
+    @user = @current_user
+  end
+
+  def update
+    @user = @current_user # makes our views "cleaner" and more consistent
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Account updated!"
+      redirect_to account_url
+    else
+      render :action => :edit
+    end
+  end
 end

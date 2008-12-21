@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe SessionsController do
+describe UserSessionsController do
   include ControllerSpecHelpers
   
   describe "should not error out" do
