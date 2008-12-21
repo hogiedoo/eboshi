@@ -1,6 +1,5 @@
 class Adjustment < LineItem
   include Comparable
-	validates_presence_of :rate
 	
 	def total
 		self.rate

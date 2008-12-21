@@ -50,8 +50,8 @@ describe InvoicesController do
         "total" => total
       }
       post :create, :client_id => @client.id, :invoice => attrs
-	    response.should redirect_to(invoices_path(@client))
       assigns(:invoice).should have(:no).errors
+	    response.should redirect_to(invoices_path(@client))
       assigns(:invoice).should have(1).adjustments
       assigns(:invoice).adjustments.first.total.should == 50
       assigns(:invoice).total.should == total

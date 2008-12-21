@@ -1,6 +1,6 @@
 class Work < LineItem
   include Comparable
-	validates_presence_of :client_id, :user_id, :rate, :start, :finish
+	validates_presence_of :user, :start, :finish
 	
 	def self.merge_from_ids(ids)
 	  works = Work.find ids, :order => "finish DESC"

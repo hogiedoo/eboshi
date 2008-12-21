@@ -2,7 +2,9 @@ class LineItem < ActiveRecord::Base
 	belongs_to :client
 	belongs_to :user
 	belongs_to :invoice
-	
+
+  validates_presence_of :client, :rate
+  	
 	named_scope :unbilled, :conditions => "invoice_id IS NULL AND start IS NOT NULL", :order => 'start DESC'
 
 	def total

@@ -3,8 +3,10 @@ class Invoice < ActiveRecord::Base
 	has_many :line_items, :dependent => :destroy
 	has_many :works
 	has_many :adjustments
-	has_many :payments, :order => 'created_at DESC'
+	has_many :payments, :dependent => :destroy, :order => 'created_at DESC'
 	
+	validates_presence_of :client, :date, :project_name
+
 	def self.unpaid
 	  self.all(:order => "`date` DESC").reject(&:paid?)
 	end
@@ -13,8 +15,6 @@ class Invoice < ActiveRecord::Base
 	  self.all(:order => "`date` DESC").select(&:paid?)
 	end
 	
-	validates_presence_of :client, :date, :project_name
-
 	def initialize(options = {})
 		options = {} if options.nil?
 		options.reverse_merge!(:date => Date.today)
@@ -28,7 +28,7 @@ class Invoice < ActiveRecord::Base
 	def total=(value)
 		difference = value.to_f - total
 		return total if difference.abs < 0.01
-		line_items << adjustments.build(:total => difference)
+		line_items << adjustments.build(:total => difference, :client => client)
 	end
 	
 	def balance

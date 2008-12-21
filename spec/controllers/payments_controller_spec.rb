@@ -10,7 +10,9 @@ describe PaymentsController do
 	end
 	
   it "should add a payment to the invoice on create" do
-    @invoice = Factory :invoice, :total => 500
+    @invoice = Factory.build :invoice
+    @invoice.total = 500
+    @invoice.save
     payment_attributes = {
       :total => "50"
     }
