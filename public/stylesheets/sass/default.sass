@@ -1,0 +1,258 @@
+body
+  :margin 0
+  :padding 0
+  :background-color black
+  :font-size 13px
+  :color #8C8C8C
+
+body, th, td, input, textarea, select, option
+  :text-transform lowercase
+  :font-family "Trebuchet MS", "Times New Roman", Arial, Times, serif
+
+h1, h2, h3
+  :font-weight normal
+  :color #F8FBEC
+
+h1
+  :letter-spacing -2px
+  :font-size 3em
+
+h2
+  :letter-spacing -1px
+  :font-size 2em
+
+h3
+  :font-size 1em
+
+
+blockquote
+  :padding-left 1em
+
+  p, ul, ol
+    :line-height normal
+    :font-style italic
+
+a
+  :color #FF781F
+  :text-decoration none
+  :background transparent url('/images/underline1.png') repeat-x center bottom
+
+  &:hover
+    :background transparent url('/images/underline2.png') repeat-x center bottom
+
+
+#wrapper
+  :min-width 900px
+
+#flash_notice
+  :color green
+
+#flash_error
+  :color red
+
+.red
+  :color red
+
+.clear
+  :clear both
+
+#header_container
+  :width 100%
+  :margin 0 auto
+  :background-color white
+
+#header
+  :width 760px
+  :padding 20px 0
+  :margin 0 auto
+  :position relative
+
+  h1
+    :margin 0
+    :padding 0
+
+    a
+      :margin 0
+      :color black
+      :text-decoration none
+      :background none
+      :color black
+
+  p
+    :margin 0
+    :color black
+    :text-decoration none
+    :background none
+    :margin-top -10px
+
+  a
+    :color #FF781F
+
+  span
+    :color black
+
+
+#login
+  :float right
+  :margin 50px 0 0 0px
+  :text-align right
+
+#ampersand
+  :background transparent url('/images/ampersand.png') no-repeat
+  :display block
+  :position absolute
+  :top 20px
+  :left -77px
+  :width 89px
+  :height 74px
+
+#breadcrumbs_container
+  :width 100%
+  :background-color #FF781F
+
+
+#breadcrumbs
+  :display block
+  :width 820px
+  :height 32px
+  :margin 0 auto
+
+  h2
+    :margin 0
+    :color #B65616
+
+
+#page
+  :float left
+  :display block
+
+
+#all_content_container
+  :width 100%
+
+
+#all_content
+  :display block
+  :margin 0 auto
+  :width 820px
+
+
+#content
+  :width 600px
+
+
+.post
+  :padding 0 0 20px 0
+
+
+.title
+  :margin 0
+  :padding-bottom 5px
+  :border-bottom 2px solid #B7D24D
+
+
+.byline
+  :margin 0
+  :color #646464
+
+
+.meta
+  :text-align left
+  :color #646464
+  :padding 10px 10px
+  :height 48px
+  :background url(/images/img06.gif) no-repeat left top
+
+  &.more
+    :padding-left 20px
+
+  &.comments
+    :padding-left 20px
+
+  a
+    :color #003300
+
+
+#sidebar
+  :float left
+  :display block
+  :width 200px
+  :padding 0 0 0 20px
+  :margin 0
+
+  ul
+    :margin 0 0 0 25px
+    :padding 0
+    :list-style hiragana
+
+  li
+    :margin 0
+    :padding 0
+
+    ul
+      :padding 15px 15px
+
+    li
+      :border-bottom 1px dotted #000000
+      :padding-left 15px
+
+  h2
+    :margin 0
+    :padding 10px 0 0 0
+    :height 40px
+
+
+#footer_container
+  :width 100%
+
+
+#footer
+  :clear both
+  :width 760px
+  :height 40px
+  :margin 0 auto
+  :padding 20px 0 0 0
+  :text-align center
+  :font-size smaller
+  :color grey
+
+  a
+    :color #003300
+
+
+tr
+  &.line_item_over
+    :background-color white
+
+  &.line_item_selected
+    :background-color blue
+
+
+.total
+  :text-align right
+  :font-weight bold
+
+
+.invoice
+  :margin 10px 0 10px 0
+  :padding 5px
+  :color white
+
+  &.unbilled
+    :background-color yellow
+
+  &.paid
+    :background-color green
+
+  &.unpaid
+    :background-color red
+
+  h2
+    :margin 0
+    :padding 10px 0 0 40px
+    :height 40px
+    :background url(/images/img04.gif) no-repeat left 60%
+    :float left
+
+  ul
+    :float right
