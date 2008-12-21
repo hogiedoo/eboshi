@@ -13,6 +13,7 @@ Rails::Initializer.run do |config|
   config.gem 'rcov', :version => '>= 0.8.1.2.0'
   config.gem 'mysql'
   config.gem 'haml'
+  config.gem 'resource_controller'
 
   config.action_controller.session = {
     :session_key => '_invoice_session',
