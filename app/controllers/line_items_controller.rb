@@ -1,28 +1,11 @@
-class LineItemsController < ApplicationController
-	before_filter :get_line_item, :only => [:show, :edit, :update, :destroy, :clock_out]
+class LineItemsController < ResourceController::Base
+  actions :all, :except => [:index, :show]
+	before_filter :get_line_item, :except => [:new, :create, :clock_in, :merge]
 	before_filter :get_client
-
-  def new
-    @line_item = @client.line_items.new
-  end
-
-  def edit
-  end
-
-  def create
-    @line_item = @client.line_items.build params[:line_item]
-		
-		if @line_item.save
-		  flash[:notice] = 'LineItem was successfully created.'
-		  redirect_to invoices_path(@client)
-		else
-		  render :action => "new"
-		end
-  end
 
   def update
     if @line_item.update_attributes params[@line_item.class.to_s.underscore]
-      flash[:notice] = 'LineItem was successfully updated.'
+      flash[:notice] = "#{@line_item.class.to_s} was successfully updated."
       respond_to do |format|
         format.html { redirect_to invoices_path(@client) }
         format.js { render :nothing => true }
@@ -35,14 +18,8 @@ class LineItemsController < ApplicationController
     end
   end
 
-  def destroy
-    @line_item.destroy
-
-		respond_to do |format|
-			format.html { redirect_to invoices_path(@client) }
-			format.js { render :json => @line_item.invoice_total }
-		end
-  end
+  destroy.wants.html { redirect_to invoices_path(@client) }
+  destroy.wants.js { render :json => @line_item.invoice_total }
   
   def clock_in
   	@line_item = @client.clock_in current_user
@@ -84,5 +61,9 @@ class LineItemsController < ApplicationController
   	def get_client
 		  @client = @line_item.try(:client) || Client.find(params[:client_id])
 	  end
+	  
+	  def build_object
+      @object = @client.line_items.build params[:line_item]
+    end
 
 end
