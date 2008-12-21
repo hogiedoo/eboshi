@@ -6,8 +6,8 @@ $(function() {
 
 var AutoResizeTextArea = {
   init: function(el) {
-    // get height of the element  
-    var __heightFromElement = el.offsetHeight;  
+    // get height of the element; use as minimum
+    var originalHeight = el.offsetHeight;  
       
     // adjust the textarea, for all good browsers: overflow:hidden to lose the scrollbars,   
     // for IE use overflowX:auto to let that browser decide whether to show scrollbars  
@@ -22,10 +22,10 @@ var AutoResizeTextArea = {
     // hide the created div away  
     dummy.style.position = 'absolute';  
     dummy.style.top = '0px';  
-    dummy.style.left = '0px';  
+    dummy.style.left = '-99999px';  
     dummy.innerHTML = ' 42';  
       
-    var __lineHeight = dummy.offsetHeight;  
+    var lineHeight = dummy.offsetHeight;  
       
     var checkExpandContract = function() {  
       // place text inside the element in a new var called html  
@@ -45,15 +45,19 @@ var AutoResizeTextArea = {
       if(dummy.innerHTML != html) {  
         dummy.innerHTML = html;  
           
-        // if the height from our element doesnt match the height from the dummy
-        if (el.offsetHeight != dummy.offsetHeight) {  
-          el.style.height = (dummy.offsetHeight + __lineHeight) + 'px';  
+        // skip if the height from our element matches the dummy height
+        if (el.offsetHeight != dummy.offsetHeight) {
+          // ensure minimum height
+          if (dummy.offsetHeight < originalHeight) {
+            el.style.height = originalHeight+'px';
+          } else {
+            el.style.height = (dummy.offsetHeight + lineHeight) + 'px';
+          }
         }
       }
     }
     
     // Startup
-    
     var expandElement = function()  {
         interval = window.setInterval(function() {checkExpandContract()}, 250);
     }
