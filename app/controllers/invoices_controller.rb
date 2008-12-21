@@ -1,65 +1,21 @@
-class InvoicesController < ApplicationController
+class InvoicesController < ResourceController::Base
 	before_filter :get_invoice, :except => [:index, :new, :create]
 	before_filter :get_client
 	
-	def index
-	  respond_to do |format|
-	    format.html
-	    format.js { render :partial => 'invoice', :collection => @client.invoices.paid }
-	  end
+	index.wants.js { render :partial => 'invoice', :collection => @client.invoices.paid }
+	
+  show.wants.pdf do
+		send_data InvoiceDrawer.draw(@invoice),
+		  :filename => "bot-and-rose_invoice-#{@invoice.id}.pdf",
+		  :type => 'application/pdf',
+		  :disposition => 'inline'
 	end
 	
-	def show
-		respond_to do |format|
-			format.html 
-			format.pdf do
-				send_data InvoiceDrawer.draw(@invoice),
-				  :filename => "bot-and-rose_invoice-#{@invoice.id}.pdf",
-				  :type => 'application/pdf',
-				  :disposition => 'inline'
-			end
-	  end
-	end
+	edit.wants.js { render :partial => 'full', :locals => { :invoice => @invoice } } 
+  create.wants.html { redirect_to invoices_path(@client) }
+  update.wants.html { redirect_to invoices_path(@client) }
+  destroy.wants.html { redirect_to invoices_path(@client) }
 
-	def new
-		@invoice = @client.build_invoice_from_unbilled(params[:line_item_ids])
-	end
-
-	def edit
-	  respond_to do |format|
-	    format.html
-	    format.js { render :partial => 'full', :locals => { :invoice => @invoice } } 
-	  end
-	end
-
-	def create
-	  @invoice = @client.invoices.build
-	  @invoice.attributes = params[:invoice]
-	  if @invoice.save
-	    flash[:notice] = 'Invoice was successfully created.'
-	    redirect_to invoices_path(@client)
-	  else
-	    render :action => "new"
-	  end
-	end
-
-	def update
-	  @invoice.attributes = params[:invoice]
-	  if @invoice.save
-	    flash[:notice] = 'Invoice was successfully updated.'
-	    redirect_to invoices_path(@client)
-	  else
-	    render :action => "edit" 
-	  end
-	end
-
-	def destroy
-	  @invoice.destroy
-	  flash[:notice] = 'Invoice was successfully deleted.'
-
-	  redirect_to invoices_path(@client)
-	end
-	
 	protected 
 		def get_client
 			@client = @invoice.try(:client) || Client.find(params[:client_id])
@@ -67,6 +23,15 @@ class InvoicesController < ApplicationController
 
 		def get_invoice
 		  @invoice = Invoice.find params[:id]
+		end
+		
+		def build_object
+		  if params[:invoice]
+		    @object = @client.invoices.build
+		    @object.attributes = params[:invoice]
+		  else
+    		@object = @client.build_invoice_from_unbilled(params[:line_item_ids])
+		  end
 		end
 
 end
