@@ -1,22 +1,11 @@
-class PaymentsController < ApplicationController
-  before_filter :get_invoice
+class PaymentsController < ResourceController::Base
+  actions :new, :create
   
-  def new
-    @payment = @invoice.payments.build :total => @invoice.balance
-  end
-  
-  def create
-	  @payment = @invoice.payments.build(params[:payment])
-	  if @payment.save
-	    flash[:notice] = 'Payment was successfully created.'
-      redirect_to invoices_path(@invoice.client)
-	  else
-	    render :action => "new"
-	  end
-  end
+  create.wants.html { redirect_to invoices_path(@invoice.client) }
   
   protected
-    def get_invoice
+    def build_object
       @invoice = Invoice.find params[:invoice_id]
+      @object = @invoice.payments.build(params[:payment] || { :total => @invoice.balance })
     end
 end
