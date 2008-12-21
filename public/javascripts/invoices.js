@@ -7,7 +7,8 @@ $(function() {
     $(this).removeClass("line_item_over")
   })
 
-  $("tr#new_line_items ~ tr").livequery('mousedown', function() {
+  $("tr#new_line_items ~ tr").livequery('click', function(e) {
+    if(e.target.type == 'textarea') return
     $(this).toggleClass("line_item_selected")
     $(this).find(":checkbox").toggleChecks()
   })

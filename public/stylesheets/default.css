@@ -37,6 +37,9 @@ a {
   a:hover {
     background: transparent url('/images/underline2.png') repeat-x center bottom; }
 
+img {
+  border: 0; }
+
 #wrapper {
   min-width: 900px; }
 
@@ -199,6 +202,9 @@ tr#new_line_items ~ tr td.notes textarea {
   border: 0;
   background-color: black;
   color: #8C8C8C; }
+tr#new_line_items ~ tr td:last-child a {
+  display: block;
+  margin: 7px 0 7px 0; }
 
 .total {
   text-align: right;
