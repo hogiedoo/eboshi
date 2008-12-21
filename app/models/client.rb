@@ -1,8 +1,9 @@
 class Client < ActiveRecord::Base
-	has_many :line_items
+	has_many :line_items, :dependent => :destroy
 	has_many :works
 	has_many :adjustments
-	has_many :invoices
+	has_many :invoices, :dependent => :destroy
+	has_many :payments, :through => :invoices
 	
 	validates_presence_of :name
 
@@ -24,7 +25,7 @@ class Client < ActiveRecord::Base
 	end
 	
 	def debits
-		invoices.to_a.sum(&:total)
+		payments.to_a.sum(&:total)
 	end
 	
 	def clock_in(user)

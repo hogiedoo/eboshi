@@ -40,7 +40,8 @@
           - @clients.each do |client|
             %ul
               %li
-                = link_to h(client.name), invoices_path(client)
+                %span= link_to h(client.name), invoices_path(client)
+                %span= number_to_currency client.balance
           %p= link_to '+ Add Client', new_client_path
         #page
           #content

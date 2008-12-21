@@ -33,7 +33,8 @@ class InvoicesController < ApplicationController
 	end
 
 	def create
-	  @invoice = @client.invoices.build(params[:invoice])
+	  @invoice = @client.invoices.build
+	  @invoice.attributes = params[:invoice]
 	  if @invoice.save
 	    flash[:notice] = 'Invoice was successfully created.'
 	    redirect_to invoices_path(@client)

@@ -10,6 +10,17 @@ describe Client do
     	Factory(:work, :client => @client, :user => @user, :invoice => nil)
     ]
   	Factory :work, :client => @client, :user => @user, :invoice => @invoice
+  	Payment.create :invoice => @invoice, :total => 50
+  	Factory :adjustment, :client => @client, :user => @user, :invoice => @invoice, :rate => 100
+  end
+
+  it "should leave no trace when destroyed" do
+    @client.destroy
+    Invoice.count.should == 0
+    Work.count.should == 0
+    LineItem.count.should == 0
+    Adjustment.count.should == 0    
+    Payment.count.should == 0
   end
 
   it "should create a new instance given valid attributes" do
@@ -17,11 +28,11 @@ describe Client do
   end
 
   it "should calculate the balance correctly" do
-  	@client.balance.should eql 100.0
+  	@client.balance.should eql 200.0
   end
 
   it "should calculate the credits correctly" do
-  	@client.credits.should == 150
+  	@client.credits.should == 250
   end
 
   it "should calculate the debits correctly" do

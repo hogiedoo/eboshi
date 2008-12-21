@@ -161,12 +161,12 @@ a {
     list-style: hiragana; }
   #sidebar li {
     margin: 0;
-    padding: 0; }
-    #sidebar li ul {
-      padding: 15px 15px; }
-    #sidebar li li {
-      border-bottom: 1px dotted #000000;
-      padding-left: 15px; }
+    padding: 0;
+    clear: both; }
+    #sidebar li span:first-child {
+      float: left; }
+    #sidebar li span:last-child {
+      float: right; }
   #sidebar h2 {
     margin: 0;
     padding: 10px 0 0 0;
