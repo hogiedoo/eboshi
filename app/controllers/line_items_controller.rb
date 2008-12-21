@@ -2,9 +2,6 @@ class LineItemsController < ApplicationController
 	before_filter :get_line_item, :only => [:show, :edit, :update, :destroy, :clock_out]
 	before_filter :get_client
 
-	in_place_edit_for :line_item, :notes
-	in_place_edit_for :line_item, :rate
-	
   def new
     @line_item = @client.line_items.new
   end
@@ -26,9 +23,15 @@ class LineItemsController < ApplicationController
   def update
     if @line_item.update_attributes params[@line_item.class.to_s.underscore]
       flash[:notice] = 'LineItem was successfully updated.'
-      redirect_to invoices_path(@client) 
+      respond_to do |format|
+        format.html { redirect_to invoices_path(@client) }
+        format.js { render :nothing => true }
+      end
     else
-      render :action => "edit" 
+      respond_to do |format|
+        format.html { render :action => "edit" }
+        format.js { exit }
+      end
     end
   end
 

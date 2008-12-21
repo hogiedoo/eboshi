@@ -27,7 +27,7 @@ describe Work do
   
 	describe "billed" do
 		before(:each) do
-			@line_item = Factory :work
+			@line_item = Factory :work, :start => Time.today, :finish => Time.today + 1.hour, :rate => 50
 		end
 
 		it "should calculate the hours correctly" do

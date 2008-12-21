@@ -1,8 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe UsersController do
-  extend ControllerSpecHelperMethods
-  setup_env
+  include ControllerSpecHelpers
   
 	before(:each) do
 		@user = Factory :user

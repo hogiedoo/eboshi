@@ -1,8 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe LineItemsController do
-  extend ControllerSpecHelperMethods
-  setup_env
+  include ControllerSpecHelpers
   
   before :each do
 		@client = Factory :client
@@ -18,6 +17,9 @@ describe LineItemsController do
     end
     it "on update" do
       put :update, :client_id => @client.id, :id => @line_item.id, :line_item => @line_item.attributes
+    end
+    it "on shallow update" do
+      put :update, :id => @line_item.id, :line_item => @line_item.attributes
     end
     it "on destroy" do
       delete :destroy, :client_id => @client.id, :id => @line_item.id

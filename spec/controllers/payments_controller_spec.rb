@@ -1,8 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PaymentsController do
-  extend ControllerSpecHelperMethods
-  setup_env
+  include ControllerSpecHelpers
 	
 	it "should not error out on new" do
 	  @client = Factory :client

@@ -1,16 +1,15 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe InvoicesController do
-  extend ControllerSpecHelperMethods
-  setup_env
+  include ControllerSpecHelpers
   
-  before :each do
-    @client = Factory :client
-    @invoice = Factory :invoice, :client => @client
-    5.times { Factory :work, :invoice => @invoice }
-  end
-
   describe "should not error out" do
+    before :each do
+      @client = Factory :client
+      @invoice = Factory :invoice, :client => @client
+      5.times { Factory :work, :invoice => @invoice }
+    end
+    
     it "on index" do
       get :index, :client_id => @client.id
     end
@@ -42,23 +41,20 @@ describe InvoicesController do
   
   describe "on create" do
     it "should allow adjustment via total field" do
-      @client = Factory(:client)
-      works = []
-      3.times do
-        works << Factory(:work)
-      end
+      @client = Factory :client
+      3.times { Factory :work, :client => @client }
+      total = @client.works.to_a.sum(&:total)+50
       attrs = {
-        "line_item_ids" => works.collect(&:id),
+        "line_item_ids" => @client.works.collect(&:id),
         "project_name" => "testing site",
-        "total" => works.sum(&:total)+50
+        "total" => total
       }
       post :create, :client_id => @client.id, :invoice => attrs
-      debugger
 	    response.should redirect_to(invoices_path(@client))
       assigns(:invoice).should have(:no).errors
       assigns(:invoice).should have(1).adjustments
       assigns(:invoice).adjustments.first.total.should == 50
-      assigns(:invoice).total.should == works.sum(&:total)+50
+      assigns(:invoice).total.should == total
     end
   end
 

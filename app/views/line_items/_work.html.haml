@@ -2,15 +2,17 @@
 %td
   = check_box_tag 'line_item_ids[]', work.id, nil, :style => "display: none"
   = work.start.to_s(:slash)
-%td=h work.user.login
-%td= work.start.to_s(:time)
+%td.name=h work.user.login
+%td.start= work.start.to_s(:time)
 
 - if work.incomplete?
   %td{ :colspan => 2 }= link_to 'Clock Out', clock_out_path(@client, work), :class => "clock_out"
 - else
-  %td= work.finish.to_s(:time)
-  %td= number_with_precision work.hours, :precision => 2
+  %td.finish= work.finish.to_s(:time)
+  %td.hours= number_with_precision work.hours, :precision => 2
   
-%td{ :align => "right" }= in_place_text_field :line_item, :rate, :url => set_line_item_rate_line_item_path(:id => work.id, :client_id => work.client.id)
-%td{ :align => "right" }= number_to_currency work.total
-%td= work.notes
+%td.rate= number_to_per_hour work.rate
+%td.total= number_to_currency work.total
+%td.notes
+  %textarea{ :id => "notes_#{work.id}" }
+    =work.notes

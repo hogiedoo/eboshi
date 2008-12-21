@@ -3,6 +3,6 @@
   &raquo; Billing Details
 
 - content_for :javascript_includes do
-  = javascript_include_tag 'invoices'
+  = javascript_include_tag 'invoices', 'auto_resize_textareas', 'edit_in_place'
 
 = render :partial => 'invoice', :collection => @client.invoices_with_unbilled
