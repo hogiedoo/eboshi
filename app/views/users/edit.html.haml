@@ -1,0 +1,15 @@
+- content_for :title do
+  Users &raquo; edit
+  = @user.name
+
+%h2
+  Users &raquo; edit
+  = @user.name
+
+- form_for @user do |f|
+  = f.error_messages
+  = render :partial => "form", :object => f
+  = f.submit "Update"
+
+%br
+= link_to "cancel", users_path
