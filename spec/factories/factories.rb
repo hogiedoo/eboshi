@@ -16,13 +16,14 @@ Factory.define :client do |c|
 end
 
 Factory.define :user do |u|
-  u.login { Faker::Name.name.underscore }
+  u.login { Faker::Name.name.gsub(/[^a-zA-Z]/, '') }
   u.email { Faker::Internet.email }
-  u.crypted_password 'cd7a52bc8c5d424b198392ec9110ce1e7c4c7c01'
-  u.salt '0025f53d85b10176ef12c8320e9c08c000974840'
+  u.password "insecure"
+  u.password_confirmation "insecure"
   u.created_at Time.today
   u.updated_at Time.today
   u.rate 50
+  u.color '123456'
 end
 
 Factory.define :work do |w|

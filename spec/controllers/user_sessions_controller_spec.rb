@@ -12,6 +12,7 @@ describe UserSessionsController do
 			post :create
 		end
 		it "on destroy" do
+		  controller.stub!(:current_user_session).and_return(mock("current_user_session", :null_object => true))
 			get :destroy
 		end
   end

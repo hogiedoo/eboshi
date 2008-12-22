@@ -10,7 +10,7 @@ class InvoicesController < ResourceController::Base
 		  :type => 'application/pdf',
 		  :disposition => 'inline'
 	end
-	
+
 	edit.wants.js { render :partial => 'full', :locals => { :invoice => @invoice } } 
   create.wants.html { redirect_to invoices_path(@client) }
   update.wants.html { redirect_to invoices_path(@client) }

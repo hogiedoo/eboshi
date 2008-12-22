@@ -10,14 +10,15 @@ module ControllerSpecHelpers
   def self.included(klass)
     klass.instance_eval <<-end_eval
       integrate_views
-	
-	    before(:each) do
-	      controller.stub!(:authenticate_or_request_with_http_basic).and_return(true)
-	      controller.stub!(:current_user).and_return(Factory :user)
+      
+      before :each do
+        controller.stub!(:current_user).and_return(Factory :user)
       end
     end_eval
 	end
+	
 end
+
 
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
