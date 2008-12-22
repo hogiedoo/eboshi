@@ -21,8 +21,10 @@
     #header_container
       #header
         #login
-          %span== Welcome, #{current_user.name}!
-          %span==(#{link_to 'view account', edit_user_path(current_user)})
+          - if current_user
+            %span== Welcome, #{current_user.name}!
+            %span==(#{link_to 'view account', edit_user_path(current_user)})
+            %span==(#{link_to 'logout', logout_path, :method => :delete})
         %h1 
           %a{:href => "/"} BOTandROSE Invoicing
         %p Simple rails invoicing application
@@ -36,13 +38,14 @@
     #all_content_container
       #all_content
         #sidebar
-          %h2 client list
-          - @clients.each do |client|
-            %ul
-              %li
-                %span= link_to h(client.name), invoices_path(client)
-                %span= number_to_currency client.balance
-          %p= link_to '+ Add Client', new_client_path
+          - if current_user
+            %h2 client list
+            - @clients.each do |client|
+              %ul
+                %li
+                  %span= link_to h(client.name), invoices_path(client)
+                  %span= number_to_currency client.balance
+            %p= link_to '+ Add Client', new_client_path
         #page
           #content
             %p#flash_notice= flash[:notice]

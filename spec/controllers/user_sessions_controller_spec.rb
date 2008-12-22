@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe SessionsController do
+describe UserSessionsController do
   include ControllerSpecHelpers
   
   describe "should not error out" do
@@ -12,6 +12,7 @@ describe SessionsController do
 			post :create
 		end
 		it "on destroy" do
+		  controller.stub!(:current_user_session).and_return(mock("current_user_session", :null_object => true))
 			get :destroy
 		end
   end

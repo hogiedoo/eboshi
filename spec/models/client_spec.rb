@@ -1,6 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Client do
+  before :all do
+    debugger
+  end
+  
   before(:each) do
   	@client = Factory :client
   	@invoice = Factory :invoice, :client => @client
