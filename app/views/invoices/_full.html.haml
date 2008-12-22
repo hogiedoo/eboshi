@@ -1,9 +1,7 @@
 %table{ :border => "1", :cellpadding => "4", :cellspacing => "0" }
   %tr
-    %th Date
     %th User
-    %th Start
-    %th Finish
+    %th Time
     %th Hours
     %th Rate
     %th Total
@@ -12,7 +10,7 @@
   %tbody{ :class => invoice.status, :id => "invoice_#{invoice.id_or_new}" }
     - if invoice.status == 'unbilled'
       %tr#new_line_items
-        %td{ :colspan => 6 }
+        %td{ :colspan => 4 }
           = button_to 'Clock In', clock_in_path(@client), :id => 'clock_in'
           &nbsp;
           &raquo;
@@ -25,7 +23,7 @@
           %b Current Balance
     - else
       %tr
-        %td{ :colspan => 6 }
+        %td{ :colspan => 4 }
           Invoiced on:
           = invoice.date.to_s(:slash) if invoice.date
         %td.total= number_to_currency invoice.balance
