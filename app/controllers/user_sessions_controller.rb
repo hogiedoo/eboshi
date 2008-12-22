@@ -5,7 +5,13 @@ class UserSessionsController < ResourceController::Base
 
   create do
     flash "Login successful!"
-    wants.html { redirect_back_or_default '/' }
+    wants.html do
+      if object.user.last_client
+        redirect_to invoices_path(object.user.last_client)
+      else
+        redirect_back_or_default '/'
+      end
+    end
   end
 
   def destroy
