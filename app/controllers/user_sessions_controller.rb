@@ -5,12 +5,18 @@ class UserSessionsController < ResourceController::Base
 
   create do
     flash "Login successful!"
-    wants.html { redirect_back_or_default '/' }
+    wants.html do
+      if object.user.last_client
+        redirect_to invoices_path(object.user.last_client)
+      else
+        redirect_back_or_default '/'
+      end
+    end
   end
 
   def destroy
     current_user_session.destroy
     flash[:notice] = "Logout successful!"
-    redirect_back_or_default new_user_session_url
+    redirect_to login_path
   end
 end
