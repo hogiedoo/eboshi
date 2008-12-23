@@ -83,7 +83,12 @@ class InvoiceDrawer
 		PDF::SimpleTable.new do |tab|
 			#tab.title = "PDF User Unit Conversions"
 			tab.maximum_width = 6
-			tab.column_order.push(*%w(Agent Item Hours Rate Cost))
+			tab.column_order.push(*%w(Date Agent Item Hours Rate Cost))
+			tab.columns[:Date] = PDF::SimpleTable::Column.new("Date") { |col|
+				col.heading = PDF::SimpleTable::Column::Heading.new("Date")
+				col.heading.bold = true
+				col.justification = :center
+			}
 			tab.columns[:Agent] = PDF::SimpleTable::Column.new("Agent") { |col|
 				col.heading = PDF::SimpleTable::Column::Heading.new("Agent")
 				col.heading.bold = true
@@ -115,6 +120,7 @@ class InvoiceDrawer
 			data = []
 			for work in invoice.works
 				data << {
+					"Date" => work.start.to_s(:slash),
 					"Agent" => work.user.login,
 					"Item" => work.notes.word_wrap(60),
 					"Hours" => work.hours.round(2),
