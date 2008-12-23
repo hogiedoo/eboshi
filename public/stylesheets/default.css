@@ -195,7 +195,8 @@ tr#new_line_items ~ tr td.rate, tr#new_line_items ~ tr td.total {
 tr#new_line_items ~ tr td.notes textarea {
   border: 0;
   background-color: black;
-  color: #8C8C8C; }
+  color: #8C8C8C;
+  width: 275px; }
 tr#new_line_items ~ tr td:last-child a {
   display: block;
   margin: 7px 0 7px 0; }

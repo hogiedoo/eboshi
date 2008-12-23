@@ -39,7 +39,6 @@ end
 Factory.define :adjustment do |a|
   a.client { Factory :client }
   a.invoice { Factory :invoice }
-  a.user { Factory :user }
   a.rate 0
   a.notes "adjustment"
 end

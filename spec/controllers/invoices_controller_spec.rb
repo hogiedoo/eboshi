@@ -8,6 +8,7 @@ describe InvoicesController do
       @client = Factory :client
       @invoice = Factory :invoice, :client => @client
       5.times { Factory :work, :invoice => @invoice }
+      Factory :adjustment, :invoice => @invoice
     end
     
     it "on index" do
