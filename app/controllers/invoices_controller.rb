@@ -2,9 +2,7 @@ class InvoicesController < ResourceController::Base
 	before_filter :get_invoice, :except => [:index, :new, :create]
 	before_filter :get_client
 	
-	index.before do
-	  current_user.update_attribute(:last_client, @client)
-	end
+	index.before { current_user.update_attribute(:last_client, @client) }
 	index.wants.js { render :partial => 'invoice', :collection => @client.invoices.paid }
 	
   show.wants.pdf do

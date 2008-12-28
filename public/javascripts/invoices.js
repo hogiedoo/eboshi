@@ -28,12 +28,12 @@ $(function() {
     this.parents("tbody").find("td.total").text(number_to_currency(data.total))
   }, "json")
 
-  $("form:has(input.delete)").livequery('click', function() {
-    var form = $(this)
+  $("a.delete").livequery('click', function() {
+    var a = this
     if(confirm('Are you sure you want to delete this line item?')) {
-      $.post(form.attr("action"), form.serialize(), function(data) {
-        form.parents("tbody").find("td.total").text(number_to_currency(data))
-        form.parents("tr").remove()
+      $.post(a.href, '_method=delete', function(data) {
+        $(a).parents("tbody").find("td.total").text(number_to_currency(data))
+        $(a).parents("tr").remove()
       }, 'json')
     }
     return false

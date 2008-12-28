@@ -9,5 +9,6 @@ db/data.*
 db/*.sqlite3
 config/database.yml
 config/deploy.rb
+converage/**/*
 Capfile
 *[~]

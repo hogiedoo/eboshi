@@ -1,5 +1,5 @@
 $(function() {
-  $("tbody.unbilled td.notes textarea").each(function() {
+  $("td.notes textarea").livequery(function() {
     new AutoResizeTextArea.init(this)
   })
 })

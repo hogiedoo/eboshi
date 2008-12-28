@@ -1,5 +1,5 @@
 $(function() {
-  $("tbody.unbilled td.notes textarea").each(function() {
+  $("td.notes textarea").livequery(function() {
     this.buffer = this.value
     this.wait = false
     // grab line_item id from tr
