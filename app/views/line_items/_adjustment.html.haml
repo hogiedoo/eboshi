@@ -1,3 +1,6 @@
-%td{ :colspan => 7, :align => "right" }= number_to_currency adjustment.total
-%td
-  %i Adjustment
+%td{ :colspan => 5, :align => "right" }
+  %i Adjustment:
+  = number_to_currency adjustment.total
+%td.notes
+  %textarea{ :id => "notes_#{adjustment.id}" }
+    =adjustment.notes
