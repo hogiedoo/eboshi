@@ -33,4 +33,10 @@ class LineItem < ActiveRecord::Base
 	def invoice_total
 	  invoice.try(:total) || client.balance
 	end
+	
+	def notes_with_period
+	  returning notes do
+	    notes += '.' unless notes.nil? or notes.last.match /[.?]/
+	  end    
+	end
 end

@@ -4,17 +4,13 @@ class Work < LineItem
 	
 	def self.merge_from_ids(ids)
 	  works = Work.find ids, :order => "finish DESC"
-	  works.each do |w|
-	    w.notes += '.' unless w.notes.nil? or w.notes.last.match /[.?]/
-	  end
+
 	  returning work = works.first do
-	    unless works.empty?
-	      work.hours = works.sum(&:hours)
-	      work.notes = works.collect(&:notes) * ' '
-	      works.shift
-	      works.each(&:destroy)
-	      work.save!
-	    end
+      work.update_attributes(
+        :hours => works.sum(&:hours),
+        :notes => works.collect(&:notes_with_period) * ' '
+      )
+      works.each { |w| w.destroy unless w == work }
     end
 	end
 	
