@@ -13,7 +13,7 @@ class LineItem < ActiveRecord::Base
 
 	def hours
 		return 0 unless finish and start
-		BigDecimal ((finish - start) / 60 / 60).to_s
+		BigDecimal.new(((finish - start) / 60 / 60).to_s)
 	end
 	
 	def == (target)
@@ -36,7 +36,7 @@ class LineItem < ActiveRecord::Base
 	
 	def notes_with_period
 	  returning notes do
-	    notes += '.' unless notes.nil? or notes.last.match /[.?]/
+	    notes += '.' unless notes.nil? or notes.last.match(/[.?]/)
 	  end    
 	end
 end
