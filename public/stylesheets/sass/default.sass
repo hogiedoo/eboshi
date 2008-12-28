@@ -215,13 +215,14 @@ img
   a
     :color #003300
 
-tr#new_line_items ~ tr
-  &.line_item_over
-    :background-color white
-    :color black
-  &.line_item_selected
-    :background-color blue
-    :color black
+table.invoice
+  tr#new_line_items ~ tr
+    &.line_item_over
+      :background-color white
+      :color black
+    &.line_item_selected
+      :background-color blue
+      :color black
 
   td.rate, td.total
     :text-align right

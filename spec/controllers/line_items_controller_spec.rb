@@ -46,4 +46,13 @@ describe LineItemsController do
       response.should be_redirect
     end  	
   end
+  
+  describe "on update" do
+    it "should allow update of notes" do
+      put :update, :id => @line_item.id, :line_item => { :notes => 'test' }
+      assigns(:line_item).should have(:no).errors 
+      assigns(:line_item).notes.should == 'test'
+      response.should be_redirect
+    end
+  end
 end

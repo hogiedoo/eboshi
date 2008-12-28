@@ -184,20 +184,20 @@ img {
   #footer a {
     color: #003300; }
 
-tr#new_line_items ~ tr.line_item_over {
+table.invoice tr#new_line_items ~ tr.line_item_over {
   background-color: white;
   color: black; }
-tr#new_line_items ~ tr.line_item_selected {
+table.invoice tr#new_line_items ~ tr.line_item_selected {
   background-color: blue;
   color: black; }
-tr#new_line_items ~ tr td.rate, tr#new_line_items ~ tr td.total {
+table.invoice td.rate, table.invoice td.total {
   text-align: right; }
-tr#new_line_items ~ tr td.notes textarea {
+table.invoice td.notes textarea {
   border: 0;
   background-color: black;
   color: #8C8C8C;
   width: 275px; }
-tr#new_line_items ~ tr td:last-child a {
+table.invoice td:last-child a {
   display: block;
   margin: 7px 0 7px 0; }
 
