@@ -6,9 +6,11 @@
     = invoice.status
   %h3
     - unless invoice.payments.empty?
+      - unless invoice.paid?
+        = number_to_currency invoice.total
+        total
       - invoice.payments.each do |p|
         %li= number_to_currency(p.total)+' paid on '+p.created_at.to_s(:slash)
-  %ul
     %li= link_to 'Export PDF', invoice_path(:id => invoice.id, :format => :pdf)
     - unless invoice.paid?
       %li= link_to 'make payment', new_payment_path(invoice), :class => 'mini_invoice_make_payment'

@@ -35,15 +35,18 @@
           &nbsp;
           &raquo;
           = link_to 'Delete', invoice_path(invoice), :method => :delete, :confirm => 'Are you certain you want to delete this invoice and its hours and notes?'
-        %td.total= number_to_currency invoice.balance
+        %td.total= number_to_currency invoice.total
         %td
           %div
             Invoiced on:
             = invoice.date.to_s(:slash) if invoice.date
-          - if invoice.paid?
+          - unless invoice.payments.empty?
             %b PAYMENTS:
             - invoice.payments.each do |p|
               %li= number_to_currency(p.total)+' '+p.created_at.to_s(:slash)
+            - unless invoice.paid?
+              = number_to_currency invoice.balance
+              remaining
           - else
             %b.red UNPAID
             =# button_to 'Mark as Paid', paid_invoice_path(invoice)
