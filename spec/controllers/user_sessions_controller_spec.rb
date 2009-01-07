@@ -8,7 +8,7 @@ describe UserSessionsController do
     	get :new
 		end
 		it "on create" do
-			User.stub!(:authenticate).and_return Factory(:user)
+			User.stub!(:authenticate).and_return User.make
 			post :create
 		end
 		it "on destroy" do

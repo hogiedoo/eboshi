@@ -4,13 +4,13 @@ describe PaymentsController do
   include ControllerSpecHelpers
 	
 	it "should not error out on new" do
-	  @client = Factory :client
-    @invoice = Factory :invoice, :client => @client
+	  @client = Client.make
+    @invoice = Invoice.make :client => @client
 	  get :new, :invoice_id => @invoice.id
 	end
 	
   it "should add a payment to the invoice on create" do
-    @invoice = Factory :invoice
+    @invoice = Invoice.make
     @invoice.update_attribute :total, 500
     payment_attributes = {
       :total => "50"

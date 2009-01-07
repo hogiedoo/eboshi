@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Adjustment do
   before(:each) do
-    @adjustment = Factory :adjustment
+    @adjustment = Adjustment.make
   end
 
   it "should not have any hours" do
@@ -15,7 +15,7 @@ describe Adjustment do
   end
 
   it "should be greater than all other line items" do
-    @work = Factory :work
+    @work = Work.make
     @adjustment.should > @work
     @adjustment.should_not < @work
     @adjustment.should_not eql @work
