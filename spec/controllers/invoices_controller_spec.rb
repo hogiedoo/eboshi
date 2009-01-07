@@ -39,6 +39,12 @@ describe InvoicesController do
       delete :destroy, :id => @invoice.id
     end
   end
+
+  it "should escape notes" do
+    w = Work.make :invoice => nil, :notes => "test & test"
+    get :index, :client_id => w.client.id
+    response.body.should match /test &amp; test/
+  end
   
   describe "on create" do
     it "should allow adjustment via total field" do
