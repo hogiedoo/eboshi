@@ -4,8 +4,8 @@ describe LineItemsController do
   include ControllerSpecHelpers
   
   before :each do
-		@client = Factory :client
-		@line_item = Factory :work, :client => @client
+		@client = Client.make
+		@line_item = Work.make :client => @client
 	end
 	
   describe "should not error out" do
@@ -37,7 +37,7 @@ describe LineItemsController do
       get :clock_in, :client_id => @client.id
     end
 		it "on clock_out" do
-			@line_item = Factory :work, :start => Date.today, :finish => Date.today
+			@line_item = Work.make :start => Date.today, :finish => Date.today
 			get :clock_out, :client_id => @client.id, :id => @line_item.id
       response.should be_redirect
 		end
