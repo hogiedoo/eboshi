@@ -47,7 +47,10 @@
               %ul
                 %li
                   %span= link_to h(client.name), invoices_path(client)
-                  %span= number_to_currency client.balance
+                  %span
+                    = currency_or_empty client.unbilled_balance
+                    %br/
+                    %span.red= currency_or_empty client.overdue_balance
             %p= link_to '+ Add Client', new_client_path
         #page
           #content

@@ -27,8 +27,16 @@ describe Client do
     Client.create!(@client.attributes)
   end
 
-  it "should calculate the balance correctly" do
+  it "should calculate the total balance correctly" do
   	@client.balance.should eql 200.0
+  end
+
+  it "should calculate the unbilled balance correctly" do
+  	@client.unbilled_balance.should eql 100.0
+  end
+
+  it "should calculate the overdue balance correctly" do
+  	@client.overdue_balance.should eql 100.0
   end
 
   it "should calculate the credits correctly" do

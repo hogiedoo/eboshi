@@ -163,6 +163,7 @@ img {
     #sidebar li span:first-child {
       float: left; }
     #sidebar li span:last-child {
+      text-align: right;
       float: right; }
   #sidebar h2 {
     margin: 0;
