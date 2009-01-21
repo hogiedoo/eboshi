@@ -5,6 +5,9 @@ class InvoicesController < ResourceController::Base
 	index.before { current_user.update_attribute(:last_client, @client) }
 	index.wants.js { render :partial => 'invoice', :collection => @client.invoices.paid }
 	
+	show.wants.html do
+	  render :layout => false
+	end
   show.wants.pdf do
 		send_data InvoiceDrawer.draw(@invoice),
 		  :filename => "bot-and-rose_invoice-#{@invoice.id}.pdf",

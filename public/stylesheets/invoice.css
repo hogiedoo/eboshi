@@ -1,0 +1,38 @@
+* {margin: 0; padding: 0; border: none;}
+body {font: 13px normal "Times";}
+
+.clear {clear:both;}
+.left_align {text-align: left;}
+.right_align {text-align: right;}
+.center_align {text-align: center;}
+
+p {display; block;}
+h1 {font-size: 28px; font-weight: normal; line-height: .7;}
+h2 {font-size: 16px; line-height: 1.5;}
+h3 {font-size: 16px; font-weight: normal;}
+
+#container {width: 612px; height: 792px; position: relative;}
+
+#content {margin: 36px 72px; }
+
+#return {display: block; float: right; text-align: justify; width: 150px;}
+#logo {background: white url('/images/invoice/logo.gif') no-repeat; width:146px; height:53px;}
+
+#client {display: block; float: left;}
+
+#date {display: block; float: left; margin: 20px 0;}
+
+#project {margin: 0 10px; padding: 0 20px; border-left: 1px dotted grey; border-right: 1px dotted grey; }
+#project_header { display: block; width: 100%; margin: 0 0 20px 0;}
+#items {display: block; width: 100%;}
+#items td {padding: 2px 0;}
+#items tfoot td {padding: 20px 0 0 0; font-weight: bold;}
+#project_footer {display: block; width: 100%; text-align: right; margin: 10px 0 0 0;}
+
+#sig {display: block; position: absolute; bottom: 72px; left: 72px;}
+#michael {display: block; background: transparent url('/images/invoice/michael.gif') no-repeat;
+  position: relative; width:190px; height:80px; margin: 0 0 -30px 0;}
+#michael span {display: block; position: absolute; top: 30px; right: 10px;}
+#micah {display: block; background: transparent url('/images/invoice/micah.png') no-repeat; 
+  position: relative; width:135px; height:40px; margin: 0 0 0 55px;}
+#micah span {display: block; position: absolute; top: 40px; right: 10px;}
