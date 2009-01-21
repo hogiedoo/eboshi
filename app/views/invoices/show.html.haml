@@ -1,91 +1,95 @@
 !!!
 %html{html_attrs}
-%head
-  %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
-  %title
-    Invoice Example
-  %meta{:name => "keywords", :content => ""}
-  %meta{:name => "description", :content => ""}
+  %head
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+    %title
+      Invoice Example
+    %meta{:name => "keywords", :content => ""}
+    %meta{:name => "description", :content => ""}
 
-  = stylesheet_link_tag 'invoice'
-  = yield :stylesheet_links
+    = stylesheet_link_tag 'invoice'
+    = yield :stylesheet_links
 
-  %link{:rel => "shortcut icon", :href => "/favicon.png", :type => "image/x-icon"}
+    %link{:rel => "shortcut icon", :href => "/favicon.png", :type => "image/x-icon"}
 
-%body
-  #container
-    #content
-    
-      #return
-        #logo
-        %p 625 nw Everett st., no.346
-        %p Portland, Oregon 97209
-        %p info@botandrose.com
-      .clear
+
+  %body
+    #container
+      #content
       
-      #client
-        %h1 INVOICE
-        %p attention:
-        %h2 Client Name
-        %p Address line 01
-        %p Address line 02
-      .clear
-      
-      #date
-        %h3 Date . 20 January 2009
-      .clear
-      
-      #project
-        #project_header
-          %table{:cellspacing => '0', :cellpadding => '0', :width => '100%'}
-            %tr
+        #return
+          #logo= link_to image_tag("/images/invoice/logo.gif", :size => "146x53"), "http://botandrose.com"
+          %p 625 nw Everett st., no.346
+          %p Portland, Oregon 97209
+          %p info@botandrose.com
+        .clear
+        
+        #client
+          %h1 INVOICE
+          %p attention:
+          %h2 Client Name
+          %p Address line 01
+          %p Address line 02
+        .clear
+        
+        #date
+          %h3 Date . 20 January 2009
+        .clear
+        
+        #project
+          #project_header
+            %table{:cellspacing => '0', :cellpadding => '0', :width => '100%'}
               %col{:width => '49%'}
               %col{:width => '2%'}
               %col{:width => '49%'}
-            %tr
-              %td PROJECT
-              %td .
-              %td.right_align Project Title
-            %tr
-              %td INVOICE NUMBER
-              %td .
-              %td.right_align 000000
-            %tr
-              %td TERMS
-              %td .
-              %td.right_align Due on Receipt
-              
-        #items
-          %table{:cellspacing => '0', :cellpadding => '0', :width => '100%',}
-            %tr
+              %tr
+                %td PROJECT
+                %td .
+                %td.right_align Project Title
+              %tr
+                %td INVOICE NUMBER
+                %td .
+                %td.right_align 000000
+              %tr
+                %td TERMS
+                %td .
+                %td.right_align Due on Receipt
+                
+          #items
+            %table{:cellspacing => '0', :cellpadding => '0', :width => '100%'}
               %col{:width => '60%'}
               %col{:width => '15%'}
               %col{:width => '25%'}
-            %thead
-              %th.left_align ITEM
-              %th HOURS
-              %th COST
-            %tr
-              %td Lorem ipsum dolor sit amet.
-              %td.center_align 4
-              %td.center_align 300.00
-            %tr
-              %td Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              %td.center_align 10
-              %td.center_align 750.00
-            %tfoot
-              %td{:colspan => '2'} TOTAL
-              %td.center_align $1050.00
-              
-        #project_footer
-          %p Work rated at $75/hour
-          %p Additional notes
+              %thead
+                %tr
+                  %th.left_align ITEM
+                  %th HOURS
+                  %th COST
+              %tfoot
+                %tr
+                  %td{:colspan => '2'} TOTAL
+                  %td.center_align $1050.00
+              %tbody
+                %tr
+                  %td Lorem ipsum dolor sit amet.
+                  %td.center_align 4
+                  %td.center_align 300.00
+                %tr
+                  %td Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  %td.center_align 10
+                  %td.center_align 750.00
+                
+          #project_footer
+            %p Work rated at $75/hour
+            %p Additional notes
+          
+        .clear
         
-      .clear
-      
-    #sig
-      %p sincerely,
-      #michael
-        %span michael m gubitosa
-      #micah
-        %span micah geisel
+      #sig
+        %p sincerely,
+        #michael
+          = image_tag "/images/invoice/michael.gif"
+          %span michael m gubitosa
+        #micah
+          = image_tag "/images/invoice/micah.gif"
+          %span micah geisel

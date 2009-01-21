@@ -1,0 +1,27 @@
+From 607470736f565528c1d2146a8b8db16588492119 Mon Sep 17 00:00:00 2001
+From: Micah Geisel <originofstorms@gmail.com>
+Date: Tue, 20 Jan 2009 20:06:48 -0800
+Subject: add title to pdf.
+
+---
+ app/views/invoices/show.html.haml |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
+
+diff --git a/app/views/invoices/show.html.haml b/app/views/invoices/show.html.haml
+index b1d6fe6609aa5330cfb3579221f9f1f80ca901ca..f6d3437b77d9ecd4e6122df41cdc60c10619419d 100644
+--- a/app/views/invoices/show.html.haml
++++ b/app/views/invoices/show.html.haml
+@@ -2,8 +2,7 @@
+ %html{html_attrs}
+   %head
+     %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+-    %title
+-      Invoice Example
++    %title= "bot &amp; rose invoice \##{@invoice.id}"
+     %meta{:name => "keywords", :content => ""}
+     %meta{:name => "description", :content => ""}
+ 
+-- 
+1.5.6.3
+
+

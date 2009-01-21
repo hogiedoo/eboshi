@@ -1,0 +1,44 @@
+From 387209eaf550e4572bbd9beba54c370f637efb19 Mon Sep 17 00:00:00 2001
+From: Micah Geisel <originofstorms@gmail.com>
+Date: Thu, 19 Feb 2009 23:40:44 -0800
+Subject: added metric_fu 0.9.0
+
+---
+ Rakefile              |    8 +++++++-
+ config/environment.rb |    1 +
+ 2 files changed, 8 insertions(+), 1 deletions(-)
+
+diff --git a/Rakefile b/Rakefile
+index acff9b6ef9f2e7efbe50b6a555e56f256b117a63..786bf8a7fc899f83a950b81683b7581d8a063ebb 100644
+--- a/Rakefile
++++ b/Rakefile
+@@ -6,6 +6,12 @@ require(File.join(File.dirname(__FILE__), 'config', 'boot'))
+ require 'rake'
+ require 'rake/testtask'
+ require 'rake/rdoctask'
+-#require 'metric_fu'
++require 'metric_fu'
++
++MetricFu::Configuration.run do |config|
++  config.churn = { :start_date => lambda{ 3.months.ago }, :minimum_churn_count => 3 }
++  config.saikuro = { "--warn_cyclo" => "3", "--error_cyclo" => "4" }
++end
++	
+ 
+ require 'tasks/rails'
+diff --git a/config/environment.rb b/config/environment.rb
+index a40befc31c2014e1684f9c4342d72f8e0c78eb6b..ed3e51c131ff75c96294bfe36f6e511a3c469933 100644
+--- a/config/environment.rb
++++ b/config/environment.rb
+@@ -12,6 +12,7 @@ Rails::Initializer.run do |config|
+   config.gem 'haml'
+   config.gem 'resource_controller'
+   config.gem 'authlogic'
++  config.gem 'jscruggs-metric_fu', :version => '0.9.0', :lib => 'metric_fu', :source => 'http://gems.github.com'
+ 
+   config.action_controller.session = {
+     :session_key => '_invoice_session',
+-- 
+1.5.6.3
+
+
