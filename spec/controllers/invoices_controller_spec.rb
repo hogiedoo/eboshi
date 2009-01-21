@@ -5,10 +5,10 @@ describe InvoicesController do
   
   describe "should not error out" do
     before :each do
-      @client = Factory :client
-      @invoice = Factory :invoice, :client => @client
-      5.times { Factory :work, :invoice => @invoice }
-      Factory :adjustment, :invoice => @invoice
+      @client = Client.make
+      @invoice = Invoice.make :client => @client
+      5.times { Work.make :invoice => @invoice }
+      Adjustment.make :invoice => @invoice
     end
     
     it "on index" do
@@ -39,11 +39,17 @@ describe InvoicesController do
       delete :destroy, :id => @invoice.id
     end
   end
+
+  it "should escape notes" do
+    w = Work.make :invoice => nil, :notes => "test & test"
+    get :index, :client_id => w.client.id
+    response.body.should match /test &amp; test/
+  end
   
   describe "on create" do
     it "should allow adjustment via total field" do
-      @client = Factory :client
-      3.times { Factory :work, :client => @client }
+      @client = Client.make
+      3.times { Work.make :client => @client }
       total = @client.works.to_a.sum(&:total)+50
       attrs = {
         "line_item_ids" => @client.works.collect(&:id),

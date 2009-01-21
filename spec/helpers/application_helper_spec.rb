@@ -9,4 +9,13 @@ describe ApplicationHelper do
       helper.number_to_per_hour(10.50).should == "$10.50/hr"
     end
   end
+  
+  describe "currency_or_empty" do
+    it "should return currency if > 0" do
+      helper.currency_or_empty(1.23).should == "$1.23"
+    end
+    it "should return -- if == 0" do
+      helper.currency_or_empty(0.0).should == "--"
+    end
+  end
 end

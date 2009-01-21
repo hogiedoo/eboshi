@@ -4,7 +4,7 @@ describe ClientsController do
   include ControllerSpecHelpers
   
 	before(:each) do
-		@client = Factory :client
+		@client = Client.make
 	end
 
   describe "should not error out" do

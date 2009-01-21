@@ -4,7 +4,7 @@ describe UsersController do
   include ControllerSpecHelpers
   
 	before(:each) do
-		@user = Factory :user
+		@user = User.make
 	end
 
   describe "should not error out" do
