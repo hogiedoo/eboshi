@@ -1,63 +1,63 @@
 !!!
 %html{html_attrs}
-%head
-  %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
-  %title
-    Eboshi &raquo;
-    = yield :title
-  %meta{:name => "keywords", :content => ""}
-  %meta{:name => "description", :content => ""}
+  %head
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+    %title
+      Eboshi &raquo;
+      = yield :title
+    %meta{:name => "keywords", :content => ""}
+    %meta{:name => "description", :content => ""}
 
-  = javascript_include_tag 'jquery', 'jquery.livequery', 'application', 'pretty_flash'
-  = yield :javascript_includes
+    = javascript_include_tag 'jquery', 'jquery.livequery', 'application', 'pretty_flash'
+    = yield :javascript_includes
 
-  = stylesheet_link_tag 'default', 'in_place_styles', 'pretty_flash'
-  = yield :stylesheet_links
+    = stylesheet_link_tag 'default', 'in_place_styles', 'pretty_flash'
+    = yield :stylesheet_links
 
-  %link{:rel => "shortcut icon", :href => "/favicon.png", :type => "image/x-icon"}
+    %link{:rel => "shortcut icon", :href => "/favicon.png", :type => "image/x-icon"}
 
-%body
-  #flash_notice{ :style => "display: none" }= flash[:notice]
-  #flash_error{ :style => "display: none" }= flash[:error]
+  %body
+    #flash_notice{ :style => "display: none" }= flash[:notice]
+    #flash_error{ :style => "display: none" }= flash[:error]
 
-  #wrapper
-    #header_container
-      #header
-        #login
-          - if current_user
-            %span== Welcome, #{current_user.name}!
-            %span==(#{link_to 'view account', edit_user_path(current_user)})
-            %span==(#{link_to 'logout', logout_path, :method => :delete})
-        %h1 
-          %a{:href => "/"} BOTandROSE Invoicing
-        %p Simple rails invoicing application
-        #ampersand
-        
-    #breadcrumbs_container
-      #breadcrumbs
-        %h2= yield :title
-        = yield :header
-        
-    #all_content_container
-      #all_content
-        #sidebar
-          - if current_user
-            %h2 client list
-            - @clients.each do |client|
-              %ul
-                %li
-                  %span= link_to h(client.name), invoices_path(client)
-                  %span
-                    = currency_or_empty client.unbilled_balance
-                    %br/
-                    %span.red= currency_or_empty client.overdue_balance
-            %p= link_to '+ Add Client', new_client_path
-        #page
-          #content
-            = yield
+    #wrapper
+      #header_container
+        #header
+          #login
+            - if current_user
+              %span== Welcome, #{current_user.name}!
+              %span==(#{link_to 'view account', edit_user_path(current_user)})
+              %span==(#{link_to 'logout', logout_path, :method => :delete})
+          %h1 
+            %a{:href => "/"} BOTandROSE Invoicing
+          %p Simple rails invoicing application
+          #ampersand
+          
+      #breadcrumbs_container
+        #breadcrumbs
+          %h2= yield :title
+          = yield :header
+          
+      #all_content_container
+        #all_content
+          #sidebar
+            - if current_user
+              %h2 client list
+              - @clients.each do |client|
+                %ul
+                  %li
+                    %span= link_to h(client.name), invoices_path(client)
+                    %span
+                      = currency_or_empty client.unbilled_balance
+                      %br/
+                      %span.red= currency_or_empty client.overdue_balance
+              %p= link_to '+ Add Client', new_client_path
+          #page
+            #content
+              = yield
+          .clear
         .clear
-      .clear
-      
-    #footer_container
-      #footer
-        = yield :footer
+        
+      #footer_container
+        #footer
+          = yield :footer
