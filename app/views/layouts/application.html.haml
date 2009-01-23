@@ -28,35 +28,36 @@
             %span== Welcome, #{current_user.name}!
             %span==(#{link_to 'view account', edit_user_path(current_user)})
             %span==(#{link_to 'logout', logout_path, :method => :delete})
-        %h1 
-          %a{:href => "/"} BOTandROSE Invoicing
-        %p Simple rails invoicing application
-        #ampersand
+        #title
+          %h1 
+            %a{:href => "/"} BOTandROSE Invoicing
+          %p Simple rails invoicing application
+        .clear
+      .clear
         
     #breadcrumbs_container
       #breadcrumbs
         %h2= yield :title
         = yield :header
         
-    #all_content_container
-      #all_content
-        #sidebar
-          - if current_user
-            %h2 client list
-            - @clients.each do |client|
-              %ul
-                %li
-                  %span= link_to h(client.name), invoices_path(client)
-                  %span
-                    = currency_or_empty client.unbilled_balance
-                    %br/
-                    %span.red= currency_or_empty client.overdue_balance
-            %p= link_to '+ Add Client', new_client_path
-        #page
-          #content
-            = yield
-        .clear
+    #all_content
+      #sidebar
+        - if current_user
+          %h2 client list
+          - @clients.each do |client|
+            %ul
+              %li
+                %span= link_to h(client.name), invoices_path(client)
+                %span
+                  = currency_or_empty client.unbilled_balance
+                %span.red= currency_or_empty client.overdue_balance
+                .clear
+          %p= link_to '+ Add Client', new_client_path
+      #page
+        #content
+          = yield
       .clear
+    .clear
       
     #footer_container
       #footer

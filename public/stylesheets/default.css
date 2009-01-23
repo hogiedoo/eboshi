@@ -1,8 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: black;
-  color: #8C8C8C; }
+  background-color: white;
+  color: #3C3C3C; }
 
 body, th, td, input, textarea, select, option {
   font-size: 13px;
@@ -10,8 +10,7 @@ body, th, td, input, textarea, select, option {
   font-family: 'Trebuchet MS', 'Times New Roman', Arial, Times, serif; }
 
 h1, h2, h3 {
-  font-weight: normal;
-  color: #F8FBEC; }
+  font-weight: normal; }
 
 h1 {
   letter-spacing: -2px;
@@ -19,10 +18,11 @@ h1 {
 
 h2 {
   letter-spacing: -1px;
-  font-size: 2em; }
+  font-size: 1.6em; }
 
 h3 {
-  font-size: 1em; }
+  font-size: 1em;
+  color: grey; }
 
 blockquote {
   padding-left: 1em; }
@@ -31,7 +31,7 @@ blockquote {
     font-style: italic; }
 
 a {
-  color: #FF781F;
+  color: black;
   text-decoration: none;
   background: transparent url('/images/underline1.png') repeat-x center bottom; }
   a:hover {
@@ -41,6 +41,7 @@ img {
   border: 0; }
 
 #wrapper {
+  display: block;
   min-width: 900px; }
 
 .red {
@@ -55,25 +56,30 @@ img {
   background-color: white; }
 
 #header {
-  width: 760px;
-  padding: 20px 0;
-  margin: 0 auto;
-  position: relative; }
-  #header h1 {
-    margin: 0;
-    padding: 0; }
-    #header h1 a {
+  display: block;
+  float: left;
+  position: relative;
+  height: 80px;
+  width: 100%; }
+  #header #title {
+    display: block;
+    float: left;
+    padding: 0 0 0 10px; }
+    #header #title h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 48px; }
+      #header #title h1 a {
+        margin: 0;
+        color: black;
+        text-decoration: none;
+        background: none; }
+    #header #title p {
       margin: 0;
       color: black;
       text-decoration: none;
       background: none;
-      color: black; }
-  #header p {
-    margin: 0;
-    color: black;
-    text-decoration: none;
-    background: none;
-    margin-top: -10px; }
+      margin-top: -10px; }
   #header a {
     color: #FF781F; }
   #header span {
@@ -81,45 +87,42 @@ img {
 
 #login {
   float: right;
-  margin: 50px 0 0 0px;
+  margin: 0px;
+  padding: 0 10px 0 0;
   text-align: right; }
 
-#ampersand {
-  background: transparent url('/images/ampersand.png') no-repeat;
-  display: block;
-  position: absolute;
-  top: 20px;
-  left: -77px;
-  width: 89px;
-  height: 74px; }
-
 #breadcrumbs_container {
-  width: 100%;
-  background-color: #FF781F; }
+  width: 100%; }
 
 #breadcrumbs {
   display: block;
   width: 820px;
-  height: 32px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  text-align: center; }
   #breadcrumbs h2 {
-    margin: 0;
-    color: #B65616; }
+    color: black;
+    margin: 0px; }
 
 #page {
   float: left;
-  display: block; }
-
-#all_content_container {
-  width: 100%; }
+  display: block;
+  margin: 0 0 0 240px;
+  padding: 0 0 0 20px; }
 
 #all_content {
-  display: block;
-  margin: 0 auto;
-  width: 820px; }
+  display: block; }
 
 #content {
   width: 600px; }
+  #content li.user {
+    width: 100%; }
+    #content li.user a {
+      font-size: 28px;
+      color: black; }
+    #content li.user span {
+      color: grey; }
+  #content .add {
+    font-size: 18px; }
 
 .post {
   padding: 0 0 20px 0; }
@@ -143,25 +146,33 @@ img {
     padding-left: 20px; }
   .meta.comments {
     padding-left: 20px; }
-  .meta a {
-    color: #003300; }
 
 #sidebar {
-  float: left;
   display: block;
-  width: 200px;
-  padding: 0 0 0 20px;
-  margin: 0; }
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  -moz-border-radius: 0 24px 0 0;
+  width: 240px;
+  height: 100%;
+  margin: 80px 0 0 0;
+  padding: 0 0 0 10px;
+  background-color: #cccccc;
+  border-top: 3px solid black;
+  border-right: 3px solid black; }
   #sidebar ul {
-    margin: 0 0 0 25px;
+    display: block;
+    width: 100%;
+    margin: 0 0 0 15px;
     padding: 0;
     list-style: hiragana; }
   #sidebar li {
     margin: 0;
-    padding: 0;
-    clear: both; }
+    padding: 0; }
     #sidebar li span:first-child {
-      float: left; }
+      float: left;
+      font-weight: bold;
+      font-size: 14px; }
     #sidebar li span:last-child {
       text-align: right;
       float: right; }
@@ -189,13 +200,12 @@ table.invoice tr#new_line_items ~ tr.line_item_over {
   background-color: white;
   color: black; }
 table.invoice tr#new_line_items ~ tr.line_item_selected {
-  background-color: blue;
+  background-color: yellow;
   color: black; }
 table.invoice td.rate, table.invoice td.total {
   text-align: right; }
 table.invoice td.notes textarea {
   border: 0;
-  background-color: black;
   color: #8C8C8C;
   width: 275px; }
 table.invoice td:last-child a {
@@ -208,19 +218,16 @@ table.invoice td:last-child a {
 
 .invoice {
   margin: 10px 0 10px 0;
-  padding: 5px;
-  color: white; }
+  padding: 5px; }
   .invoice.unbilled {
-    background-color: yellow; }
+    color: yellow; }
   .invoice.paid {
-    background-color: green; }
+    color: green; }
   .invoice.unpaid {
-    background-color: red; }
+    color: red; }
   .invoice h2 {
     margin: 0;
-    padding: 10px 0 0 40px;
     height: 40px;
-    background: url(/images/img04.gif) no-repeat left 60%;
     float: left; }
   .invoice ul {
     float: right; }

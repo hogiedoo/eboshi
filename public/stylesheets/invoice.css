@@ -6,16 +6,16 @@ body {font: 13px normal "Times";}
 .right_align {text-align: right;}
 .center_align {text-align: center;}
 
-p {display; block;}
+p {display: block;}
 h1 {font-size: 28px; font-weight: normal; line-height: .7;}
 h2 {font-size: 16px; line-height: 1.5;}
 h3 {font-size: 16px; font-weight: normal;}
 
 #container {width: 612px; height: 792px; position: relative;}
 
-#content {margin: 36px 72px; }
+#content {margin: 36px 36px; }
 
-#return {display: block; float: right; text-align: justify; width: 150px;}
+#return {display: block; float: right; text-align: justify; width: 150px; line-height: .9;}
 #logo {background: white url('/images/invoice/logo.gif') no-repeat; width:146px; height:53px;}
 
 #client {display: block; float: left;}

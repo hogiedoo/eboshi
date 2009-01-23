@@ -4,8 +4,8 @@
 %h2 users &raquo; all
 %ul
   - @users.each do |user|
-    %li{ :style => "background-color: \##{user.color}" }
-      %div= link_to h(user.name), edit_user_path(user)
-      %div= number_to_per_hour user.rate
+    %li.user{ :style => "background-color: \##{user.color}" }
+      = link_to h(user.name), edit_user_path(user)
+      %span= number_to_per_hour user.rate
 
-= link_to '+add user', new_user_path
+.add= link_to '+add user', new_user_path
