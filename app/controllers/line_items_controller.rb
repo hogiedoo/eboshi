@@ -4,9 +4,10 @@ class LineItemsController < ResourceController::Base
 	before_filter :get_client
 
   def update
-    attributes = params[:line_item] || params[@line_item.class.to_s.underscore]
+    class_name = @line_item.class.to_s
+    attributes = params[:line_item] || params[class_name.underscore]
     if @line_item.update_attributes attributes
-      flash[:notice] = "#{@line_item.class.to_s} was successfully updated."
+      flash[:notice] = "#{class_name} was successfully updated."
       respond_to do |format|
         format.html { redirect_to invoices_path(@client) }
         format.js { render :nothing => true }
