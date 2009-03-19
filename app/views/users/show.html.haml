@@ -3,12 +3,14 @@
   = @user.name
 
 %h2
-  Users &raquo; 
-  = @user.name
-  
+  .user_name{:style => "color: \##{current_user.color}"}
+    %span Users &raquo;
+    = @user.name
+
 %p
   %b Login:
   =h @user.login
+  
 
 %p
   %b Login count:
@@ -34,4 +36,4 @@
   %b Current login ip:
   =h @user.current_login_ip
 
-= link_to 'Edit', edit_user_path
+= link_to 'Edit', edit_user_path, :class=>"button"

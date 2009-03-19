@@ -3,13 +3,14 @@
   = @user.name
 
 %h2
-  Users &raquo; edit
-  = @user.name
+  .user_name{:style => "color: \##{current_user.color}"}
+    %span Users &raquo; edit
+    = @user.name
 
 - form_for @user do |f|
   = f.error_messages
   = render :partial => "form", :object => f
-  = f.submit "Update"
+  = f.submit "Update", :class=>"right"
 
-%br
-= link_to "cancel", users_path
+= link_to "cancel", users_path, :class=>"button right"
+.clear

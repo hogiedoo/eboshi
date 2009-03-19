@@ -1,28 +1,33 @@
 body
   :margin 0
   :padding 0
-  :background-color white
-  :color #3C3C3C
+  :font-size 1em
+  :background #58595b url('/images/bg.gif') repeat-y
+
 
 body, th, td, input, textarea, select, option
-  :font-size 13px
-  :text-transform lowercase
-  :font-family 'Trebuchet MS', 'Times New Roman', Arial, Times, serif
+  :font-size .9em
+  :font-family "Arial", sans-serif
 
-h1, h2, h3
-  :font-weight normal
+a, h1, h2, h3
+  :font-family "Arial Black", sans-serif
+
+h1, h2, h3, ul, li, p
+  :margin 0
+  :padding 0
+  
+ul, li
+  :list-style-type none
 
 h1
-  :letter-spacing -2px
-  :font-size 3em
+  :letter-spacing -.1em
+  :font-size 4em
 
 h2
-  :letter-spacing -1px
-  :font-size 1.6em
-
+  :font-size 1.3em
+  
 h3
-  :font-size 1em
-  :color grey
+  :font-size .9em
 
 
 blockquote
@@ -32,57 +37,84 @@ blockquote
     :line-height normal
     :font-style italic
 
-a
-  :color black
-  :text-decoration none
-  :background transparent url('/images/underline1.png') repeat-x center bottom
+!a= #333333
+!a_lt= #cccccc
 
+a
+  :color= !a
+  :text-decoration none
   &:hover
-    :background transparent url('/images/underline2.png') repeat-x center bottom
+    :text-decoration underline
+
+    
+th
+  :font-variant small-caps
+  :color #333333
 
 img
   :border 0
   
-!sidebar_width= 240px
-!header_height= 80px
-
-#wrapper
-  :display block
-  :min-width 900px
+!content_width= 1000px
+!var_border= 3px double #666666
 
 .red
   :color red
-
 .clear
   :clear both
+.left
+  :float left
+.align_left
+  :text-align left
+.right
+  :float right
+.align_right
+  :text-align right
+.even
+  :background #EFF0F0
+.sm_pad
+  :padding 4px
+
+.button
+  :border= 2px solid !a_lt
+  :background #ffffff
+  :margin 3px
+  :padding 0 6px
+  :font-size .8em
+  :-moz-border-radius 12px
+  &:hover
+    :border-color= !a
+    :text-decoration none
+    
+input[type="submit"]
+  :margin 3px 0 0 0
+
+  
+#wrapper
+  :display block
+  :min-width 910px
 
 #header_container
   :width 100%
   :margin 0 auto
-  :background-color white
+  :border-bottom= !var_border
 
 #header
   :display block
-  :float left
   :position relative
-  :height= !header_height
-  :width 100%
+  :width= !content_width
+  :margin 0 auto
   
   #title
     :display block
     :float left
-    :padding 0 0 0 10px
     
     h1
-      :margin 0
-      :padding 0
-      :font-size 48px
-
       a
         :margin 0
         :color black
         :text-decoration none
         :background none
+        :line-height 1.2
 
     p
       :margin 0
@@ -90,9 +122,6 @@ img
       :text-decoration none
       :background none
       :margin-top -10px
-
-  a
-    :color #FF781F
 
   span
     :color black
@@ -106,38 +135,33 @@ img
 
 #breadcrumbs_container
   :width 100%
+  :background #000000
+  :border-bottom= !var_border
+
 
 #breadcrumbs
   :display block
-  :width 820px
+  :width= !content_width
   :margin 0 auto
-  :text-align center
-
-  h2
-    :color black
-    :margin 0px
-
-
-#page
-  :float left
-  :display block
-  :margin= 0 0 0 !sidebar_width
-  :padding 0 0 0 20px
+  :color #e4e4e4
 
 #all_content
   :display block
+  :width= !content_width
+  :margin 10px auto
 
 #content
-  :width 600px
+  :float left
+  :width 700px
+  :padding 10px
+  :border 1px solid #cccccc
+  :background #ffffff
   li.user
     :width 100%
     a
-      :font-size 28px
       :color black
     span
       :color grey
-  .add
-    :font-size 18px
 
 .post
   :padding 0 0 20px 0
@@ -169,41 +193,20 @@ img
 
 #sidebar
   :display block
-  :position fixed
-  :left 0px
-  :top 0px
-  :-moz-border-radius 0 24px 0 0 
-  :width= !sidebar_width
-  :height 100%
-  :margin= !header_height 0 0 0
-  :padding 0 0 0 10px
-  :background-color #cccccc
-  :border-top 3px solid black
-  :border-right 3px solid black
-
-  ul
-    :display block
-    :width 100%
-    :margin 0 0 0 15px
-    :padding 0
-    :list-style hiragana
-
-  li
-    :margin 0
-    :padding 0
-    span:first-child
-      :float left
-      :font-weight bold
-      :font-size 14px
-    span:last-child
-      :text-align right
-      :float right
+  :float right
+  :width 260px
+  :font-size .8em
+  
+  table
+    td
+      :border-bottom 1px solid #cccccc
+      &:hover background #ffffff
+      
+      a
+        :font-weight bold
     
-  h2
-    :margin 0
-    :padding 10px 0 0 0
-    :height 40px
-
+  .button
+    :font-size 1em
 
 #footer_container
   :width 100%
@@ -216,13 +219,24 @@ img
   :margin 0 auto
   :padding 20px 0 0 0
   :text-align center
-  :font-size smaller
   :color grey
 
   a
     :color #003300
 
 table.invoice
+  tr
+    th
+      :border-top= !var_border
+      :border-bottom= !var_border
+  tr
+    td
+      :border-bottom 1px solid #666666
+      :border-right 1px dotted #666666
+      :padding 2px
+      &:first-child
+        :border-left 1px dotted #666666
+      
   tr#new_line_items ~ tr
     &.line_item_over
       :background-color white
@@ -230,42 +244,69 @@ table.invoice
     &.line_item_selected
       :background-color yellow
       :color black
-
-  td.rate, td.total
-    :text-align right
     
   td.notes
     textarea
-      :border 0
-      :color #8C8C8C
-      :width 275px
+      :width 96%
+      :border thin solid grey
   td:last-child
     a
       :display block
       :margin 7px 0 7px 0
                 
 .total
-  :text-align right
   :font-weight bold
 
 
 .invoice
-  :margin 10px 0 10px 0
-  :padding 5px
-
+  :padding 3px 0
+  :border-bottom 3px solid #ffffff
+  :text-align center
+  
+  &:first-child
+    :border-bottom none
+    :padding none
+  
   &.unbilled
     :color yellow
 
   &.paid
     :color green
+    :background #DFF3E3
 
   &.unpaid
     :color red
+    :background #EDE1E5
 
-  h2
-    :margin 0
-    :height 40px
+  h3
     :float left
-
+    :padding 3px 0 0 0
+    span
+      :color #666666
+      :font .9em italic "Arial", sans-serif
   ul
     :float right
+
+.user_name
+  :font-family "Arial Black", sans-serif
+  span
+    :color black
+  
+form label
+  :width 180px
+  :text-align right
+  :display inline-block
+  
+.box
+  :display block
+  :width 20px
+  :height 20px
+  
+#new_user_session, #new_client
+  p
+    :margin 3px 0
+    label
+      :width 80px
+    
+
+  

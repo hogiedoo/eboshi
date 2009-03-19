@@ -1,5 +1,6 @@
-%tr{ :id => "line_item_#{line_item.id}_tr" }
+%tr{ :id => "line_item_#{line_item.id}_tr", :class => cycle('even','') }
   = render :partial => 'line_items/'+line_item.class.to_s.underscore, :object => line_item
-  %td{ :style => "background-color: \##{line_item.try(:user).try(:color)}" }
+  / %td{ :style => "background-color: \##{line_item.try(:user).try(:color)}" }
+  %td
     = link_to image_tag('edit.png'), edit_line_item_path(line_item)
     = link_to image_tag('delete.png'), line_item_path(line_item), :class => 'delete'

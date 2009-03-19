@@ -1,5 +1,6 @@
 - @line_item = work
-%td.name{ :style => "background-color: \##{work.user.color}" }=h work.user.login
+/ %td.name{ :style => "background-color: \##{work.user.color}" }=h work.user.login
+%td.name{:class=>"user_name", :style => "color: \##{work.user.color}" }=h work.user.login
 %td.time{ :colspan => work.incomplete? ? 4 : 1 }
   = check_box_tag 'line_item_ids[]', work.id, nil, :style => "display: none"
   = work.start.to_s(:slash)

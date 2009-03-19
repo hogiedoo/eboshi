@@ -9,14 +9,15 @@
   %col{ :width => '10%' }
   %col{ :width => '10%' }
   %tr
-    %th Name
-    %th Balance
+    %th name
+    %th balance
   - for client in @clients
     %tr
       %td= h client.name
       %td{ :align => 'center' }= number_to_currency client.balance
-      %td{ :align => 'center' }= link_to 'Billing Details', invoices_path(client)
-      %td{ :align => 'center' }= link_to 'Client Details', client
-      %td{ :align => 'center' }= link_to 'Edit', edit_client_path(client)
-      %td{ :align => 'center' }= link_to 'Delete', client, :confirm => 'Are you sure?', :method => :delete
+      %td{ :align => 'center' }= link_to 'Billing Details', invoices_path(client), :class=>"button"
+      %td{ :align => 'center' }= link_to 'Client Details', client, :class=>"button"
+      %td{ :align => 'center' }= link_to 'Edit', edit_client_path(client), :class=>"button"
+      %td{ :align => 'center' }= link_to 'Delete', client, :confirm => 'Are you sure?', :method => :delete, :class=>"button"
+
       
