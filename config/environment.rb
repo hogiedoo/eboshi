@@ -11,7 +11,7 @@ Rails::Initializer.run do |config|
   config.gem 'haml'
   config.gem 'resource_controller'
   config.gem 'authlogic'
-  config.gem 'jscruggs-metric_fu', :version => '0.9.0', :lib => 'metric_fu', :source => 'http://gems.github.com'
+  #config.gem 'jscruggs-metric_fu', :version => '0.9.0', :lib => 'metric_fu', :source => 'http://gems.github.com'
 
   config.action_controller.session = {
     :session_key => '_invoice_session',
