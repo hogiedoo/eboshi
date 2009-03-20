@@ -54,4 +54,7 @@ $(function() {
     this.parents("div:first").replaceWith(data)
   })
 
+  $("a.invoice_hide_details").GET(function(data) {
+    this.parents("table:first").replaceWith(data)
+  })
 })
