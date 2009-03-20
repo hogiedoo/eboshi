@@ -1,4 +1,4 @@
-%tr{ :id => "line_item_#{line_item.id}_tr", :class => cycle('even','') }
+%tr{ :id => "line_item_#{line_item.id}_tr", :class => "line_item#{cycle(' even','')}" }
   = render :partial => 'line_items/'+line_item.class.to_s.underscore, :object => line_item
   / %td{ :style => "background-color: \##{line_item.try(:user).try(:color)}" }
   %td

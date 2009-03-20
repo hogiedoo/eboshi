@@ -237,7 +237,7 @@ table.invoice
       &:first-child
         :border-left 1px dotted #666666
       
-  tr#new_line_items ~ tr
+  tr.line_item
     &.line_item_over
       :background-color white
       :color black
@@ -265,7 +265,7 @@ table.invoice
   
   &:first-child
     :border-bottom none
-    :padding none
+    :padding 0px
   
   &.unbilled
     :color yellow

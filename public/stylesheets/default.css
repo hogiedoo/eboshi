@@ -210,10 +210,10 @@ table.invoice tr td {
   padding: 2px; }
   table.invoice tr td:first-child {
     border-left: 1px dotted #666666; }
-table.invoice tr#new_line_items ~ tr.line_item_over {
+table.invoice tr.line_item.line_item_over {
   background-color: white;
   color: black; }
-table.invoice tr#new_line_items ~ tr.line_item_selected {
+table.invoice tr.line_item.line_item_selected {
   background-color: yellow;
   color: black; }
 table.invoice td.notes textarea {
@@ -232,7 +232,7 @@ table.invoice td:last-child a {
   text-align: center; }
   .invoice:first-child {
     border-bottom: none;
-    padding: none; }
+    padding: 0px; }
   .invoice.unbilled {
     color: yellow; }
   .invoice.paid {
