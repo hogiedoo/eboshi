@@ -1,13 +1,13 @@
 $(function() {
-  $("tr#new_line_items ~ tr").livequery('mouseover', function() {
+  $("tr.line_item").livequery('mouseover', function() {
     $(this).addClass("line_item_over")
   })
 
-  $("tr#new_line_items ~ tr").livequery('mouseout', function() {
+  $("tr.line_item").livequery('mouseout', function() {
     $(this).removeClass("line_item_over")
   })
 
-  $("tr#new_line_items ~ tr").livequery('click', function(e) {
+  $("tr.line_item").livequery('click', function(e) {
     if(e.target.type == 'textarea') return
     $(this).toggleClass("line_item_selected")
     $(this).find(":checkbox").toggleChecks()
@@ -54,4 +54,7 @@ $(function() {
     this.parents("div:first").replaceWith(data)
   })
 
+  $("a.invoice_hide_details").GET(function(data) {
+    this.parents("table:first").replaceWith(data)
+  })
 })

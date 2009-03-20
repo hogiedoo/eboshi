@@ -8,7 +8,6 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.gem 'pdf-writer', :lib => 'pdf/writer'
-  config.gem 'mysql'
   config.gem 'haml'
   config.gem 'resource_controller'
   config.gem 'authlogic'
