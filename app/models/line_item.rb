@@ -31,7 +31,7 @@ class LineItem < ActiveRecord::Base
 	end
 	
 	def invoice_total
-	  invoice.try(:total) || client.balance
+	  invoice.try(:total) || client.unbilled_balance
 	end
 	
 	def notes_with_period

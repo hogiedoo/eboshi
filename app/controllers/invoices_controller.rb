@@ -5,16 +5,14 @@ class InvoicesController < ResourceController::Base
 	index.before { current_user.update_attribute(:last_client, @client) }
 	index.wants.js { render :partial => 'invoice', :collection => @client.invoices.paid }
 	
-	show.wants.html do
-	  render :layout => false
-	end
+	show.wants.html { render :layout => false }
   show.wants.pdf do
 		send_data InvoiceDrawer.draw(@invoice),
 		  :filename => "bot-and-rose_invoice-#{@invoice.id}.pdf",
 		  :type => 'application/pdf',
 		  :disposition => 'inline'
 	end
-
+	show.wants.js { render :partial => 'mini', :locals => { :invoice => @invoice } } 
 	edit.wants.js { render :partial => 'full', :locals => { :invoice => @invoice } } 
   create.wants.html { redirect_to invoices_path(@client) }
   update.wants.html { redirect_to invoices_path(@client) }

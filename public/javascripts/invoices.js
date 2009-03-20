@@ -1,13 +1,13 @@
 $(function() {
-  $("tr#new_line_items ~ tr").livequery('mouseover', function() {
+  $("tr.line_item").livequery('mouseover', function() {
     $(this).addClass("line_item_over")
   })
 
-  $("tr#new_line_items ~ tr").livequery('mouseout', function() {
+  $("tr.line_item").livequery('mouseout', function() {
     $(this).removeClass("line_item_over")
   })
 
-  $("tr#new_line_items ~ tr").livequery('click', function(e) {
+  $("tr.line_item").livequery('click', function(e) {
     if(e.target.type == 'textarea') return
     $(this).toggleClass("line_item_selected")
     $(this).find(":checkbox").toggleChecks()
@@ -32,7 +32,7 @@ $(function() {
     var a = this
     if(confirm('Are you sure you want to delete this line item?')) {
       $.post(a.href, '_method=delete', function(data) {
-        $(a).parents("tbody").find("td.total").text(number_to_currency(data))
+        $(a).parents("table").find("thead td.total").text(number_to_currency(data))
         $(a).parents("tr").remove()
       }, 'json')
     }
@@ -54,4 +54,7 @@ $(function() {
     this.parents("div:first").replaceWith(data)
   })
 
+  $("a.invoice_hide_details").GET(function(data) {
+    this.parents("table:first").replaceWith(data)
+  })
 })

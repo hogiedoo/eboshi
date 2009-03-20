@@ -14,10 +14,11 @@
   = stylesheet_link_tag 'default', 'in_place_styles', 'pretty_flash'
   = yield :stylesheet_links
 
-  %style{type="text/css"}
-    :plain
-      a:hover{color: ##{current_user.color};}
-      .button:hover{border-color:##{current_user.color};}
+  - if current_user
+    %style{type="text/css"}
+      :plain
+        a:hover{color: ##{current_user.color};}
+        .button:hover{border-color:##{current_user.color};}
       
   %link{:rel => "shortcut icon", :href => "/favicon.png", :type => "image/x-icon"}
 
