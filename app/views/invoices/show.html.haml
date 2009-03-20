@@ -73,7 +73,7 @@
                   - if line_item.is_a? Work
                     %tr
                       %td= h line_item.notes
-                      %td.center_align= line_item.hours
+                      %td.center_align= number_with_precision line_item.hours, :precision => 2
                       %td.center_align= number_to_currency line_item.rate
                       %td.center_align= number_to_currency line_item.total
                   - if line_item.is_a? Adjustment
