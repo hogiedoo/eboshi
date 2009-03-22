@@ -213,8 +213,8 @@ table.invoice tr td {
     border-left: 1px dotted #666666; }
 table.invoice tr.line_item.line_item_over {
   color: black; }
-table.invoice tr.line_item.line_item_selected {
-  color: black; }
+table.invoice tr.line_item.line_item_selected { color: black; }
+  .line_item_selected td.user_name {color:black !important;}
 table.invoice td.notes textarea {
   width: 96%;
   border: thin solid grey; }
