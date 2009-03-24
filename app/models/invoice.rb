@@ -1,3 +1,14 @@
+# == Schema Information
+# Schema version: 20081222015211
+#
+# Table name: invoices
+#
+#  id           :integer(4)      not null, primary key
+#  client_id    :integer(4)
+#  date         :datetime
+#  project_name :string(255)
+#
+
 class Invoice < ActiveRecord::Base
 	belongs_to :client
 	has_many :line_items, :dependent => :destroy

@@ -59,7 +59,7 @@
             %col{:width=>"60%"}
             %col{:width=>"20%"}
             %col{:width=>"20%"}
-            - @clients.each do |client|
+            - current_user.clients.each do |client|
               %tr
                 %td= link_to h(client.name), invoices_path(client), :class=>"inline"
                 %td= currency_or_empty client.unbilled_balance
