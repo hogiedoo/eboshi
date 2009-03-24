@@ -12,14 +12,6 @@ class ApplicationController < ActionController::Base
   before_filter :activate_authlogic
   before_filter :require_user
 
-  before_filter :get_clients
-  
-  protected
-
-		def get_clients
-      @clients = Client.all :order => 'name'
-		end
-
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)

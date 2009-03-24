@@ -4,6 +4,9 @@ module NavigationHelpers
     
     when /the homepage/
       root_path
+    when /the new client_user_assignments page/
+      new_client_user_assignments_path
+
     
     # Add more page name => path mappings here
     

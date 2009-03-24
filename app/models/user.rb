@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
   acts_as_authentic
   
   belongs_to :last_client, :class_name => "Client"
+  has_many :pacts, :dependent => :destroy
+  has_many :clients, :through => :pacts
   
   def name
     login
