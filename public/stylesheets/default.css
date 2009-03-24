@@ -78,7 +78,7 @@ img {
   margin: 3px;
   padding: 0 6px;
   font-size: .8em;
-  -moz-border-radius: 12px; }
+  -moz-border-radius: 12px; -webkit-border-radius: 12px; border-radius: 12px; }
   .button:hover {
     border-color: #333333;
     text-decoration: none; }
