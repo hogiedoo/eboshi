@@ -1,3 +1,22 @@
+# == Schema Information
+# Schema version: 20081222015211
+#
+# Table name: clients
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  address    :string(255)
+#  city       :string(255)
+#  state      :string(255)
+#  zip        :string(255)
+#  country    :string(255)
+#  email      :string(255)
+#  contact    :string(255)
+#  phone      :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Client < ActiveRecord::Base
 	has_many :line_items, :dependent => :destroy
 	has_many :works
