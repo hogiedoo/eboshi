@@ -32,7 +32,7 @@ $(function() {
     var a = this
     if(confirm('Are you sure you want to delete this line item?')) {
       $.post(a.href, '_method=delete', function(data) {
-        $(a).parents("tbody").find("td.total").text(number_to_currency(data))
+        $(a).parents("table").find("thead td.total").text(number_to_currency(data))
         $(a).parents("tr").remove()
       }, 'json')
     }

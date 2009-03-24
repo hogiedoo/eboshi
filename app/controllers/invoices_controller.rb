@@ -3,7 +3,7 @@ class InvoicesController < ResourceController::Base
 	before_filter :get_client
 	
 	index.before { current_user.update_attribute(:last_client, @client) }
-	index.wants.js { render :partial => 'invoice', :collection => @client.invoices.paid }
+	index.wants.js { render @client.invoices.paid }
 	
 	show.response do |wants|
 	  wants.html { render :layout => false }

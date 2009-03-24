@@ -14,7 +14,7 @@ class LineItemsController < ResourceController::Base
       end
     else
       respond_to do |format|
-        format.html { render :action => "edit" }
+        format.html { render :edit }
         format.js { exit }
       end
     end
@@ -27,7 +27,7 @@ class LineItemsController < ResourceController::Base
   	@line_item = @client.clock_in current_user
   	
 		respond_to do |format|
-			format.html { render :action => 'new' }
+			format.html { render :new }
 			format.js { render :partial => 'line_item', :object => @line_item }
 		end
   end
