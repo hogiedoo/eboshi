@@ -23,45 +23,37 @@ Feature: Manage client-user associations
       | client |
       | fashions weekly |
   
-  Scenario: Users should only see assigned clients
+  Scenario: View assigned clients
     Given I am on "/"
-    Then I should see "cheapbowlingballs.com"
-    And I should see "bossanova"
-    And I should not see "g2a"
-    And I should not see "fashions weekly"
+    Then I should see "cheapbowlingballs.com" under "Clients"
+    And I should see "bossanova" under "Clients"
+    And I should not see "g2a" under "Clients"
+    And I should not see "fashions weekly" under "Clients"
     
-  Scenario: Users should see collaborators
+  Scenario: Collaborator list
     Given I am on the invoices page for "bossanova"
-    Then I should see "Michael"
-    And I should not see "Kit"
+    Then I should see "Michael" under "Collaborators"
+    And I should not see "Kit" under "Collaborators"
     
-  Scenario: Users should be able to delete assignments
+  Scenario: User deletes another's assignment
     Given I am on the invoices page for "bossanova"
     And I click "delete" next to "Michael"
-    Then I should not see "Michael"
-    
+    Then I should not see "Michael" under "Collaborators"
+        
   Scenario: User deletes own assignment
     Given I am on the invoices page for "bossanova"
     And I click "delete" next to "Micah"
-    Then I should not see "bossanova"
+    Then I should not see "bossanova" under "Clients"
     
-  Scenario: Add user
-    Given I follow "Add Client"
-    And I fill in "Name" with "Domaine Selections"
-    And I press "Create"
-    Then I should see "Domaine Selections" under "Clients"
-
-  Scenario: Users shouldn't be able to access unassigned clients
-    Then visiting the invoices page for "fashions weekly" should return 404
+  Scenario: User sees a list of current associates on the invite collaborator page
+    Given I am on the invoices page for "cheapbowlingballs.com"
+    And I follow "Invite collaborator"
+    Then I should see "Michael" under "Existing User"
+    And I should not see "Kit" under "Existing User"
     
-  Scenario: Users shouldn't be able to access unassigned invoices
-    Given an invoice exists for "fashions weekly"
-    Then visiting that invoice page should return 404
-
-  Scenario: Users shouldn't be able to access unassigned line items
-    Given an adjustment exists for "fashions weekly"
-    Then visiting that line item page should return 404
-
-  Scenario: Users shouldn't be able to access unassigned payments
-    Given an invoice exists for "fashions weekly"
-    Then visiting the new payment page for that invoice should return 404
+  Scenario: User invites a collaborator onto a project
+    Given I am on the invoices page for "cheapbowlingballs.com"
+    And I follow "Invite collaborator"
+    And I choose "Michael"
+    And I press "Invite"
+    Then I should see "Michael" under "Collaborators"
