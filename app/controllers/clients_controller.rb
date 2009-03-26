@@ -4,6 +4,8 @@ class ClientsController < ResourceController::Base
   actions :all, :except => :show  
 
   create.wants.html { redirect_to clients_path }
+  create.after { object.users << current_user }
+  
   update.wants.html { redirect_to clients_path }
   
   private

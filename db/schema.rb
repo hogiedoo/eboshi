@@ -51,17 +51,6 @@ ActiveRecord::Schema.define(:version => 20090326050219) do
     t.string   "type"
   end
 
-  create_table "logged_exceptions", :force => true do |t|
-    t.string   "exception_class"
-    t.string   "controller_name"
-    t.string   "action_name"
-    t.text     "message"
-    t.text     "backtrace"
-    t.text     "environment"
-    t.text     "request"
-    t.datetime "created_at"
-  end
-
   create_table "payments", :force => true do |t|
     t.integer  "invoice_id"
     t.decimal  "total",      :precision => 10, :scale => 2
