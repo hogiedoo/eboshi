@@ -39,6 +39,12 @@ Feature: Manage client-user associations
     Given I am on the invoices page for "bossanova"
     And I click "delete" next to "Michael"
     Then I should not see "Michael"
+    
+  Scenario: Add user
+    Given I follow "Add Client"
+    And I fill in "Name" with "Domaine Selections"
+    And I press "Create"
+    Then I should see "Domaine Selections" under "Clients"
 
   Scenario: Users shouldn't be able to access unassigned clients
     Then visiting the invoices page for "fashions weekly" should return 404

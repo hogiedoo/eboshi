@@ -55,3 +55,7 @@ Then /^visiting the new payment page for that invoice should return 404$/ do
   lambda { visit "/invoices/#{invoice.id}/payments/new" }.should raise_error ActiveRecord::RecordNotFound
 end
 
+Then /^I should see "(.+)" under "Clients"$/ do |name|
+  response.should have_selector "h2:contains('Clients') ~ *:contains('#{name}')"
+end
+
