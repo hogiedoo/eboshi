@@ -17,21 +17,21 @@
       #content
       
         #return
-          #logo= link_to image_tag("/images/invoice/logo.gif", :size => "146x53"), "http://botandrose.com"
+          #logo= link_to image_tag("/images/invoice/logo.gif", :size => "145x51"), "http://botandrose.com"
           %p 625 nw Everett st., no.346
           %p Portland, Oregon 97209
-          %p info@botandrose.com
+          %p.color info@botandrose.com
         .clear
         
         #client
-          %h1 INVOICE
+          %h1 Invoice
           %p attention:
           %h2= h @invoice.client.contact
           %p= h @invoice.client.address
         .clear
         
         #date
-          %h3= "#{@invoice.date.day}  #{Date::MONTHNAMES[@invoice.date.month]}  #{@invoice.date.year}"
+          %h3="#{@invoice.date.day}  #{Date::MONTHNAMES[@invoice.date.month]}  #{@invoice.date.year}"
         .clear
         
         #project
@@ -54,35 +54,35 @@
                 %td.right_align Due on Receipt
                 
           #items
-            %table{:cellspacing => '0', :cellpadding => '0', :width => '100%'}
-              %col{:width => '60%'}
+            %table{:cellspacing => '0', :cellpadding => '0'}
+              %col{:width => '70%'}
               %col{:width => '15%'}
-              %col{:width => '25%'}
+              %col{:width => '15%'}
               %thead
                 %tr
-                  %th.left_align ITEM
-                  %th HOURS
-                  %th RATE
-                  %th COST
+                  %th.left_align item
+                  %th hours
+                  / %th rate
+                  %th cost
               %tfoot
                 %tr
-                  %td{:colspan => '3'} TOTAL
+                  %td{:colspan => '2'} TOTAL
                   %td.center_align= number_to_currency @invoice.total
               %tbody
                 - for line_item in @invoice.line_items
                   - if line_item.is_a? Work
-                    %tr
-                      %td= h line_item.notes
+                    %tr{:class => cycle('even','')}
+                      %td.li= h line_item.notes
                       %td.center_align= number_with_precision line_item.hours, :precision => 2
-                      %td.center_align= number_to_currency line_item.rate
+                      / %td.center_align= number_to_currency line_item.rate
                       %td.center_align= number_to_currency line_item.total
                   - if line_item.is_a? Adjustment
                     %tr
-                      %td{:colspan => 3 }= h line_item.notes
+                      %td{:colspan => 2 }= h line_item.notes
                       %td.center_align= number_to_currency line_item.total
                 
           #project_footer
-            %p Additional notes
+            %em Work rated at $75/hour.
           
         .clear
         
