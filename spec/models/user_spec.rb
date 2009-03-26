@@ -10,7 +10,7 @@ describe User do
       3.times { @client.users << User.make }
       2.times { User.make }
       
-      @it.related_users.count.should == 3
+      @it.related_users.length.should == 3
     end
   end
 end
