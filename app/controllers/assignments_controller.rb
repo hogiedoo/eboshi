@@ -2,7 +2,10 @@ class AssignmentsController < ResourceController::Base
   before_filter :authorized?
   
   actions :destroy
-  destroy.wants.html { redirect_to :back }
+  destroy.wants.html do
+    path = object.user == current_user ? "/" : :back
+    redirect_to path
+  end
   
   private
     def authorized?

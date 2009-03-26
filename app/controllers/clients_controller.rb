@@ -12,6 +12,10 @@ class ClientsController < ResourceController::Base
     def object
       @object ||= Client.find params[:id]
     end
+    
+    def collection
+      @collection ||= current_user.clients
+    end
 
     def authorized?
       current_user.authorized? object

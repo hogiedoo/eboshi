@@ -40,6 +40,11 @@ Feature: Manage client-user associations
     And I click "delete" next to "Michael"
     Then I should not see "Michael"
     
+  Scenario: User deletes own assignment
+    Given I am on the invoices page for "bossanova"
+    And I click "delete" next to "Micah"
+    Then I should not see "bossanova"
+    
   Scenario: Add user
     Given I follow "Add Client"
     And I fill in "Name" with "Domaine Selections"
