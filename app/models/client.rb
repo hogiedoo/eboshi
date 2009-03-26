@@ -23,8 +23,8 @@ class Client < ActiveRecord::Base
 	has_many :adjustments
 	has_many :invoices, :dependent => :destroy
 	has_many :payments, :through => :invoices
-	has_many :pacts, :dependent => :destroy
-	has_many :users, :through => :pacts
+	has_many :assignments, :dependent => :destroy
+	has_many :users, :through => :assignments
 	
 	validates_presence_of :name
 

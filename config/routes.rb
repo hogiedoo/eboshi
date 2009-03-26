@@ -17,6 +17,7 @@ ActionController::Routing::Routes.draw do |map|
 	map.clock_out '/clients/:client_id/line_item/:id/clock_out', :controller => 'line_items', :action => 'clock_out'
 
   map.resources :users
+  map.resources :assignments, :only => :destroy
   map.resource :account, :controller => "users"
   map.resource :user_session
 

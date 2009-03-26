@@ -12,7 +12,9 @@ module ControllerSpecHelpers
       integrate_views
       
       before :each do
-        controller.stub!(:current_user).and_return(User.make)
+        user = User.make
+        user.stub!(:authorized?).and_return(true)
+        controller.stub!(:current_user).and_return(user)        
       end
     end_eval
 	end

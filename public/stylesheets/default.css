@@ -9,8 +9,7 @@ body, th, td, input, textarea, select, option {
   font-family: "Arial", sans-serif; }
 
 a, h1, h2, h3 {
-  font-family: Arial, sans-serif;
-  font-weight: bold; }
+  font-family: "Arial Black", sans-serif; }
 
 h1, h2, h3, ul, li, p {
   margin: 0;
@@ -78,7 +77,7 @@ img {
   margin: 3px;
   padding: 0 6px;
   font-size: .8em;
-  -moz-border-radius: 12px; -webkit-border-radius: 12px; border-radius: 12px; }
+  -moz-border-radius: 12px; }
   .button:hover {
     border-color: #333333;
     text-decoration: none; }
@@ -212,9 +211,11 @@ table.invoice tr td {
   table.invoice tr td:first-child {
     border-left: 1px dotted #666666; }
 table.invoice tr.line_item.line_item_over {
+  background-color: white;
   color: black; }
-table.invoice tr.line_item.line_item_selected { color: black; }
-  .line_item_selected td.user_name {color:black !important;}
+table.invoice tr.line_item.line_item_selected {
+  background-color: yellow;
+  color: black; }
 table.invoice td.notes textarea {
   width: 96%;
   border: thin solid grey; }
@@ -250,8 +251,7 @@ table.invoice td:last-child a {
     float: right; }
 
 .user_name {
-  font-family: Arial, sans-serif;
-  font-weight: bold; }
+  font-family: "Arial Black", sans-serif; }
   .user_name span {
     color: black; }
 
