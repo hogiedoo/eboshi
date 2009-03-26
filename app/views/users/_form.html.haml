@@ -3,6 +3,10 @@
   = form.text_field :login
   
 %p
+  = form.label :email, "Email Address"
+  = form.text_field :email
+  
+%p
   = form.label :password, form.object.new_record? ? nil : "Change password"
   = form.password_field :password
 
@@ -11,7 +15,7 @@
   = form.password_field :password_confirmation
   
 %p
-  = form.label :rate
+  = form.label :rate, "Default Rate"
   = form.text_field :rate
   
 %p
