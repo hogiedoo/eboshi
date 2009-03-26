@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-	map.root :controller => 'users', :action => 'index'
+	map.root :controller => 'clients', :action => 'index'
 
   map.resources :clients, :shallow => true do |client|
 	  client.resources :invoices, :shallow => true, :name_prefix => nil do |invoice|
