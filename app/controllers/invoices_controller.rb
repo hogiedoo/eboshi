@@ -1,7 +1,8 @@
 class InvoicesController < ResourceController::Base
 	before_filter :get_invoice, :except => [:index, :new, :create]
 	before_filter :get_client
-	
+  before_filter :authorized?
+
 	index.before { current_user.update_attribute(:last_client, @client) }
 	index.wants.js { render @client.invoices.paid }
 	
@@ -36,11 +37,11 @@ class InvoicesController < ResourceController::Base
 
 	protected 
 		def get_client
-			@client = @invoice.try(:client) || Client.find(params[:client_id])
+			@client ||= @invoice.try(:client) || Client.find(params[:client_id])
 		end
 
 		def get_invoice
-		  @invoice = Invoice.find params[:id]
+		  @invoice ||= Invoice.find params[:id]
 		end
 		
 		def build_object
@@ -52,4 +53,8 @@ class InvoicesController < ResourceController::Base
 		  end
 		end
 
+  private
+    def authorized?
+			current_user.authorized? @client
+    end      
 end

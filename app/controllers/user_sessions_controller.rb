@@ -1,7 +1,8 @@
 class UserSessionsController < ResourceController::Base
-  actions :new, :create, :destroy
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
+
+  actions :new, :create, :destroy
 
   create do
     flash "Login successful!"

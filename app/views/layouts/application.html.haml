@@ -53,6 +53,14 @@
         
     #all_content
       #sidebar
+        - if @client
+          %h2 Collaborators
+          - @client.users.each do |user|
+            %li
+              = h user.name
+              = link_to 'delete', Assignment.find_by_cuplet(@client, user), :method => :delete
+          = link_to 'Invite collaborator', new_assignment_path(@client)
+            
         - if current_user
           %h2 Clients  
           %table{:width=>"100%", :border=>"0", :cellspacing=>"0", :cellpadding=>"0"}

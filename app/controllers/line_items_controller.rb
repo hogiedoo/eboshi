@@ -1,7 +1,9 @@
 class LineItemsController < ResourceController::Base
-  actions :all, :except => [:index, :show]
 	before_filter :get_line_item, :except => [:new, :create, :clock_in, :merge]
 	before_filter :get_client
+	before_filter :authorized?
+
+  actions :all, :except => [:index, :show]
 
   def update
     class_name = @line_item.class.to_s
@@ -57,15 +59,19 @@ class LineItemsController < ResourceController::Base
 
   protected
     def get_line_item
-      @line_item = LineItem.find params[:id]
+      @line_item ||= LineItem.find params[:id]
     end
 
   	def get_client
-		  @client = @line_item.try(:client) || Client.find(params[:client_id])
+		  @client ||= (@line_item.try(:client) || Client.find(params[:client_id]))
 	  end
 	  
 	  def build_object
-      @object = @client.line_items.build params[:line_item]
+      @object ||= @client.line_items.build params[:line_item]
     end
 
+  private
+    def authorized?
+			current_user.authorized? @client
+    end
 end
