@@ -11,3 +11,10 @@ Given /^I am signed in as "Micah"$/ do
   response.should contain "Welcome,"
   response.should contain "Micah!"
 end
+
+Given /^the following (.+) exist:$/ do |model, table|
+  model = model.singularize.capitalize.constantize
+  table.hashes.each do |row|
+    model.make row
+  end
+end

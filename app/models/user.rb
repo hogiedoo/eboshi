@@ -29,6 +29,10 @@ class User < ActiveRecord::Base
   has_many :assignments, :dependent => :destroy
   has_many :clients, :through => :assignments
   
+  def related_users
+    clients.collect(&:users).flatten.uniq - [self]
+  end
+  
   def name
     login
   end
