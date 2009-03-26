@@ -48,3 +48,8 @@ Invoice.blueprint do
   date Date.today
   project_name { Faker::Company.name }
 end
+
+Payment.blueprint do
+  invoice
+  total 0
+end

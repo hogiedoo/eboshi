@@ -10,7 +10,11 @@
 #  updated_at :datetime
 #
 
-class Pact < ActiveRecord::Base
+class Assignment < ActiveRecord::Base
   belongs_to :user
   belongs_to :client
+  
+  def self.find_by_cuplet(client, user)
+    first :conditions => { :client_id => client, :user_id => user }
+  end
 end
