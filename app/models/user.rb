@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
   
   def authorized?(object)
     return if object.is_a? Client and clients.include?(object)
+    return if object.is_a? Invoice and clients.include?(object.client)
     return if object.is_a? Assignment and object.client.users.include?(self)
     raise ActiveRecord::RecordNotFound
   end
