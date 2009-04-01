@@ -1,13 +1,13 @@
 $(function() {
-  $("tr.line_item").livequery('mouseover', function() {
+  $("tr.line_item").live('mouseover', function() {
     $(this).addClass("line_item_over")
   })
 
-  $("tr.line_item").livequery('mouseout', function() {
+  $("tr.line_item").live('mouseout', function() {
     $(this).removeClass("line_item_over")
   })
 
-  $("tr.line_item").livequery('click', function(e) {
+  $("tr.line_item").live('click', function(e) {
     if(e.target.type == 'textarea') return
     $(this).toggleClass("line_item_selected")
     $(this).find(":checkbox").toggleChecks()
@@ -28,7 +28,7 @@ $(function() {
     this.parents("tbody").find("td.total").text(number_to_currency(data.total))
   }, "json")
 
-  $("a.delete").livequery('click', function() {
+  $("a.delete").live('click', function() {
     var a = this
     if(confirm('Are you sure you want to delete this line item?')) {
       $.post(a.href, '_method=delete', function(data) {
