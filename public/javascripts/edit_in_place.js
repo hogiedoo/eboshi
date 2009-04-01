@@ -17,7 +17,7 @@ $(function() {
         ', 500)
       } else {
         this.buffer = this.value
-        $.post('/line_items/'+this.line_item_id, '_method=put&line_item[notes]='+this.value)
+        $.post('/line_items/'+this.line_item_id, '_method=put&line_item[notes]='+escape(this.value))
         this.wait = true
       }
     }
