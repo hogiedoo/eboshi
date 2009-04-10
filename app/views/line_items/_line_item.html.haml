@@ -1,4 +1,6 @@
 %tr{ :id => "line_item_#{line_item.id}_tr", :class => "line_item#{cycle(' even','')}" }
+  %td= check_box_tag 'line_item_ids[]', line_item.id, nil
+
   = render :partial => 'line_items/'+line_item.class.to_s.underscore, :object => line_item
   / %td{ :style => "background-color: \##{line_item.try(:user).try(:color)}" }
   %td
