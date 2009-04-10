@@ -55,4 +55,8 @@ class Invoice < ActiveRecord::Base
     !line_items.empty? && !payments.empty? && balance == 0
   end
   
+	def total_hours
+		line_items.to_a.sum(&:hours)
+	end
+	
 end
