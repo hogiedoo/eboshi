@@ -9,6 +9,7 @@ describe UsersController do
 
   describe "should not error out" do
     it "on index" do
+      controller.stub!(:current_user).and_return(User.make :admin => true)
       get :index
     end
     it "on edit" do
