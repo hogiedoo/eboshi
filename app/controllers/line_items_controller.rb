@@ -1,5 +1,5 @@
 class LineItemsController < ResourceController::Base
-	before_filter :get_line_item, :except => [:new, :create, :clock_in, :merge, :destroy]
+	before_filter :get_line_item, :except => [:new, :create, :clock_in, :merge]
 	before_filter :get_client
 	before_filter :authorized?
 
