@@ -14,10 +14,10 @@ Then /^visiting the invoices page for "(.+)" should return 404$/ do |name|
   lambda { visit "/clients/#{client.id}/invoices" }.should raise_error ActiveRecord::RecordNotFound
 end
 
-Then /^visiting that (.+) page should return 404$/ do |model_name|
+Then /^visiting that (.+) (.*)[ ]?page should return 404$/ do |model_name, action|
   model = model_name.gsub(/ /, '_').classify.constantize
   record = model.first
-  lambda { visit "/#{model_name.gsub(/ /, '_').pluralize}/#{record.id}" }.should raise_error ActiveRecord::RecordNotFound
+  lambda { visit "/#{model_name.gsub(/ /, '_').pluralize}/#{record.id}/#{action}" }.should raise_error ActiveRecord::RecordNotFound
 end
 
 Then /^visiting the new payment page for that invoice should return 404$/ do

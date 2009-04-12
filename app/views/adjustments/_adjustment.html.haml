@@ -1,11 +1,11 @@
-%tr{ :id => "adjustment_#{adjustment.id}_tr", :class => "adjustment#{cycle(' even','')}" }
-  %td= check_box_tag 'adjustment_ids[]', work.id, nil
+%tr{ :id => "line_item_#{adjustment.id}_tr", :class => "line_item adjustment#{cycle(' even','')}" }
+  %td= check_box_tag 'line_item_ids[]', adjustment.id, nil, :id => "line_item_ids_#{adjustment.id}"
 
   %td{ :colspan => 5, :align => "right" }
-    %i Adjustment:
+    %i Flat Fee:
     = number_to_currency adjustment.total
   %td.notes
-    %textarea{ :id => "notes_#{adjustment.id}" }
+    %textarea{ :id => "notes_#{adjustment.id}", :autocomplete => "off" }
       =h adjustment.notes
           
   %td

@@ -1,5 +1,5 @@
-%tr{ :id => "work_#{work.id}_tr", :class => "work#{cycle(' even','')}" }
-  %td= check_box_tag 'work_ids[]', work.id, nil
+%tr{ :id => "line_item_#{work.id}_tr", :class => "line_item work#{cycle(' even','')}" }
+  %td= check_box_tag 'line_item_ids[]', work.id, nil, :id => "line_item_ids_#{work.id}"
 
   %td.name{ :class=>"user_name", :style => "color: \##{work.user.color}" }=h work.user.name
   %td.time{ :colspan => work.incomplete? ? 4 : 1 }
@@ -16,7 +16,7 @@
     %td.rate= number_to_per_hour work.rate
     %td.total= number_to_currency work.total
   %td.notes
-    %textarea{ :id => "notes_#{work.id}" }
+    %textarea{ :id => "notes_#{work.id}", :autocomplete => "off" }
       =h work.notes
       
   %td

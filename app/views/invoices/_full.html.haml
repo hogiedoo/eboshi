@@ -9,7 +9,7 @@
   
   %thead{ :class => invoice.status, :id => "invoice_#{invoice.id_or_new}" }
     - if invoice.status == 'unbilled'
-      %tr#new_line_items
+      %tr
         %td
           - unless invoice.line_items.empty?
             with checked:<br>
@@ -49,7 +49,7 @@
             %b.red UNPAID
             =# button_to 'Mark as Paid', paid_invoice_path(invoice)
   
-  %tr
+  %tr#new_line_items
     %th
     %th user
     %th time
@@ -58,4 +58,4 @@
     %th total
     %th notes  
 
-    = render invoice.line_items.sort
+  = render invoice.line_items.sort

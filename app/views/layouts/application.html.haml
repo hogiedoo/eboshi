@@ -74,14 +74,6 @@
                 %td= link_to h(client.name), invoices_path(client), :class=>"inline"
                 %td= currency_or_empty client.unbilled_balance
                 %td.red= currency_or_empty client.overdue_balance
-                /
-                  %ul
-                    %li
-                      = link_to h(client.name), invoices_path(client), :class=>"inline"
-                      %span 
-                        / = currency_or_empty client.unbilled_balance
-                      %span 
-                        / = currency_or_empty client.overdue_balance
                     
           = link_to '+ Add Client', new_client_path, :class=>"button right"
           .clear

@@ -1,10 +1,11 @@
 - content_for :title do
-  Editing line_item
+  =h @client.name
+  &raquo; Editing Time Item
 
-= error_messages_for :line_item
+= error_messages_for :work
 
-- form_for @line_item, :url => line_item_path(@line_item) do |f|
+- form_for @work do |f|
   = render :partial => 'form', :object => f, :as => :f
   %p= f.submit "Update"
 
-= link_to 'Back', line_items_path(@client)
+= link_to 'Back', invoices_path(@client)
