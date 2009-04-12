@@ -14,7 +14,7 @@ Client.blueprint do
 end
 
 User.blueprint do
-  login { Faker::Name.name.gsub(/[^a-zA-Z]/, '') }
+  name { Faker::Name.name.gsub(/[^a-zA-Z]/, '') }
   email { Faker::Internet.email }
   password "insecure"
   password_confirmation "insecure"
