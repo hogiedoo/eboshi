@@ -9,11 +9,16 @@ ActionController::Routing::Routes.draw do |map|
   	      :shallow => true,
   	      :name_prefix => nil
 	  end
-    client.resources :line_items,
+    client.resources :works,
       :shallow => true,
       :except => [:index, :show],
-      :member => [:set_line_item_rate, :set_line_item_notes],
+      :member => [:set_rate, :set_notes],
       :collection => [:merge],
+      :name_prefix => nil
+    client.resources :adjustments,
+      :shallow => true,
+      :except => [:index, :show],
+      :member => [:set_notes],
       :name_prefix => nil
     client.resources :assignments,
       :shallow => true,

@@ -1,0 +1,14 @@
+%tr{ :id => "adjustment_#{adjustment.id}_tr", :class => "adjustment#{cycle(' even','')}" }
+  %td= check_box_tag 'adjustment_ids[]', work.id, nil
+
+  %td{ :colspan => 5, :align => "right" }
+    %i Adjustment:
+    = number_to_currency adjustment.total
+  %td.notes
+    %textarea{ :id => "notes_#{adjustment.id}" }
+      =h adjustment.notes
+          
+  %td
+    = link_to image_tag('edit.png'), edit_adjustment_path(adjustment)
+    = link_to image_tag('delete.png'), adjustment_path(adjustment), :class => 'delete'
+

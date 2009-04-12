@@ -1,0 +1,11 @@
+- content_for :title do
+  =h @client.name
+  &raquo; Editing Flat Fee
+
+= error_messages_for :adjustment
+
+- form_for @adjustment do |f|
+  = render :partial => 'form', :object => f, :as => :f
+  %p= f.submit "Update"
+
+= link_to 'Back', invoices_path(@client)
