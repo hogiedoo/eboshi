@@ -16,10 +16,15 @@
   
 %p
   = form.label :rate, "Default Rate"
-  = form.text_field :rate
+  == $#{form.text_field :rate}
   
 %p
   = form.label :color
   = form.text_field :color
-  
+
 %p
+  = form.label :logo
+  = image_tag @user.logo.url(:pdf) if @user.logo.updated_at
+  = form.file_field :logo
+
+

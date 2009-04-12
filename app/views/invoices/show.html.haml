@@ -17,7 +17,11 @@
       #content
       
         #return
-          #logo= link_to image_tag("/images/invoice/logo.gif", :size => "145x51"), "http://botandrose.com"
+          #logo
+            - if current_user.logo.updated_at
+              = image_tag current_user.logo.url(:pdf)
+            - else
+              = current_user.login
           %p 625 nw Everett st., no.346
           %p Portland, Oregon 97209
           %p.color info@botandrose.com
