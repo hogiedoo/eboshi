@@ -7,9 +7,9 @@ Then /^I should not be able to go to "([^\"]*)"$/ do |url|
 end
 
 Given /^I am signed in as "Micah"$/ do
-  @user = User.make :login => "Micah", :password => "insecure", :password_confirmation => "insecure"
+  @user = User.make :name => "Micah", :password => "insecure", :password_confirmation => "insecure"
   visit "/"
-  fill_in "login", :with => "Micah"
+  fill_in "email", :with => @user.email
   fill_in "password", :with => "insecure"
   click_button "Login"
   response.should contain "Welcome,"
@@ -17,9 +17,9 @@ Given /^I am signed in as "Micah"$/ do
 end
 
 Given /^I am signed in as an Admin$/ do
-  @user = User.make :login => "Admin", :password => "insecure", :password_confirmation => "insecure", :admin => true
+  @user = User.make :name => "Admin", :password => "insecure", :password_confirmation => "insecure", :admin => true
   visit "/"
-  fill_in "login", :with => "Admin"
+  fill_in "email", :with => @user.email
   fill_in "password", :with => "insecure"
   click_button "Login"
   response.should contain "Welcome,"

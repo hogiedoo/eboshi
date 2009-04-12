@@ -2,7 +2,7 @@ Feature: Manage client-user associations
   Background:
     Given I am signed in as "Micah"
     And the following users exist:
-      | login |
+      | name |
       | Michael |
       | Kit |
     And the following clients exist:
@@ -35,7 +35,7 @@ Feature: Manage client-user associations
     Then I should see "Michael" under "Collaborators"
     And I should not see "Kit" under "Collaborators"
     
-  Scenario: User deletes another's assignment
+  Scenario: User deletes anothers assignment
     Given I am on the invoices page for "bossanova"
     And I click "delete" next to "Michael"
     Then I should not see "Michael" under "Collaborators"

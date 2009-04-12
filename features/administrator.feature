@@ -1,7 +1,7 @@
 Feature: Administrator User Status
   Scenario: Admin logs in and views all users
     Given the following users exist:
-      | login   |
+      | name    |
       | Micah   |
       | Michael |
       | Tony    |
@@ -14,7 +14,7 @@ Feature: Administrator User Status
     
   Scenario: Micah logs in and tries to view all users
     Given the following users exist:
-      | login   |
+      | name    |
       | Admin   |
       | Michael |
       | Tony    |

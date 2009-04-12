@@ -44,7 +44,7 @@ class LineItem < ActiveRecord::Base
 	
 	def user_name=(name)
 		unless name.nil?
-			self.user = User.find_by_login!(name)
+			self.user = User.find_by_name!(name)
 		end
 	end
 	
