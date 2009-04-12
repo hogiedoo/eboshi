@@ -27,4 +27,9 @@
   = image_tag @user.logo.url(:pdf) if @user.logo.exists?
   = form.file_field :logo
 
+%p
+  = form.label :signature
+  = image_tag @user.signature.url(:pdf) if @user.signature.exists?
+  = form.file_field :signature
+
 

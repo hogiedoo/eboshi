@@ -12,4 +12,5 @@ config/deploy.rb
 converage/**/*
 Capfile
 public/logos
+public/signatures
 *[~]
