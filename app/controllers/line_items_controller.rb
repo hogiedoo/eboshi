@@ -1,5 +1,5 @@
 class LineItemsController < ResourceController::Base
-	before_filter :get_line_item, :except => [:new, :create, :clock_in, :merge]
+	before_filter :get_line_item, :except => [:new, :create, :clock_in, :merge, :destroy]
 	before_filter :get_client
 	before_filter :authorized?
 
@@ -29,7 +29,7 @@ class LineItemsController < ResourceController::Base
   	@line_item = @client.clock_in current_user
   	
 		respond_to do |format|
-			format.html { render :new }
+			format.html { redirect_to invoices_path(@client) }
 			format.js { render :partial => 'line_item', :object => @line_item }
 		end
   end
