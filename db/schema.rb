@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090410105933) do
+ActiveRecord::Schema.define(:version => 20090410221322) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(:version => 20090410105933) do
     t.string   "password_salt"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "rate",              :precision => 10, :scale => 2
+    t.decimal  "rate",                   :precision => 10, :scale => 2
     t.string   "color"
     t.string   "persistence_token"
     t.integer  "login_count"
@@ -75,7 +75,15 @@ ActiveRecord::Schema.define(:version => 20090410105933) do
     t.string   "last_login_ip"
     t.string   "current_login_ip"
     t.integer  "last_client_id"
-    t.boolean  "admin",                                            :default => false
+    t.boolean  "admin",                                                 :default => false
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string   "signature_file_name"
+    t.string   "signature_content_type"
+    t.integer  "signature_file_size"
+    t.datetime "signature_updated_at"
   end
 
 end

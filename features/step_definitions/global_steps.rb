@@ -32,3 +32,13 @@ Given /^the following (.+) exist:$/ do |model, table|
     model.make row
   end
 end
+
+Given /^there is a client named "([^\"]*)"$/ do |name|
+  Client.make :name => name
+end
+
+When /^I go to the first invoice for "([^\"]*)"$/ do |name|
+  client = Client.find_by_name name
+  visit invoice_path(client.invoices.first)
+end
+

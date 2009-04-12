@@ -10,6 +10,7 @@ Rails::Initializer.run do |config|
   config.gem 'haml'
   config.gem 'resource_controller'
   config.gem 'authlogic'
+  config.gem 'paperclip', :version => '>=2.1.2'
   #config.gem 'jscruggs-metric_fu', :version => '0.9.0', :lib => 'metric_fu', :source => 'http://gems.github.com'
 
   config.action_controller.session = {
