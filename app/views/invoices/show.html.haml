@@ -18,7 +18,7 @@
       
         #return
           #logo
-            - if current_user.logo.updated_at
+            - if current_user.logo.exists?
               = image_tag current_user.logo.url(:pdf)
             - else
               = current_user.login

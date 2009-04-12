@@ -11,4 +11,5 @@ config/database.yml
 config/deploy.rb
 converage/**/*
 Capfile
+public/logos
 *[~]

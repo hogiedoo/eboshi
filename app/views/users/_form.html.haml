@@ -24,7 +24,7 @@
 
 %p
   = form.label :logo
-  = image_tag @user.logo.url(:pdf) if @user.logo.updated_at
+  = image_tag @user.logo.url(:pdf) if @user.logo.exists?
   = form.file_field :logo
 
 

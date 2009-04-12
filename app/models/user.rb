@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   has_many :assignments, :dependent => :destroy
   has_many :clients, :through => :assignments
   
-  has_attached_file :logo, :storage => :database, :styles => { :pdf => "200x200>" }
+  has_attached_file :logo, :styles => { :pdf => "200x200>" }
     
   def related_users
     clients.collect(&:users).flatten.uniq - [self]

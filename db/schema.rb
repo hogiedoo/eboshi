@@ -51,14 +51,6 @@ ActiveRecord::Schema.define(:version => 20090410221322) do
     t.string   "type"
   end
 
-  create_table "logos", :force => true do |t|
-    t.string   "style"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.binary   "file_contents", :limit => 2147483647
-  end
-
   create_table "payments", :force => true do |t|
     t.integer  "invoice_id"
     t.decimal  "total",      :precision => 10, :scale => 2
