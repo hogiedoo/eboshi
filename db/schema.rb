@@ -44,17 +44,6 @@ ActiveRecord::Schema.define(:version => 20090324074829) do
     t.string   "type"
   end
 
-  create_table "logged_exceptions", :force => true do |t|
-    t.string   "exception_class"
-    t.string   "controller_name"
-    t.string   "action_name"
-    t.text     "message"
-    t.text     "backtrace"
-    t.text     "environment"
-    t.text     "request"
-    t.datetime "created_at"
-  end
-
   create_table "pacts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "client_id"

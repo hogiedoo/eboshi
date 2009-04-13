@@ -268,4 +268,5 @@ form label {
 #new_user_session p, #new_client p {
   margin: 3px 0; }
   #new_user_session p label,   #new_client p label {
-    width: 80px; }
+    width: 100px; }
+  #new_user_session input[type="checkbox"] {margin: 0px 0 0 4px;}
