@@ -25,7 +25,6 @@ class WorksController < ResourceController::Base
   end
   
   def merge
-    puts params.inspect
     @work = Work.merge_from_ids params[:line_item_ids]
     @invoice = @work.invoice || @client.build_invoice_from_unbilled
     respond_to do |format|
