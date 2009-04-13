@@ -1,12 +1,15 @@
 class LineItemsController < ResourceController::Base
-  actions :all, :except => [:index, :show]
 	before_filter :get_line_item, :except => [:new, :create, :clock_in, :merge]
 	before_filter :get_client
+	before_filter :authorized?
+
+  actions :all, :except => [:index, :show]
 
   def update
-    attributes = params[:line_item] || params[@line_item.class.to_s.underscore]
+    class_name = @line_item.class.to_s
+    attributes = params[:line_item] || params[class_name.underscore]
     if @line_item.update_attributes attributes
-      flash[:notice] = "#{@line_item.class.to_s} was successfully updated."
+      flash[:notice] = "#{class_name} was successfully updated."
       respond_to do |format|
         format.html { redirect_to invoices_path(@client) }
         format.js { render :nothing => true }
@@ -26,7 +29,7 @@ class LineItemsController < ResourceController::Base
   	@line_item = @client.clock_in current_user
   	
 		respond_to do |format|
-			format.html { render :new }
+			format.html { redirect_to invoices_path(@client) }
 			format.js { render :partial => 'line_item', :object => @line_item }
 		end
   end
@@ -56,15 +59,19 @@ class LineItemsController < ResourceController::Base
 
   protected
     def get_line_item
-      @line_item = LineItem.find params[:id]
+      @line_item ||= LineItem.find params[:id]
     end
 
   	def get_client
-		  @client = @line_item.try(:client) || Client.find(params[:client_id])
+		  @client ||= (@line_item.try(:client) || Client.find(params[:client_id]))
 	  end
 	  
 	  def build_object
-      @object = @client.line_items.build params[:line_item]
+      @object ||= @client.line_items.build params[:line_item]
     end
 
+  private
+    def authorized?
+			current_user.authorized? @client
+    end
 end

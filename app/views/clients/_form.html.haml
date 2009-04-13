@@ -2,31 +2,31 @@
 
 - form_for @client do |f|
   %p
-    %label Name
+    = f.label :name, "Company Name"
     = f.text_field :name
   %p
-    %label Address
+    = f.label :address
     = f.text_field :address
   %p
-    %label City
+    = f.label :city
     = f.text_field :city
   %p
-    %label State
+    = f.label :state
     = f.text_field :state
   %p
-    %label Zip
+    = f.label :zip
     = f.text_field :zip
   %p
-    %label Country
+    = f.label :country
     = f.text_field :country
   %p
-    %label Email
+    = f.label :email
     = f.text_field :email
   %p
-    %label Contact
+    = f.label :contact
     = f.text_field :contact
   %p
-    %label Phone
+    = f.label :phone
     = f.text_field :phone
     
   %p= f.submit @client.new_record? ? "Create" : "Update"

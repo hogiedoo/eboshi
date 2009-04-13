@@ -7,10 +7,11 @@ RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'pdf-writer', :lib => 'pdf/writer'
   config.gem 'haml'
   config.gem 'resource_controller'
   config.gem 'authlogic'
+  config.gem 'paperclip', :version => '>=2.1.2'
+  #config.gem 'jscruggs-metric_fu', :version => '0.9.0', :lib => 'metric_fu', :source => 'http://gems.github.com'
 
   config.action_controller.session = {
     :session_key => '_invoice_session',

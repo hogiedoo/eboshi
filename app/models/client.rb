@@ -23,8 +23,8 @@ class Client < ActiveRecord::Base
 	has_many :adjustments
 	has_many :invoices, :dependent => :destroy
 	has_many :payments, :through => :invoices
-	has_many :pacts, :dependent => :destroy
-	has_many :users, :through => :pacts
+	has_many :assignments, :dependent => :destroy
+	has_many :users, :through => :assignments
 	
 	validates_presence_of :name
 
@@ -68,7 +68,7 @@ class Client < ActiveRecord::Base
 	
 	def default_rate(user)
 	  # look for last rate for this client / agent combo. fallback to default user rate.
-		line_items.find(:first, :conditions => ["type='Work' AND start <> finish AND user_id=? AND rate IS NOT NULL", user.id], :order => "start DESC").try(:rate) || user.rate
+		line_items.first(:conditions => "type='Work' AND start <> finish AND user_id=#{user.id} AND rate IS NOT NULL", :order => "start DESC").try(:rate) || user.rate
 	end
 
 	def default_project_name

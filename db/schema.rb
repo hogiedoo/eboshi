@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090324074829) do
+ActiveRecord::Schema.define(:version => 20090412030221) do
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -44,13 +51,6 @@ ActiveRecord::Schema.define(:version => 20090324074829) do
     t.string   "type"
   end
 
-  create_table "pacts", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "client_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "payments", :force => true do |t|
     t.integer  "invoice_id"
     t.decimal  "total",      :precision => 10, :scale => 2
@@ -59,13 +59,13 @@ ActiveRecord::Schema.define(:version => 20090324074829) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "login"
+    t.string   "name"
     t.string   "email"
     t.string   "crypted_password"
     t.string   "password_salt"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "rate",              :precision => 10, :scale => 2
+    t.decimal  "rate",                   :precision => 10, :scale => 2
     t.string   "color"
     t.string   "persistence_token"
     t.integer  "login_count"
@@ -75,6 +75,15 @@ ActiveRecord::Schema.define(:version => 20090324074829) do
     t.string   "last_login_ip"
     t.string   "current_login_ip"
     t.integer  "last_client_id"
+    t.boolean  "admin",                                                 :default => false
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string   "signature_file_name"
+    t.string   "signature_content_type"
+    t.integer  "signature_file_size"
+    t.datetime "signature_updated_at"
   end
 
 end

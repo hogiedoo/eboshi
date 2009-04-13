@@ -1,5 +1,3 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
-
 require 'machinist'
 require 'faker'
 
@@ -16,7 +14,7 @@ Client.blueprint do
 end
 
 User.blueprint do
-  login { Faker::Name.name.gsub(/[^a-zA-Z]/, '') }
+  name { Faker::Name.name.gsub(/[^a-zA-Z]/, '') }
   email { Faker::Internet.email }
   password "insecure"
   password_confirmation "insecure"
@@ -47,4 +45,9 @@ Invoice.blueprint do
   client
   date Date.today
   project_name { Faker::Company.name }
+end
+
+Payment.blueprint do
+  invoice
+  total 0
 end

@@ -1,0 +1,12 @@
+- content_for :title do
+  = @client.name
+  &raquo; Invite Collaborator
+  
+- form_for @assignment do |f|
+  %h2 Existing User
+  - current_user.related_users.each do |user|
+    %div
+      = f.radio_button "user_id", user.id
+      = label_tag "assignment_user_id_#{user.id}", h(user.name)
+
+  = f.submit "Invite"

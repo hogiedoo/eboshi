@@ -8,6 +8,9 @@ describe ApplicationHelper do
     it "should include cents if present" do
       helper.number_to_per_hour(10.50).should == "$10.50/hr"
     end
+    it "should return nil if passed nil" do
+      helper.number_to_per_hour(nil).should be_nil
+    end
   end
   
   describe "currency_or_empty" do

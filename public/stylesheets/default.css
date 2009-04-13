@@ -78,7 +78,7 @@ img {
   margin: 3px;
   padding: 0 6px;
   font-size: .8em;
-  -moz-border-radius: 12px; -webkit-border-radius: 12px; border-radius: 12px; }
+  -moz-border-radius: 12px; }
   .button:hover {
     border-color: #333333;
     text-decoration: none; }
@@ -212,9 +212,11 @@ table.invoice tr td {
   table.invoice tr td:first-child {
     border-left: 1px dotted #666666; }
 table.invoice tr.line_item.line_item_over {
+  background-color: white;
   color: black; }
-table.invoice tr.line_item.line_item_selected { color: black; }
-  .line_item_selected td.user_name {color:black !important;}
+table.invoice tr.line_item.line_item_selected {
+  background-color: yellow;
+  color: black; }
 table.invoice td.notes textarea {
   width: 96%;
   border: thin solid grey; }

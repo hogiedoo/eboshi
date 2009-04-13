@@ -1,91 +1,98 @@
 !!!
-%html{html_attrs}
-%head
-  %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
-  %title
-    Invoice Example
-  %meta{:name => "keywords", :content => ""}
-  %meta{:name => "description", :content => ""}
+%html
+  %head
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+    %title= "bot &amp; rose invoice \##{@invoice.id}"
+    %meta{:name => "keywords", :content => ""}
+    %meta{:name => "description", :content => ""}
 
-  = stylesheet_link_tag 'invoice'
-  = yield :stylesheet_links
+    = stylesheet_link_tag 'invoice'
+    = yield :stylesheet_links
 
-  %link{:rel => "shortcut icon", :href => "/favicon.png", :type => "image/x-icon"}
+    %link{:rel => "shortcut icon", :href => "/favicon.png", :type => "image/x-icon"}
 
-%body
-  #container
-    #content
-    
-      #return
-        #logo
-        %p 625 nw Everett st., no.346
-        %p Portland, Oregon 97209
-        %p info@botandrose.com
-      .clear
+
+  %body
+    #container
+      #content
       
-      #client
-        %h1 INVOICE
-        %p attention:
-        %h2 Client Name
-        %p Address line 01
-        %p Address line 02
-      .clear
-      
-      #date
-        %h3 Date . 20 January 2009
-      .clear
-      
-      #project
-        #project_header
-          %table{:cellspacing => '0', :cellpadding => '0', :width => '100%'}
-            %tr
+        #return
+          #logo
+            - if current_user.logo.exists?
+              = image_tag current_user.logo.url(:pdf)
+            - else
+              = current_user.name
+          %p 625 nw Everett st., no.346
+          %p Portland, Oregon 97209
+          %p.color info@botandrose.com
+        .clear
+        
+        #client
+          %h1 Invoice
+          %p attention:
+          %h2= h @invoice.client.contact
+          %p= h @invoice.client.address
+        .clear
+        
+        #date
+          %h3="#{@invoice.date.day}  #{Date::MONTHNAMES[@invoice.date.month]}  #{@invoice.date.year}"
+        .clear
+        
+        #project
+          #project_header
+            %table{:cellspacing => '0', :cellpadding => '0', :width => '100%'}
               %col{:width => '49%'}
               %col{:width => '2%'}
               %col{:width => '49%'}
-            %tr
-              %td PROJECT
-              %td .
-              %td.right_align Project Title
-            %tr
-              %td INVOICE NUMBER
-              %td .
-              %td.right_align 000000
-            %tr
-              %td TERMS
-              %td .
-              %td.right_align Due on Receipt
-              
-        #items
-          %table{:cellspacing => '0', :cellpadding => '0', :width => '100%',}
-            %tr
-              %col{:width => '60%'}
+              %tr
+                %td PROJECT
+                %td .
+                %td.right_align= h @invoice.project_name
+              %tr
+                %td INVOICE NUMBER
+                %td .
+                %td.right_align= @invoice.id
+              %tr
+                %td TERMS
+                %td .
+                %td.right_align Due on Receipt
+                
+          #items
+            %table{:cellspacing => '0', :cellpadding => '0'}
+              %col{:width => '70%'}
               %col{:width => '15%'}
-              %col{:width => '25%'}
-            %thead
-              %th.left_align ITEM
-              %th HOURS
-              %th COST
-            %tr
-              %td Lorem ipsum dolor sit amet.
-              %td.center_align 4
-              %td.center_align 300.00
-            %tr
-              %td Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              %td.center_align 10
-              %td.center_align 750.00
-            %tfoot
-              %td{:colspan => '2'} TOTAL
-              %td.center_align $1050.00
-              
-        #project_footer
-          %p Work rated at $75/hour
-          %p Additional notes
+              %col{:width => '15%'}
+              %thead
+                %tr
+                  %th.left_align item
+                  %th hours
+                  / %th rate
+                  %th cost
+              %tfoot
+                %tr
+                  %td{:colspan => '2'} TOTAL
+                  %td.center_align= number_to_currency @invoice.total
+              %tbody
+                - for line_item in @invoice.line_items
+                  - if line_item.is_a? Work
+                    %tr{:class => cycle('even','')}
+                      %td.li= h line_item.notes
+                      %td.center_align= number_with_precision line_item.hours, :precision => 2
+                      / %td.center_align= number_to_currency line_item.rate
+                      %td.center_align= number_to_currency line_item.total
+                  - if line_item.is_a? Adjustment
+                    %tr
+                      %td{:colspan => 2 }= h line_item.notes
+                      %td.center_align= number_to_currency line_item.total
+                
+          #project_footer
+            %em Work rated at $75/hour.
+          
+        .clear
         
-      .clear
-      
-    #sig
-      %p sincerely,
-      #michael
-        %span michael m gubitosa
-      #micah
-        %span micah geisel
+      #sig
+        %p sincerely,
+        - if current_user.signature.exists?
+          = image_tag current_user.signature.url(:pdf)
+        - else
+          = current_user.name

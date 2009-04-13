@@ -18,7 +18,7 @@ function jQueryGETorPOST(method, callback, type) {
   method = (method == "GET" ? $.get : $.post)
   if(!type) type = "html"
   var event = this.is("form") ? "submit" : "click"
-  this.livequery(event, function() {
+  this.live(event, function() {
     var el = $(this)
     var url = el.is("form") ? el.attr("action") : el.attr("href")
     var params = el.is("form") ? el.serialize() : null
