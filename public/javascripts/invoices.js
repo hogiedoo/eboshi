@@ -57,4 +57,11 @@ $(function() {
   $("a.invoice_hide_details").GET(function(data) {
     this.parents("table:first").replaceWith(data)
   })
+  
+  $("tbody a.select_all").live('click', function() {
+    $(this).parents("tbody").find(":checkbox").each(function() { this.checked = true })
+  })
+  $("tbody a.select_none").live('click', function() {
+    $(this).parents("tbody").find(":checkbox").each(function() { this.checked = false })
+  })
 })

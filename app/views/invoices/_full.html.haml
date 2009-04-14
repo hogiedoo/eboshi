@@ -51,7 +51,12 @@
     %td{:colspan => "3"}
       - if invoice.status == 'unbilled'
         - unless invoice.line_items.empty?
-          %em.left with checked items:
+          %em.left
+            with checked items:
+            %a.select_all{:href => "javascript:void(0)"} all
+            |
+            %a.select_none{:href => "javascript:void(0)"} none
+          
           = link_to 'Create Invoice', new_invoice_path(@client), :id => 'create_invoice', :class=>"button left"
           = link_to 'Merge', merge_works_path(@client), :id => 'merge', :class=>"button left"
           .clear
