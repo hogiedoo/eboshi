@@ -10,27 +10,14 @@
   %thead{ :class => invoice.status, :id => "invoice_#{invoice.id_or_new}" }
     - if invoice.status == 'unbilled'
       %tr
-        %td
-          - unless invoice.line_items.empty?
-            with checked:<br>
-            = link_to 'Create Invoice', new_invoice_path(@client), :id => 'create_invoice', :class=>"button right"
-            = link_to 'Merge Together', merge_works_path(@client), :id => 'merge', :class=>"button right"
-        %td{ :colspan => 2 }
-          = button_to 'Clock In', clock_in_path(@client), :id => 'clock_in', :class=>"left"
+        %td{ :colspan => 7 }
+          = button_to 'Clock In', clock_in_path(@client), :id => 'clock_in', :class=>"button left"
           = link_to 'New Time Item', new_work_path(@client), :class=>"button left"
           = link_to 'New Flat Fee', new_adjustment_path(@client), :class=>"button left"
-        %td.total_hours= number_with_precision invoice.total_hours, :precision => 2
-        %td
-        %td.total= number_to_currency invoice.balance
-        %td.align_left
-          %b Current Balance
+          .clear          
     - else
       %tr
-        %td
-          with checked:<br>
-          = link_to 'Merge', merge_works_path(@client), :id => 'merge', :class=>"button right"
-          =# link_to 'Unassign', unassign_works_path(@client), :id => 'unassign', :class=>"button right"
-        %td{:colspan => 4}
+        %td{ :colspan => 5 }
           = link_to 'Hide Details', invoice, :class => 'invoice_hide_details button left'
           = link_to 'Export PDF', invoice_path(:id => invoice.id, :format => :pdf), :class=>"button"
           = link_to 'Edit', edit_invoice_path(invoice), :class=>"button"
@@ -59,6 +46,18 @@
     %th hours
     %th rate
     %th total
-    %th notes  
-
+    %th notes
+  %tr#totals
+    %td{:colspan => "3"}
+      - if invoice.status == 'unbilled'
+        - unless invoice.line_items.empty?
+          %em.left with checked items:
+          = link_to 'Create Invoice', new_invoice_path(@client), :id => 'create_invoice', :class=>"button left"
+          = link_to 'Merge', merge_works_path(@client), :id => 'merge', :class=>"button left"
+          .clear
+    %td.total_hours= number_with_precision invoice.total_hours, :precision => 2  
+    %td &nbsp 
+    %td.total= number_to_currency invoice.balance
+    %td.align_left
+      %b Current Balance
   = render invoice.line_items.sort

@@ -76,20 +76,20 @@ img
 .sm_pad
   :padding 4px
 
-.button
+.button, input.button
+  :font-weight bold
   :border= 2px solid !a_lt
   :background #ffffff
   :margin 3px
-  :padding 0 6px
+  :padding 1px 12px
   :font-size .8em
   :-moz-border-radius 12px
   &:hover
     :border-color= !a
     :text-decoration none
     
-input[type="submit"]
-  :margin 3px 0 0 0
-
+.button
+  :padding 2px 12px
   
 #wrapper
   :display block
@@ -227,6 +227,9 @@ input[type="submit"]
     :color #003300
 
 table.invoice
+  tr#totals
+    td
+      :border-bottom 3px double #000
   tr
     th
       :border-top= !var_border
@@ -241,11 +244,9 @@ table.invoice
       
   tr.line_item
     &.line_item_over
-      :background-color white
-      :color black
+      :color #000
     &.line_item_selected
-      :background-color yellow
-      :color black
+      :color #000
     
   td.notes
     textarea
@@ -256,6 +257,8 @@ table.invoice
     a
       :display block
       :margin 7px 0 7px 0
+    a.button
+      :margin 3px
 
 .dummy
   :line-height 14px
@@ -310,12 +313,16 @@ form label
   :display block
   :width 20px
   :height 20px
-  
-#new_user_session, #new_client
-  p
-    :margin 3px 0
-    label
-      :width 80px
-    
 
+    
+// erros
+
+.fieldWithErrors
+  :display inline
+  
+.errorExplanation
+  :color red
+  p
+    :font-style italic
+    :font-size .9em
   

@@ -75,12 +75,6 @@
                     %th rate
                   %th cost
                   
-              %tfoot
-                %tr
-                  %td TOTAL
-                  %td{:colspan => @invoice.consistant_rate ? 1 : 2 }
-                  %td.center_align= number_to_currency @invoice.total
-                  
               %tbody
                 - @invoice.line_items.each do |line_item|
                   - if line_item.is_a? Work
@@ -95,6 +89,11 @@
                       %td{:colspan => @invoice.consistant_rate ? 2 : 3}
                         = h line_item.notes
                       %td.center_align= number_to_currency line_item.total
+                      
+                %tr
+                  %td TOTAL
+                  %td{:colspan => @invoice.consistant_rate ? 1 : 2 }
+                  %td.center_align= number_to_currency @invoice.total
                       
           - if @invoice.consistant_rate.respond_to?(:nonzero?)
             #project_footer
