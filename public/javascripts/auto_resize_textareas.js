@@ -15,38 +15,35 @@ var AutoResizeTextArea = {
     $(el).css("overflowX", "auto")
       
     // create a new element that will be used to track the dimensions  
-    var dummy_id = Math.floor(Math.random()*99999) + '_dummy';  
     var dummy = document.createElement('div');  
-    document.body.appendChild(dummy);  
+    el.parentNode.appendChild(dummy);
   
     // hide the created div away  
-    dummy.style.position = 'absolute';  
-    dummy.style.top = '0px';  
-    dummy.style.left = '-99999px';  
-    dummy.innerHTML = ' 42';  
+    $(dummy).css({ position: 'absolute', top: '0px', left: '-99999px' })
+//    $(dummy).css("position", 'absolute')
+//    $(dummy).css("margin-left", '6px')
+//    $(dummy).css("top", "282px")
+    $(dummy).addClass("dummy")
+    dummy.innerHTML = 'a';
       
     var lineHeight = dummy.offsetHeight;  
       
-    var checkExpandContract = function() {  
-      // place text inside the element in a new var called html  
-      $.each(['display', 'font-family', 'font-weight', 'font-size', 'padding', 'margin', 'overflow-x'], function() {
-        $(dummy).css(this, $(el).css(this))
-      })
-      
-      // hack width to fix, 2px too big for some god damned reason
+    var checkExpandContract = function() {
+      // hack width to fix, 3px too big for some god damned reason
       var width = $(el).css('width')
       if(width.charAt(width.length-1) == "x") {  
         width = parseInt(width.substring(0,width.length-2))   
       }
-      $(dummy).css('width', width-2+"px")
+      $(dummy).css('width', width-3+"px")
 
+      // place text inside the element in a new var called html  
       // transfer content to dummy      
       var html = el.value.replace(/\n/g, '<br>');  
       if(dummy.innerHTML != html) {  
-        dummy.innerHTML = html;  
+        dummy.innerHTML = html;
           
         // skip if the height from our element matches the dummy height
-        if (el.offsetHeight != dummy.offsetHeight) {
+        if (el.offsetHeight != dummy.offsetHeight + lineHeight) {
           // ensure minimum height
           if (dummy.offsetHeight < originalHeight) {
             el.style.height = originalHeight+'px';
@@ -69,6 +66,6 @@ var AutoResizeTextArea = {
     // Put eventListeners to our elements
     $(el).focus(expandElement);
     $(el).blur(contractElement);
-    checkExpandContract();
+    $(window).load(checkExpandContract)
   }
 }

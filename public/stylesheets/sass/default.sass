@@ -1,12 +1,13 @@
 body
   :margin 0
   :padding 0
-  :font-size 1em
+  :font-size 0.9em
   :background #58595b url('/images/bg.gif') repeat-y center
+  :font-family "Arial", sans-serif
 
 
-body, th, td, input, textarea, select, option
-  :font-size .9em
+th, td, input, textarea, .dummy, select, option
+  :font-size 0.9em
   :font-family "Arial", sans-serif
 
 a, h1, h2, h3
@@ -250,13 +251,19 @@ table.invoice
   td.notes
     textarea
       :width 96%
-      :border thin solid grey
+      :border 1px solid grey
+      
   td:last-child
     a
       :display block
       :margin 7px 0 7px 0
     a.button
       :margin 3px
+
+.dummy
+  :line-height 14px
+  :letter-spacing 1px
+  :text-align left
                 
 .total
   :font-weight bold
