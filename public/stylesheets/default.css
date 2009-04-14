@@ -72,19 +72,20 @@ img {
 .sm_pad {
   padding: 4px; }
 
-.button {
+.button, input.button {
+  font-weight: bold;
   border: 2px solid #000000;
   background: #ffffff;
   margin: 3px;
-  padding: 0 6px;
+  padding: 1px 12px;
   font-size: .8em;
   -moz-border-radius: 12px; }
-  .button:hover {
+  .button:hover,   input.button:hover {
     border-color: #333333;
     text-decoration: none; }
 
-input[type="submit"] {
-  margin: 3px 0 0 0; }
+.button {
+  padding: 2px 12px; }
 
 #wrapper {
   display: block;
@@ -202,6 +203,8 @@ input[type="submit"] {
   #footer a {
     color: #003300; }
 
+table.invoice tr#totals td {
+  border-bottom: 3px double #000; }
 table.invoice tr th {
   border-top: 3px double #666666;
   border-bottom: 3px double #666666; }
@@ -212,17 +215,17 @@ table.invoice tr td {
   table.invoice tr td:first-child {
     border-left: 1px dotted #666666; }
 table.invoice tr.line_item.line_item_over {
-  background-color: white;
-  color: black; }
+  color: #000; }
 table.invoice tr.line_item.line_item_selected {
-  background-color: yellow;
-  color: black; }
+  color: #000; }
 table.invoice td.notes textarea {
   width: 96%;
   border: thin solid grey; }
 table.invoice td:last-child a {
   display: block;
   margin: 7px 0 7px 0; }
+table.invoice td:last-child a.button {
+  margin: 3px; }
 
 .total {
   font-weight: bold; }
@@ -267,7 +270,11 @@ form label {
   width: 20px;
   height: 20px; }
 
-#new_user_session p, #new_client p {
-  margin: 3px 0; }
-  #new_user_session p label,   #new_client p label {
-    width: 80px; }
+.fieldWithErrors {
+  display: inline; }
+
+.errorExplanation {
+  color: red; }
+  .errorExplanation p {
+    font-style: italic;
+    font-size: .9em; }
