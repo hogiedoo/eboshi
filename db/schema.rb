@@ -51,6 +51,13 @@ ActiveRecord::Schema.define(:version => 20090414000506) do
     t.string   "type"
   end
 
+  create_table "pacts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "payments", :force => true do |t|
     t.integer  "invoice_id"
     t.decimal  "total",      :precision => 10, :scale => 2

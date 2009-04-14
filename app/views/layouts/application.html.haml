@@ -17,8 +17,8 @@
   - if current_user
     %style{type="text/css"}
       :plain
-        a:hover{color: ##{current_user.color};}
-        .button:hover{border-color:##{current_user.color};}
+        a:hover, input.button:hover {color: ##{current_user.color};}
+        .button:hover, input.button:hover {border-color:##{current_user.color};}
         .line_item_selected {background-color:##{current_user.color};}
        
       
@@ -61,7 +61,8 @@
             %li
               = h user.name
               = link_to 'delete', Assignment.find_by_cuplet(@client, user), :method => :delete
-          = link_to 'Invite collaborator', new_assignment_path(@client)
+          = link_to '+ Invite collaborator', new_assignment_path(@client), :class=>"button right"
+          .clear
             
         - if current_user
           %h2 Clients  
