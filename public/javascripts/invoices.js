@@ -10,7 +10,7 @@ $(function() {
   $("tr.line_item").live('click', function(e) {
     if(e.target.type == 'textarea') return
     $(this).toggleClass("line_item_selected")
-    $(this).find(":checkbox").toggleChecks()
+    if(!$(e.target).is(":checkbox")) $(this).find(":checkbox").toggleChecks()
   })
   
   $("a#create_invoice").click(function() {
