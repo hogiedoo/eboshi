@@ -20,19 +20,19 @@ $(function() {
   })
 
   $("form:has(#clock_in)").POST(function(data) {
-    $("#new_line_items").after(data)
+    $("tr#totals").after(data)
   })
 
   $("tr.line_item a.clock_out").POST(function(data) {
-    this.parents("tr").replaceWith(data.work)
     this.parents("tbody").find("td.total").text(number_to_currency(data.total))
+    this.parents("tr").replaceWith(data.work)
   }, "json")
 
   $("tr.line_item a.delete").live('click', function() {
     var a = this
     if(confirm('Are you sure you want to delete this line item? This cannot be undone!')) {
       $.post(a.href, '_method=delete', function(data) {
-        $(a).parents("table").find("thead td.total").text(number_to_currency(data))
+        $(a).parents("tbody").find("td.total").text(number_to_currency(data))
         $(a).parents("tr").remove()
       }, 'json')
     }
@@ -56,5 +56,12 @@ $(function() {
 
   $("a.invoice_hide_details").GET(function(data) {
     this.parents("table:first").replaceWith(data)
+  })
+  
+  $("tbody a.select_all").live('click', function() {
+    $(this).parents("tbody").find(":checkbox").each(function() { this.checked = true })
+  })
+  $("tbody a.select_none").live('click', function() {
+    $(this).parents("tbody").find(":checkbox").each(function() { this.checked = false })
   })
 })
