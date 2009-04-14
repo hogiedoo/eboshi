@@ -267,8 +267,11 @@ form label {
   width: 20px;
   height: 20px; }
 
-#new_user_session p, #new_client p {
-  margin: 3px 0; }
-  #new_user_session p label,   #new_client p label {
-    width: 100px; }
-  #new_user_session input[type="checkbox"] {margin: 0px 0 0 4px;}
+.fieldWithErrors {
+  display: inline; }
+
+.errorExplanation {
+  color: red; }
+  .errorExplanation p {
+    font-style: italic;
+    font-size: .9em; }
