@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090412030221) do
+ActiveRecord::Schema.define(:version => 20090414000506) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -84,6 +84,13 @@ ActiveRecord::Schema.define(:version => 20090412030221) do
     t.string   "signature_content_type"
     t.integer  "signature_file_size"
     t.datetime "signature_updated_at"
+    t.string   "business_name"
+    t.string   "business_email"
+    t.string   "address"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
   end
 
 end

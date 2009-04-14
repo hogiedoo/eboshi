@@ -1,5 +1,5 @@
 !!!
-%html{html_attrs}
+%html
   %head
     %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
     %title
@@ -36,7 +36,7 @@
             ==#{link_to 'Logout', logout_path, :method => :delete, :class=>"button right"}
             - if current_user.admin?
               ==#{link_to 'All Users', users_path, :class=>"button right"}
-            ==#{link_to 'View Account', edit_user_path(current_user), :class=>"button right"}
+            ==#{link_to 'My Account', edit_user_path(current_user), :class=>"button right"}
             .user_name.right.sm_pad{:style => "color: \##{current_user.color}"}
               %span Welcome, 
               ==#{current_user.name}!

@@ -22,6 +22,36 @@
   = form.label :color
   = form.text_field :color
 
+%h1 invoice details
+
+%p
+  = form.label :business_name
+  = form.text_field :business_name
+
+%p
+  = form.label :business_email
+  = form.text_field :business_email
+  
+%p
+  = form.label :address
+  = form.text_field :address
+
+%p
+  = form.label :address2, ""
+  = form.text_field :address2
+
+%p
+  = form.label :city 
+  = form.text_field :city
+
+%p
+  = form.label :state
+  = form.text_field :state
+
+%p
+  = form.label :zip, "Zipcode"
+  = form.text_field :zip
+
 %p
   = form.label :logo
   = image_tag @user.logo.url(:pdf) if @user.logo.exists?

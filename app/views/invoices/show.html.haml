@@ -2,7 +2,7 @@
 %html
   %head
     %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
-    %title= "bot &amp; rose invoice \##{@invoice.id}"
+    %title= "#{h current_user.business_name_or_name} invoice \##{@invoice.id}"
     %meta{:name => "keywords", :content => ""}
     %meta{:name => "description", :content => ""}
 
@@ -21,10 +21,14 @@
             - if current_user.logo.exists?
               = image_tag current_user.logo.url(:pdf)
             - else
-              = current_user.name
-          %p 625 nw Everett st., no.346
-          %p Portland, Oregon 97209
-          %p.color info@botandrose.com
+              = current_user.business_name_or_name
+          - unless current_user.address.blank?
+            %p= h current_user.address
+          - unless current_user.address2.blank?
+            %p= h current_user.address2
+          - if current_user.city_state_zip
+            %p= h current_user.city_state_zip
+          %p.color= mail_to current_user.business_email_or_email
         .clear
         
         #client
@@ -62,31 +66,39 @@
               %col{:width => '70%'}
               %col{:width => '15%'}
               %col{:width => '15%'}
+              
               %thead
                 %tr
                   %th.left_align item
                   %th hours
-                  / %th rate
+                  - unless @invoice.consistant_rate
+                    %th rate
                   %th cost
+                  
               %tfoot
                 %tr
-                  %td{:colspan => '2'} TOTAL
+                  %td TOTAL
+                  %td{:colspan => @invoice.consistant_rate ? 1 : 2 }
                   %td.center_align= number_to_currency @invoice.total
+                  
               %tbody
-                - for line_item in @invoice.line_items
+                - @invoice.line_items.each do |line_item|
                   - if line_item.is_a? Work
                     %tr{:class => cycle('even','')}
                       %td.li= h line_item.notes
                       %td.center_align= number_with_precision line_item.hours, :precision => 2
-                      / %td.center_align= number_to_currency line_item.rate
+                      - unless @invoice.consistant_rate
+                        %td.center_align= number_to_currency line_item.rate
                       %td.center_align= number_to_currency line_item.total
                   - if line_item.is_a? Adjustment
                     %tr
-                      %td{:colspan => 2 }= h line_item.notes
+                      %td{:colspan => @invoice.consistant_rate ? 2 : 3}
+                        = h line_item.notes
                       %td.center_align= number_to_currency line_item.total
-                
-          #project_footer
-            %em Work rated at $75/hour.
+                      
+          - if @invoice.consistant_rate.respond_to?(:nonzero?)
+            #project_footer
+              %em== Work rated at #{number_to_per_hour @invoice.consistant_rate}.
           
         .clear
         
@@ -95,4 +107,4 @@
         - if current_user.signature.exists?
           = image_tag current_user.signature.url(:pdf)
         - else
-          = current_user.name
+          = current_user.business_name_or_name

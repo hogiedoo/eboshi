@@ -59,4 +59,10 @@ class Invoice < ActiveRecord::Base
 		line_items.to_a.sum(&:hours)
 	end
 	
+	def consistant_rate
+	  return true if works.empty?
+	  rates = works.collect(&:rate).uniq
+	  rates.length == 1 ? rates.first : false
+  end
+	
 end
