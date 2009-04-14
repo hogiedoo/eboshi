@@ -1,6 +1,26 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Invoice do
+  describe "consistant_rate" do
+    it "should return false if invoice contains work items with varying hourly rates" do
+      @it = Invoice.make
+      Work.make :invoice => @it, :rate => 50
+      Work.make :invoice => @it, :rate => 75
+      @it.consistant_rate.should be_false
+    end
+
+    it "should return the rate if invoice contains work items with the same hourly rates" do
+      @it = Invoice.make
+      3.times { Work.make :invoice => @it, :rate => 75 }
+      @it.consistant_rate.should == 75 
+    end
+
+    it "should return true if invoice contains no work items" do
+      @it = Invoice.make
+      @it.consistant_rate.should be_true
+    end
+  end
+  
   it "should create a new instance given valid attributes" do
     Invoice.create! Invoice.make.attributes
   end

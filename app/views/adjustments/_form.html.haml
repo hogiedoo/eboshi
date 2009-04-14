@@ -1,0 +1,9 @@
+- f = form
+
+%p
+  = f.label :rate, "Amount"
+  ==$#{f.text_field :rate}
+  
+%p
+  = f.label :notes
+  = f.text_area :notes

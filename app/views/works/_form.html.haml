@@ -1,17 +1,15 @@
 - f = form
+= f.hidden_field :type
+
 %p
-  %b Start
-  %br 
+  = f.label :start
   = f.datetime_select :start
 %p
-  %b End
-  %br
+  = f.label :finish, "End"
   = f.datetime_select :finish
 %p
-  %b Rate
-  %br
+  = f.label :rate
   ==$#{f.text_field :rate}
 %p
-  %b Notes
-  %br
+  = f.label :notes
   = f.text_area :notes

@@ -9,20 +9,29 @@ ActionController::Routing::Routes.draw do |map|
   	      :shallow => true,
   	      :name_prefix => nil
 	  end
+
     client.resources :line_items,
       :shallow => true,
+      :only => [:update],
+      :name_prefix => nil
+    client.resources :works,
+      :shallow => true,
       :except => [:index, :show],
-      :member => [:set_line_item_rate, :set_line_item_notes],
       :collection => [:merge],
       :name_prefix => nil
+    client.resources :adjustments,
+      :shallow => true,
+      :except => [:index, :show],
+      :name_prefix => nil
+
     client.resources :assignments,
       :shallow => true,
       :only => [:new, :create, :destroy],
       :name_prefix => nil
 	end
 	
-	map.clock_in '/clients/:client_id/clock_in', :controller => 'line_items', :action => 'clock_in'
-	map.clock_out '/clients/:client_id/line_item/:id/clock_out', :controller => 'line_items', :action => 'clock_out'
+	map.clock_in '/clients/:client_id/clock_in.:format', :controller => 'works', :action => 'clock_in'
+	map.clock_out '/clients/:client_id/works/:id/clock_out.:format', :controller => 'works', :action => 'clock_out'
 
   map.resources :users
   map.resource :account, :controller => "users"
