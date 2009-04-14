@@ -10,7 +10,7 @@ $(function() {
   $("tr.line_item").live('click', function(e) {
     if(e.target.type == 'textarea') return
     $(this).toggleClass("line_item_selected")
-    $(this).find(":checkbox").toggleChecks()
+    if(!$(e.target).is(":checkbox")) $(this).find(":checkbox").toggleChecks()
   })
   
   $("a#create_invoice").click(function() {
@@ -24,7 +24,7 @@ $(function() {
   })
 
   $("a.clock_out").POST(function(data) {
-    this.parents("tr").replaceWith(data.line_item)
+    this.parents("tr").replaceWith(data.work)
     this.parents("tbody").find("td.total").text(number_to_currency(data.total))
   }, "json")
 

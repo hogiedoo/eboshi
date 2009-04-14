@@ -51,4 +51,17 @@ class User < ActiveRecord::Base
     return if object.is_a? Assignment and object.client.users.include?(self)
     raise ActiveRecord::RecordNotFound
   end
+  
+  def city_state_zip
+    return nil if city.blank? or state.blank? or zip.blank?
+    "#{city}, #{state}  #{zip}"
+  end
+  
+  def business_name_or_name
+    business_name.blank? ? name : business_name
+  end
+
+  def business_email_or_email
+    business_email.blank? ? email : business_email
+  end
 end

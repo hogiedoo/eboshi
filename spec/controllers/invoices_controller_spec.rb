@@ -13,30 +13,46 @@ describe InvoicesController do
     
     it "on index" do
       get :index, :client_id => @client.id
+      response.should be_success
     end
     it "on new" do
       get :new, :client_id => @client.id
+      response.should be_success
     end
+    
     it "on show" do
       get :show, :id => @invoice.id
+      response.should be_success
     end
-    it "on pdf formatted show" do
+    it "on js show" do
+      get :show, :id => @invoice.id, :format => 'js'
+      response.should be_success
+    end
+    it "on pdf show" do
       get :show, :id => @invoice.id, :format => 'pdf'
+      response.should be_success
     end
+    
     it "on edit" do
       get :edit, :id => @invoice.id
+      response.should be_success
     end
     it "on js edit" do
       get :edit, :id => @invoice.id, :format => 'js'
+      response.should be_success
     end
+    
     it "on create" do
       post :create, :client_id => @client.id, :invoice => @invoice.attributes
+      response.should be_redirect
     end
     it "on update" do
       put :update, :id => @invoice.id, :invoice => @invoice.attributes
+      response.should be_redirect
     end
     it "on destroy" do
       delete :destroy, :id => @invoice.id
+      response.should be_redirect
     end
   end
 

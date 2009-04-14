@@ -1,0 +1,11 @@
+- content_for :title do
+  =h @client.name
+  &raquo; New Time Item
+
+= error_messages_for :work
+- form_for @work do |f|
+  = render :partial => 'form', :object => f
+  %p= f.submit "Create"
+
+= link_to 'Back', invoices_path(@client)
+
