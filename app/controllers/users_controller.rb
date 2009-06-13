@@ -7,5 +7,5 @@ class UsersController < ResourceController::Base
   
   create.flash "Account registered!"
   update.flash "Account updated!"
-  update.wants.html { redirect_to edit_user_path(current_user) }
+  update.wants.html { redirect_to root_path }
 end

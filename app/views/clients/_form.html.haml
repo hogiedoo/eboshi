@@ -5,6 +5,15 @@
     = f.label :name, "Company Name"
     = f.text_field :name
   %p
+    = f.label :contact, "Contact Name"
+    = f.text_field :contact
+  %p
+    = f.label :phone
+    = f.text_field :phone
+  %p
+    = f.label :email
+    = f.text_field :email
+  %p
     = f.label :address
     = f.text_field :address
   %p
@@ -19,14 +28,7 @@
   %p
     = f.label :country
     = f.text_field :country
-  %p
-    = f.label :email
-    = f.text_field :email
-  %p
-    = f.label :contact
-    = f.text_field :contact
-  %p
-    = f.label :phone
-    = f.text_field :phone
     
-  %p= f.submit @client.new_record? ? "Create" : "Update"
+  %p
+    = f.submit @client.new_record? ? "Create" : "Update", :class => "button"
+    = link_to 'Back', clients_path, :class => "button"
