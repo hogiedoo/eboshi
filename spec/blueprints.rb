@@ -1,4 +1,5 @@
-require 'machinist'
+require 'machinist/active_record'
+require 'sham'
 require 'faker'
 
 Client.blueprint do

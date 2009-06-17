@@ -64,3 +64,10 @@ class NilClass
 	def each; self; end
 	include Enumerable
 end
+
+if RUBY_VERSION < '1.9' then
+  def Time.today
+    t = Time.now
+    t - ((t.to_f + t.gmt_offset) % 86400)
+  end unless defined? Time.today
+end
