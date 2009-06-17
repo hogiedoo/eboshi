@@ -23,6 +23,13 @@ class ApplicationController < ActionController::Base
       @current_user = current_user_session && current_user_session.user
     end
 
+    def require_admin
+      unless current_user.admin?
+        head :forbidden
+        return false
+      end
+    end
+
     def require_user
       unless current_user
         store_location

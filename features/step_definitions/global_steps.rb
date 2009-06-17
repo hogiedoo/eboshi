@@ -3,7 +3,8 @@ Given /^I am on "(.+)"$/ do |url|
 end
 
 Then /^I should not be able to go to "([^\"]*)"$/ do |url|
-  lambda { visit url }.should raise_error
+  visit url
+  response.code.should == "403"
 end
 
 Given /^I am signed in as "Micah"$/ do

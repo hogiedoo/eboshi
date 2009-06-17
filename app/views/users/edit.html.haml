@@ -12,5 +12,5 @@
   = render :partial => "form", :object => f
   = f.submit "Update", :class=>"right"
 
-= link_to "cancel", users_path, :class=>"button right"
+= link_to "cancel", current_user.admin? ? users_path : root_path, :class=>"button right"
 .clear
