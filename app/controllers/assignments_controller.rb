@@ -10,9 +10,14 @@ class AssignmentsController < ResourceController::Base
     rescue ActiveRecord::RecordNotFound
       User.find_by_email(params[:assignment][:email])
     end
-    @client.users << user
-    flash[:notice] = "Successfully created!"
-    redirect_to invoices_path(@client)
+    unless user
+      flash[:error] = "A user with that email address does not exist!"
+      redirect_to new_assignment_path
+    else
+      @client.users << user
+      flash[:notice] = "Successfully created!"
+      redirect_to invoices_path(@client)
+    end
   end
 
   destroy.wants.html do
