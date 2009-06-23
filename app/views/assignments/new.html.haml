@@ -9,4 +9,12 @@
       = f.radio_button "user_id", user.id
       = label_tag "assignment_user_id_#{user.id}", h(user.name)
 
+  %div
+    = radio_button_tag "assignment_user_id", 0
+    = label_tag "assignment_user_id_0", "Other"
+
+  %div
+    = label_tag "assignment_email", "Email"
+    = text_field_tag "assignment[email]"
+
   = f.submit "Invite"

@@ -5,7 +5,12 @@ class AssignmentsController < ResourceController::Base
   actions :new, :create, :destroy
   
   def create
-    @client.users << User.find(params[:assignment][:user_id])
+    user = begin 
+      User.find(params[:assignment][:user_id])
+    rescue ActiveRecord::RecordNotFound
+      User.find_by_email(params[:assignment][:email])
+    end
+    @client.users << user
     flash[:notice] = "Successfully created!"
     redirect_to invoices_path(@client)
   end

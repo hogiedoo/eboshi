@@ -2,9 +2,9 @@ Feature: Manage client-user associations
   Background:
     Given I am signed in as "Micah"
     And the following users exist:
-      | name |
-      | Michael |
-      | Kit |
+      | name    | email               |
+      | Michael | gubs@botandrose.com |
+      | Kit     | kit@kit.com         |
     And the following clients exist:
       | name |
       | cheapbowlingballs.com |
@@ -51,9 +51,25 @@ Feature: Manage client-user associations
     Then I should see "Michael" under "Existing User"
     And I should not see "Kit" under "Existing User"
     
-  Scenario: User invites a collaborator onto a project
+  Scenario: User invites a known collaborator onto a project
     Given I am on the invoices page for "cheapbowlingballs.com"
     And I follow "Invite collaborator"
     And I choose "Michael"
     And I press "Invite"
     Then I should see "Michael" under "Collaborators"
+
+  Scenario: User invites a new collaborator onto a project
+    Given I am on the invoices page for "cheapbowlingballs.com"
+    And I follow "Invite collaborator"
+    And I choose "Other"
+    And I fill in "Email" with "kit@kit.com"
+    And I press "Invite"
+    Then I should see "Kit" under "Collaborators"
+
+  Scenario: User invites a nonexistant collaborator onto a project
+    Given I am on the invoices page for "cheapbowlingballs.com"
+    And I follow "Invite collaborator"
+    And I choose "Other"
+    And I fill in "Email" with "bad@email.com"
+    And I press "Invite"
+    Then I should see "A user with that email address does not exist!"
