@@ -55,13 +55,6 @@ describe Work do
       (@billed1 <=> @billed2).should eql -1
     end
   
-    it "should be less than adjustment items" do
-      @adjustment = Adjustment.make
-      @line_item.should < @adjustment
-      @line_item.should_not > @adjustment
-      (@line_item <=> @adjustment).should eql -1
-    end
-
     it "should not be checked" do
       @line_item.should_not be_checked
     end
@@ -98,5 +91,4 @@ describe Work do
       @line_item.should_not be_incomplete
     end
   end
-
 end

@@ -1,9 +1,11 @@
 %tr{ :id => "line_item_#{adjustment.id}_tr", :class => "line_item adjustment#{cycle(' even','')}" }
   %td= check_box_tag 'line_item_ids[]', adjustment.id, nil, :id => "line_item_ids_#{adjustment.id}"
 
-  %td{ :colspan => 5, :align => "right" }
-    %i Flat Fee:
-    = number_to_currency adjustment.total
+  %td.name{ :class => "user_name", :style => "color: \##{adjustment.user.try(:color)}" }=h adjustment.user.try(:name)
+  %td.time= adjustment.start.to_s(:slash) if adjustment.start
+  %td{ :colspan => 2, :align => "center" }
+    %i Flat Fee
+  %td= number_to_currency adjustment.total
   %td.notes
     %textarea{ :id => "notes_#{adjustment.id}", :autocomplete => "off" }
       =h adjustment.notes
@@ -11,4 +13,3 @@
   %td
     = link_to image_tag('edit.png'), edit_adjustment_path(adjustment)
     = link_to image_tag('delete.png'), adjustment_path(adjustment), :class => 'delete'
-

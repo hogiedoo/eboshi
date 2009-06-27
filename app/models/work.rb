@@ -17,7 +17,6 @@
 #
 
 class Work < LineItem
-  include Comparable
   validates_presence_of :user, :start, :finish
   
   def self.merge_from_ids(ids)
@@ -55,13 +54,7 @@ class Work < LineItem
     update_attributes :finish => Time.now
   end
   
-  def <=> target
-    result = (target <=> self.start)
-    target.is_a?(Work) ? result : result*-1
-  end
-
   def incomplete?
     start >= finish
   end
-
 end

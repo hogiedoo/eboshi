@@ -1,6 +1,10 @@
 - f = form
 
 %p
+  = f.label :start, "Date"
+  = f.date_select :start
+
+%p
   = f.label :rate, "Amount"
   ==$#{f.text_field :rate}
   

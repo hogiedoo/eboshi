@@ -14,13 +14,6 @@ describe Adjustment do
     @adjustment.total.should eql -25
   end
 
-  it "should be greater than all other line items" do
-    @work = Work.make
-    @adjustment.should > @work
-    @adjustment.should_not < @work
-    @adjustment.should_not eql @work
-  end
-  
   it "should not be checked" do
     @adjustment.checked?.should be_false
   end

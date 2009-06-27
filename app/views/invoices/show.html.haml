@@ -76,16 +76,15 @@
                   %th cost
                   
               %tbody
-                - @invoice.line_items.each do |line_item|
-                  - if line_item.is_a? Work
-                    %tr{:class => cycle('even','')}
+                - @invoice.line_items.sort.each do |line_item|
+                  %tr{:class => cycle('even','')}
+                    - if line_item.is_a? Work
                       %td.li= h line_item.notes
                       %td.center_align= number_with_precision line_item.hours, :precision => 2
                       - unless @invoice.consistant_rate
                         %td.center_align= number_to_currency line_item.rate
                       %td.center_align= number_to_currency line_item.total
-                  - if line_item.is_a? Adjustment
-                    %tr
+                    - if line_item.is_a? Adjustment
                       %td{:colspan => @invoice.consistant_rate ? 2 : 3}
                         = h line_item.notes
                       %td.center_align= number_to_currency line_item.total
