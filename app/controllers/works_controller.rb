@@ -2,26 +2,26 @@ class WorksController < ResourceController::Base
   include LineItemsControllerMethods
 
   def clock_in
-  	@work = @client.clock_in current_user
-  	
-		respond_to do |format|
-			format.html { redirect_to invoices_path(@client) }
-			format.js { render @work }
-		end
+    @work = @client.clock_in current_user
+    
+    respond_to do |format|
+      format.html { redirect_to invoices_path(@client) }
+      format.js { render @work }
+    end
   end
   
   def clock_out
-  	object.clock_out
-  	
-  	respond_to do |format|
-  	  format.html { redirect_to invoices_path(@client) }
-  	  format.js do
-  	    render :json => {
-    	    :work => render_to_string(:partial => object),
+    object.clock_out
+    
+    respond_to do |format|
+      format.html { redirect_to invoices_path(@client) }
+      format.js do
+        render :json => {
+          :work => render_to_string(:partial => object),
           :total => object.invoice_total
         }
       end
-  	end
+    end
   end
   
   def merge
@@ -33,8 +33,14 @@ class WorksController < ResourceController::Base
     end
   end
 
+  def convert
+    object.to_adjustment!
+    flash[:notice] = "Time item converted to adjustment"
+    redirect_to invoices_path(@client)
+  end
+
   protected
-	  def build_object
+    def build_object
       @object ||= @client.works.build params[:work]
       @object.user = current_user
     end

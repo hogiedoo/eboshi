@@ -21,6 +21,14 @@ Feature: Manage line items to contruct invoices
     And I should see "$75/hr"
     And I should see "$150.00"
     
+# Scenario: User converts a time item into a flat fee
+    When I follow "Edit"
+    And I press "Convert to Flat fee"
+    Then I should see "Time item converted to adjustment"
+    And I should see "$150.00"
+    And I should not see "$75/hr"
+    And I should see "testing new time item"
+
   Scenario: User creates new flat fee
     When I follow "New Flat Fee"
     And I fill in "Amount" with "300"

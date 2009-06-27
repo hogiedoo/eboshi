@@ -24,3 +24,6 @@ require 'cucumber/rails/rspec'
 require 'webrat/core/matchers'
 
 require File.expand_path(File.dirname(__FILE__) + '/../../spec/blueprints')
+
+require 'ruby-debug'
+require 'cucumber_rails_debug/steps'
