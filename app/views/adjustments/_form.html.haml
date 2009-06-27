@@ -1,6 +1,14 @@
 - f = form
 
 %p
+  %label User
+  = @adjustment.user ? @adjustment.user.name : current_user.name
+  = f.hidden_field :user_id
+  
+  = f.check_box :no_user
+  = f.label :no_user
+
+%p
   = f.label :start, "Date"
   = f.date_select :start
   

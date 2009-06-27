@@ -25,6 +25,10 @@ class Adjustment < LineItem
     self.rate = value
   end
 
+  def no_user
+    self.user.nil? and !self.new_record?
+  end
+
   def no_date
     self.start.nil? and !self.new_record?
   end

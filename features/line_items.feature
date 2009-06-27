@@ -16,39 +16,59 @@ Feature: Manage line items to contruct invoices
     And I fill in "Rate" with "75"
     And I fill in "Notes" with "testing new time item"
     And I press "Create"
-    Then I should see "testing new time item"
-    And I should see "2.00"
-    And I should see "$75/hr"
-    And I should see "$150.00"
+    Then I should see "testing new time item" in a line item
+    And I should see "2.00" in a line item
+    And I should see "$75/hr" in a line item
+    And I should see "$150.00" in a line item
     
 # Scenario: User converts a time item into a flat fee
     When I follow "Edit"
     And I press "Convert to Flat fee"
     Then I should see "Time item converted to adjustment"
-    And I should see "$150.00"
-    And I should not see "$75/hr"
-    And I should see "testing new time item"
+    And I should see "$150.00" in a line item
+    And I should not see "$75/hr" in a line item
+    And I should see "testing new time item" in a line item
 
-  Scenario: User creates new flat fee with date
+  Scenario: User creates new flat fee with date and user
     When I follow "New Flat Fee"
     And I select "2009-01-01" as the date
     And I fill in "Amount" with "300"
     And I fill in "Notes" with "testing new flat fee"
     And I press "Create"
-    Then I should see "01/01/09"
-    And I should see "$300.00"
-    And I should see "testing new flat fee"
+    Then I should see "Micah" in a line item
+    And I should see "01/01/09" in a line item
+    And I should see "$300.00" in a line item
+    And I should see "testing new flat fee" in a line item
+
+# Scenario: User removes user and date from flat fee
+    When I follow "Edit"
+    And I check "No user"
+    And I check "No date"
+    And I press "Update"
+    Then I should not see "Micah" in a line item
+    And I should not see "01/01/09/" in a line item
     
-  Scenario: User creates new flat fee without date
+  Scenario: User creates new flat fee without date and user
     When I follow "New Flat Fee"
+    And I check "No user"
     And I select "2009-01-01" as the date
     And I check "No date"
     And I fill in "Amount" with "300"
     And I fill in "Notes" with "testing new flat fee"
     And I press "Create"
-    Then I should not see "01/01/09"
-    And I should see "$300.00"
-    And I should see "testing new flat fee"
+    Then I should not see "Micah" in a line item
+    And I should not see "01/01/09" in a line item
+    And I should see "$300.00" in a line item
+    And I should see "testing new flat fee" in a line item
+    
+# Scenario: User adds user and date from flat fee
+    When I follow "Edit"
+    And I uncheck "No user"
+    And I uncheck "No date"
+    And I select "2009-01-01" as the date
+    And I press "Update"
+    Then I should see "Micah" in a line item
+    And I should see "01/01/09" in a line item
     
 #  Scenario: User merges two time items
 #    When I follow "New Time Item"
