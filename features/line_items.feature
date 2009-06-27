@@ -29,13 +29,26 @@ Feature: Manage line items to contruct invoices
     And I should not see "$75/hr"
     And I should see "testing new time item"
 
-  Scenario: User creates new flat fee
+  Scenario: User creates new flat fee with date
     When I follow "New Flat Fee"
+    And I select "2009-01-01" as the date
     And I fill in "Amount" with "300"
     And I fill in "Notes" with "testing new flat fee"
     And I press "Create"
-    Then I should see "testing new flat fee"
+    Then I should see "01/01/09"
     And I should see "$300.00"
+    And I should see "testing new flat fee"
+    
+  Scenario: User creates new flat fee without date
+    When I follow "New Flat Fee"
+    And I select "2009-01-01" as the date
+    And I check "No date"
+    And I fill in "Amount" with "300"
+    And I fill in "Notes" with "testing new flat fee"
+    And I press "Create"
+    Then I should not see "01/01/09"
+    And I should see "$300.00"
+    And I should see "testing new flat fee"
     
 #  Scenario: User merges two time items
 #    When I follow "New Time Item"

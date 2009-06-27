@@ -24,4 +24,8 @@ class Adjustment < LineItem
   def total=(value)
     self.rate = value
   end
+
+  def no_date
+    self.start.nil? and !self.new_record?
+  end
 end
