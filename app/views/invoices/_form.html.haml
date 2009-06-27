@@ -1,16 +1,47 @@
 - f = form
+
+%h2 Line items to include
+
 %table
+  %tr
+    %th
+    %th Date
+    %th Agent
+    %th Start
+    %th Finish
+    %th Hours
+    %th Rate
+    %th Total
+    %th Notes
   - @invoice.line_items.each do |line_item|
-    %tr
-      %td= check_box_tag 'invoice[line_item_ids][]', line_item.id, true
-      %td= line_item.start.to_s(:slash) if line_item.start
-      %td= h line_item.try(:user).try(:name)
-      %td= line_item.start.to_s(:time) if line_item.start
-      %td= line_item.finish.to_s(:time) if line_item.finish
-      %td= number_with_precision line_item.hours, :precision => 2
-      %td= number_to_currency line_item.rate, :precision => 0
-      %td= number_to_currency line_item.total
-      %td= h line_item.notes
+    - if line_item.is_a? Work
+      %tr
+        %td= check_box_tag 'invoice[line_item_ids][]', line_item.id, true
+        %td= line_item.start.to_s(:slash) if line_item.start
+        %td= h line_item.try(:user).try(:name)
+        %td= line_item.start.to_s(:time) if line_item.start
+        %td= line_item.finish.to_s(:time) if line_item.finish
+        %td= number_with_precision line_item.hours, :precision => 2
+        %td= number_to_currency line_item.rate, :precision => 0
+        %td{:align => "right", :"data-total" => line_item.total}= number_to_currency line_item.total
+        %td= h line_item.notes
+
+    - if line_item.is_a? Adjustment
+      %tr
+        %td= check_box_tag 'invoice[line_item_ids][]', line_item.id, true
+        %td=# line_item.start.to_s(:slash) if line_item.start
+        %td= h line_item.try(:user).try(:name)
+        /
+          %td=# line_item.start.to_s(:time) if line_item.start
+          %td=# line_item.finish.to_s(:time) if line_item.finish
+          %td=# number_with_precision line_item.hours, :precision => 2
+          %td=# number_to_currency line_item.rate, :precision => 0
+        %td{:align => "center", :colspan => 4} Flat Fee:
+        %td{:align => "right", :"data-total" => line_item.total}= number_to_currency line_item.total
+        %td= h line_item.notes
+
+%h2 Details
+
 %p
   %b Date
   %br
