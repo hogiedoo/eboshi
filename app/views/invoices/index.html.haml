@@ -2,7 +2,7 @@
   = @client.name
   &raquo; Billing Details
 
-- content_for :javascript_includes do
+- content_for :js do
   = javascript_include_tag 'invoices', 'auto_resize_textareas', 'edit_in_place'
 
 = render @client.invoices_with_unbilled

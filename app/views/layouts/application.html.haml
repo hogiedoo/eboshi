@@ -9,10 +9,10 @@
     %meta{:name => "description", :content => ""}
 
     = javascript_include_tag 'jquery', 'jquery.ui', 'jquery.livequery', 'application', 'pretty_flash'
-    = yield :javascript_includes
+    = yield :js
 
     = stylesheet_link_tag 'default', 'in_place_styles', 'pretty_flash'
-    = yield :stylesheet_links
+    = yield :css
 
   - if current_user
     %style{type="text/css"}
