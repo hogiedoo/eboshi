@@ -2,9 +2,9 @@
 body {font: 13px normal "Times";}
 
 .clear {clear:both;}
-.left_align {text-align: left;}
-.right_align {text-align: right;}
-.center_align {text-align: center;}
+.left_align {text-align: left !important;}
+.right_align {text-align: right !important;}
+.center_align {text-align: center !important;}
 .inline {display: inline;}
 
 p {display: block;}

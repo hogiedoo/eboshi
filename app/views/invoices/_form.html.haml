@@ -46,19 +46,24 @@
 %h2 Details
 
 %p
-  %b Date
-  %br
+  = f.label :date
   = f.date_select :date
   
 %p
-  %b Project
-  %br
+  = f.label :project_name
   = f.text_field :project_name
   
 %p
-  %b Total
+  = f.label :total
   %i (changing this number will automatically create an adjustment)
-  %br
   = f.text_field :total
+
+%p
+  = f.check_box :include_dates
+  = f.label :include_dates, "Include dates?"
+
+%p
+  = f.check_box :include_times
+  = f.label :include_times, "Include times?"
 
 = f.submit @invoice.new_record? ? "Create" : "Update"	

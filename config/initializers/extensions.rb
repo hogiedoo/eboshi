@@ -17,13 +17,14 @@ class Array
 end
 
 module ActiveSupport
-	module CoreExtensions
-		module Time 
-			module Conversions
-				DATE_FORMATS[:slash] = '%m/%d/%y'
-			end
-		end
-	end
+  module CoreExtensions
+    module Time 
+      module Conversions
+        DATE_FORMATS[:pretty_time] = '%I:%M&nbsp;%p'
+        DATE_FORMATS[:slash] = '%m/%d/%y'
+      end
+    end
+  end
 end
 
 class Object
@@ -37,20 +38,20 @@ class Object
 end
 
 class Array
-	def / pieces
-		return [] if pieces.zero?
-		piece_size = (length.to_f / pieces).ceil
-		[first(piece_size), *last(length - piece_size) / (pieces - 1)]
-	end
+  def / pieces
+    return [] if pieces.zero?
+    piece_size = (length.to_f / pieces).ceil
+    [first(piece_size), *last(length - piece_size) / (pieces - 1)]
+  end
 end
 
 class String
-	def url_encode
-  	CGI::escape(self)
+  def url_encode
+    CGI::escape(self)
   end
   
   def url_decode
-  	CGI::unescape(self)
+    CGI::unescape(self)
   end
   
   def word_wrap(line_width = 80)
@@ -61,8 +62,8 @@ class String
 end
 
 class NilClass
-	def each; self; end
-	include Enumerable
+  def each; self; end
+  include Enumerable
 end
 
 if RUBY_VERSION < '1.9' then
