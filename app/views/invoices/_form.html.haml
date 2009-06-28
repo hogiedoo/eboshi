@@ -1,5 +1,8 @@
 - f = form
 
+- content_for :js do
+  = javascript_include_tag "new_invoice_form"
+
 %h2 Line items to include
 
 %table
@@ -22,7 +25,7 @@
         %td= line_item.start.to_s(:time) if line_item.start
         %td= line_item.finish.to_s(:time) if line_item.finish
         %td= number_with_precision line_item.hours, :precision => 2
-        %td= number_to_currency line_item.rate, :precision => 0
+        %td= number_to_per_hour line_item.rate
         %td{:align => "right", :"data-total" => line_item.total}= number_to_currency line_item.total
         %td= h line_item.notes
 
@@ -54,6 +57,7 @@
   
 %p
   %b Total
+  %i (changing this number will automatically create an adjustment)
   %br
   = f.text_field :total
 
