@@ -81,7 +81,7 @@
                   
               %tbody
                 - @invoice.line_items.sort.each do |line_item|
-                  %tr{:class => cycle('even','')}
+                  %tr{:class => cycle('line_item even','line_item')}
                     - if @invoice.include_dates
                       %td= line_item.start.to_s(:slash) if line_item.start
                     - if line_item.is_a? Work

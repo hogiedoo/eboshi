@@ -28,3 +28,16 @@ Feature: Invoices
     And I go to the first invoice for "bossanova"
     Then I should not see any dates on the invoice
     And I should not see any times on the invoice
+
+  Scenario: User removes items from existing invoice via checkboxes
+    When I follow "Create Invoice"
+    And I fill in "Project Name" with "Testing Invoice"
+    And I press "Create"
+    And I edit the first invoice for "bossanova"
+    And I uncheck the first line item
+    And I fill in "Total" with "100" 
+    And I press "Update"
+    Then I should see one line item
+
+    When I go to the first invoice for "bossanova"
+    Then I should see two line items
