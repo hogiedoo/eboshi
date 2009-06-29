@@ -5,4 +5,17 @@
 - content_for :js do
   = javascript_include_tag 'invoices', 'auto_resize_textareas', 'edit_in_place'
 
+- content_for :css do
+  = stylesheet_link_tag 'invoices'
+
+- content_for :actions do
+  = link_to 'Create Invoice', new_invoice_path(@client), :id => 'create_invoice', :class=>"button left"
+  = link_to 'Merge', merge_works_path(@client), :id => 'merge', :class=>"button left"
+  .clear
+
+  Select:
+  %a.select_all{:href => "javascript:void(0)"} all
+  |
+  %a.select_none{:href => "javascript:void(0)"} none
+    
 = render @client.invoices_with_unbilled

@@ -6,9 +6,6 @@ Feature: Manage line items to contruct invoices
     And the user "Micah" is assigned to "bossanova"
     And I am on the invoices page for "bossanova"
   
-  Scenario: No create invoice button when no line items
-    Then I should not see "Create Invoice"
-  
   Scenario: User creates new time item    
     When I follow "New Time Item"
     And I select "1pm" as the "Start" date and time

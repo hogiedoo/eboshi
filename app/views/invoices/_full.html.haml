@@ -1,4 +1,4 @@
-%table.invoice{:width=>"100%", :border=>"0", :cellpadding=>"0", :cellspacing=>"0" }
+%table{:class => "invoice #{invoice.status}", :width=>"100%", :border=>"0", :cellpadding=>"0", :cellspacing=>"0" }
   %col{:width=>"5%"}
   %col{:width=>"12%"}
   %col{:width=>"12%"}
@@ -7,8 +7,11 @@
   %col{:width=>"10%"}
   %col{:width=>"45%"}
   
-  %thead{ :class => invoice.status, :id => "invoice_#{invoice.id_or_new}" }
+  %thead{ :id => "invoice_#{invoice.id_or_new}" }
     - if invoice.status == 'unbilled'
+      %tr
+        %td{ :colspan => 7 }
+          %h2 Building Invoice
       %tr
         %td{ :colspan => 7 }
           = button_to 'Clock In', clock_in_path(@client), :id => 'clock_in', :class=>"button left"
@@ -17,6 +20,9 @@
           .clear          
     - else
       %tr
+        %td{ :colspan => 7 }
+          %h2== Invoice ##{invoice.id}
+      %tr
         %td{ :colspan => 5 }
           = link_to 'Hide Details', invoice, :class => 'invoice_hide_details button left'
           = link_to 'Export PDF', invoice_path(:id => invoice.id, :format => :pdf), :class=>"button"
@@ -24,7 +30,6 @@
           = link_to 'Delete', invoice_path(invoice), :method => :delete, :confirm => 'Are you certain you want to delete this invoice and all of its line items? This cannot be undone!', :class=>"button"
         %td.total= number_to_currency invoice.total
         %td
-          = "Invoice \##{invoice.id}"
           %div
             Invoiced on:
             = invoice.date.to_s(:slash) if invoice.date
@@ -49,17 +54,6 @@
     %th notes
   %tr#totals
     %td{:colspan => "3"}
-      - if invoice.status == 'unbilled'
-        - unless invoice.line_items.empty?
-          %em.left
-            with checked items:
-            %a.select_all{:href => "javascript:void(0)"} all
-            |
-            %a.select_none{:href => "javascript:void(0)"} none
-          
-          = link_to 'Create Invoice', new_invoice_path(@client), :id => 'create_invoice', :class=>"button left"
-          = link_to 'Merge', merge_works_path(@client), :id => 'merge', :class=>"button left"
-          .clear
     %td.total_hours= number_with_precision invoice.total_hours, :precision => 2  
     %td &nbsp 
     %td.total= number_to_currency invoice.balance

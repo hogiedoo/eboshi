@@ -77,6 +77,7 @@ img
   :padding 4px
 
 .button, input.button
+  :cursor pointer
   :font-weight bold
   :border= 2px solid !a_lt
   :background #ffffff
@@ -150,6 +151,11 @@ img
   :width= !content_width
   :margin 0 auto
   :color #e4e4e4
+
+#actions
+  :display block
+  :width= !content_width
+  :margin 0 auto
 
 #all_content
   :display block
@@ -231,6 +237,7 @@ img
     :color #003300
 
 table.invoice
+  :margin 10px 0px
   tr#totals
     td
       :border-bottom 3px double #000
@@ -274,8 +281,9 @@ table.invoice
 
 
 .invoice
-  :padding 3px 0
-  :border-bottom 3px solid #ffffff
+  :border 1px solid #cccccc
+  :background #ffffff
+  :margin 3px
   :text-align center
   
   &:first-child
@@ -283,7 +291,7 @@ table.invoice
     :padding 0px
   
   &.unbilled
-    :color yellow
+    :color blue
 
   &.paid
     :color green
