@@ -1,20 +1,18 @@
 - content_for :title do
   All Clients
 
-%table
-  %col{ :width => '25%' }
+%table#clients{:width => "100%"}
   %col{ :width => '35%' }
-  %col{ :width => '20%' }
-  %col{ :width => '10%' }
-  %col{ :width => '10%' }
+  %col{ :width => '35%' }
+  %col{ :width => '15%' }
+  %col{ :width => '15%' }
   %tr
     %th name
     %th balance
   - for client in @clients
-    %tr
-      %td= h client.name
+    %tr{:class => cycle('even','')}
+      %td= link_to h(client.name) , invoices_path(client)
       %td{ :align => 'center' }= number_to_currency client.balance
-      %td{ :align => 'center' }= link_to 'Invoices', invoices_path(client), :class=>"button"
       %td{ :align => 'center' }= link_to 'Edit', edit_client_path(client), :class=>"button"
       %td{ :align => 'center' }= link_to 'Delete', client, :confirm => 'Are you sure?', :method => :delete, :class=>"button"
 
