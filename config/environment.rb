@@ -8,8 +8,8 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.gem 'haml'
-  config.gem "giraffesoft-resource_controller", :lib => "resource_controller", :source => "http://gems.github.com"
   config.gem 'authlogic'
+  config.gem "giraffesoft-resource_controller", :lib => "resource_controller", :source => "http://gems.github.com"
   config.gem 'paperclip', :version => '>=2.1.2'
 
   config.gem 'cucumber', :version => '>=0.3.0'

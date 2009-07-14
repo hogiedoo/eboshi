@@ -23,7 +23,7 @@ class InvoicesController < ResourceController::Base
       # Send the generated PDF file from our html string.
       send_data(
         prince.pdf_from_string(html_string),
-        :filename => "bot-and-rose_invoice-#{@invoice.id}.pdf",
+        :filename => "#{current_user.business_name_or_name.parameterize}_invoice-\##{@invoice.id}.pdf",
         :type => 'application/pdf',
         :disposition => 'inline'
       )

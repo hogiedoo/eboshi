@@ -61,6 +61,15 @@ describe InvoicesController do
     get :index, :client_id => w.client.id
     response.body.should match /test &amp; test/
   end
+
+  it "should name the pdf correctly" do
+    @client = Client.make
+    @invoice = Invoice.make :client => @client, :id => 123
+    5.times { Work.make :invoice => @invoice }
+    Adjustment.make :invoice => @invoice
+    get :show, :id => @invoice.id, :format => 'pdf'
+    response.headers["Content-Disposition"].should =~ /micah-geisel_invoice-\#123\.pdf/
+  end
   
   describe "on create" do
     it "should allow adjustment via total field" do
