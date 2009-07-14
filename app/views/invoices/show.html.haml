@@ -48,10 +48,11 @@
               %col{:width => '49%'}
               %col{:width => '2%'}
               %col{:width => '49%'}
-              %tr
-                %td PROJECT
-                %td .
-                %td.right_align= h @invoice.project_name
+              - unless @invoice.project_name.blank?
+                %tr
+                  %td PROJECT
+                  %td .
+                  %td.right_align= h @invoice.project_name
               %tr
                 %td INVOICE NUMBER
                 %td .

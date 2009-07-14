@@ -16,7 +16,7 @@ class Invoice < ActiveRecord::Base
   has_many :adjustments
   has_many :payments, :dependent => :destroy, :order => 'created_at DESC'
   
-  validates_presence_of :client, :date, :project_name
+  validates_presence_of :client, :date
 
   def self.unpaid
     self.all(:order => "`date` DESC").reject(&:paid?)
