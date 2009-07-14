@@ -57,7 +57,7 @@
         
     #all_content
       #sidebar
-        - if @client.try(:users).try(:exists?)
+        - if @client and !@client.new_record?
           %h2 Collaborators
           - @client.users.each do |user|
             %li
