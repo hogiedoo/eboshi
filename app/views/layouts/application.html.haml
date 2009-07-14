@@ -57,7 +57,7 @@
         
     #all_content
       #sidebar
-        - unless @client.try(:users).try(:empty?)
+        - if @client.try(:users).try(:exists?)
           %h2 Collaborators
           - @client.users.each do |user|
             %li
