@@ -65,8 +65,9 @@
             %table{:cellspacing => '0', :cellpadding => '0'}
               - if @invoice.include_dates
                 %col{:width => '25%'}
-              %col{:width => '70%'}
-              %col{:width => '15%'}
+              %col{:width => '*%'}
+              - unless @invoice.works.empty?
+                %col{:width => '15%'}
               %col{:width => '15%'}
               
               %thead
@@ -74,7 +75,8 @@
                   - if @invoice.include_dates
                     %th date
                   %th.left_align item
-                  %th hours
+                  - unless @invoice.works.empty?
+                    %th hours
                   - unless @invoice.consistant_rate
                     %th rate
                   %th cost
@@ -96,13 +98,16 @@
                         %td.center_align= number_to_currency line_item.rate
                       %td.center_align= number_to_currency line_item.total
                     - if line_item.is_a? Adjustment
-                      %td{:colspan => @invoice.consistant_rate ? 2 : 3}
+                      %td{:colspan => (@invoice.consistant_rate ? 1 : 2) + (@invoice.works.empty? ? 0 : 1)}
                         = h line_item.notes
                       %td.center_align= number_to_currency line_item.total
                       
                 %tr
                   %td{:colspan => @invoice.include_dates ? 2 : 1 } TOTAL
-                  %td{:colspan => @invoice.consistant_rate ? 1 : 2 }
+                  - unless @invoice.works.empty?
+                    %td
+                  - unless @invoice.consistant_rate
+                    %td
                   %td.center_align= number_to_currency @invoice.total
                       
           - if @invoice.consistant_rate.respond_to?(:nonzero?)
