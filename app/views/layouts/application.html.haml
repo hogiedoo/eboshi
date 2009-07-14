@@ -48,7 +48,7 @@
                 = image_tag "feed-icon.gif"
             %p= link_to h(@blog_feed.title), "http://eboshi-app.blogspot.com", :target => "_blank"
             %p= @blog_feed.updated.to_date.to_s(:long)
-            %p= truncate @blog_feed.content, 100
+            %p= truncate @blog_feed.content, :length => 100
             %p= link_to "More posts &raquo;", "http://eboshi-app.blogspot.com", :target => "_blank"
         #title
           %h1 
