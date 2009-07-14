@@ -41,6 +41,15 @@
               %span Welcome, 
               ==#{current_user.name}!
             .clear
+          #blog
+            %h2
+              Latest news from the Eboshi Blog
+              %a{:href => "http://eboshi-app.blogspot.com/feeds/posts/default"}
+                = image_tag "feed-icon.gif"
+            %p= link_to h(@blog_feed.title), "http://eboshi-app.blogspot.com", :target => "_blank"
+            %p= @blog_feed.updated.to_date.to_s(:long)
+            %p= truncate @blog_feed.content, 100
+            %p= link_to "More posts &raquo;", "http://eboshi-app.blogspot.com", :target => "_blank"
         #title
           %h1 
             %a{:href => "/"} EBO$HI

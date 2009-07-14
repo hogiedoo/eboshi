@@ -11,8 +11,14 @@ class ApplicationController < ActionController::Base
 
   before_filter :activate_authlogic
   before_filter :require_user
+  before_filter :fetch_blog_feed
 
   private
+    def fetch_blog_feed
+      @blog_feed = Atom::Feed.load_feed(URI.parse("http://eboshi-app.blogspot.com/feeds/posts/default"))
+      @blog_feed = @blog_feed.entries.first
+    end
+
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
       @current_user_session = UserSession.find

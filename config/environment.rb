@@ -12,6 +12,7 @@ Rails::Initializer.run do |config|
   config.gem "giraffesoft-resource_controller", :lib => "resource_controller", :source => "http://gems.github.com"
   config.gem 'paperclip', :version => '>=2.1.2'
   config.gem 'RedCloth'
+  config.gem 'ratom', :lib => "atom"
 
   config.gem 'cucumber', :version => '>=0.3.0'
   config.gem 'notahat-machinist', :lib => 'machinist', :version => '>=1.0'
