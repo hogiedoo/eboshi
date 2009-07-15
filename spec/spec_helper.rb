@@ -15,9 +15,11 @@ module ControllerSpecHelpers
         user = User.make :business_name => "Micah Geisel"
         user.stub!(:authorized?).and_return(true)
         controller.stub!(:current_user).and_return(user)        
+
+        require 'spec/atom_mock'
       end
     end_eval
-	end
+  end
 end
 
 Spec::Runner.configure do |config|
