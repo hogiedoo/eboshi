@@ -5,7 +5,7 @@ class WorksController < ResourceController::Base
     @work = @client.clock_in current_user
     
     respond_to do |format|
-      #format.html { redirect_to invoices_path(@client) }
+      format.html { redirect_to invoices_path(@client) }
       format.js { render @work }
     end
   end

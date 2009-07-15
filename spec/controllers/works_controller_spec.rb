@@ -50,10 +50,10 @@ describe WorksController do
       response.should be_success
     end
 
-#    it "on clock_in" do
-#      get :clock_in, :client_id => @client.id
-#      response.should be_redirect
-#    end
+    it "on clock_in" do
+      get :clock_in, :client_id => @client.id
+      response.should be_redirect
+    end
     it "on js clock_in" do
       get :clock_in, :client_id => @client.id, :format => 'js'
       response.should be_success

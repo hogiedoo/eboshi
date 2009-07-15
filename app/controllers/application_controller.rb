@@ -9,11 +9,16 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '777e12608199867e6528eb1a3556d20d'
 
+  before_filter :correct_webkit_and_ie_accept_headers
   before_filter :activate_authlogic
   before_filter :require_user
   before_filter :fetch_blog_feed
 
   private
+    def correct_webkit_and_ie_accept_headers
+      request.accepts.sort!{ |x, y| y.to_s == 'text/javascript' ? 1 : -1 } if request.xhr?
+    end
+
     def fetch_blog_feed
       @blog_feed = Atom::Feed.load_feed(URI.parse("http://eboshi-app.blogspot.com/feeds/posts/default"))
       @blog_feed = @blog_feed.entries.first
