@@ -1,5 +1,5 @@
 - content_for :title do
-  = @client.name
+  =h @client.name
   &raquo; Billing Details
 
 - content_for :js do
@@ -13,4 +13,4 @@
   = link_to 'Merge', merge_works_path(@client), :id => 'merge', :class=>"button left"
   .clear
     
-= render @client.invoices_with_unbilled
+= render @invoices

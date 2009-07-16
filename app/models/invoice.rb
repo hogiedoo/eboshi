@@ -39,11 +39,11 @@ class Invoice < ActiveRecord::Base
   def total=(value)
     difference = value.to_f - total
     return total if difference.abs < 0.01
-    line_items << adjustments.build(:total => difference, :client => client)
+    line_items << adjustments.build(:total => difference, :client_id => client.id)
   end
   
   def balance
-    total - payments.sum(:total)
+    total - payments.to_a.sum(&:total)
   end
 
   def status

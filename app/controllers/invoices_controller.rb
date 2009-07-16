@@ -3,7 +3,7 @@ class InvoicesController < ResourceController::Base
   before_filter :get_client
   before_filter :authorized?
 
-  index.before { current_user.update_attribute(:last_client, @client) }
+  index.before { current_user.update_attribute(:last_client, @client) if current_user.last_client != @client }
   index.wants.js { render @client.invoices.paid }
   
   show.response do |wants|
@@ -37,19 +37,28 @@ class InvoicesController < ResourceController::Base
 
   protected 
     def get_client
-      @client ||= @invoice.try(:client) || Client.find(params[:client_id])
+      @client ||= if params[:client_id]
+        Client.find params[:client_id], :include => :assignments
+      else
+        @invoice.client
+      end
     end
 
     def get_invoice
       @invoice ||= Invoice.find params[:id]
     end
+
+    def collection
+      @collection ||= @client.invoices_with_unbilled
+    end
     
     def build_object
-      if params[:invoice]
-        @object = @client.invoices.build
-        @object.attributes = params[:invoice]
+      @object ||= if params[:invoice]
+        returning @client.invoices.build do |invoice|
+          invoice.attributes = params[:invoice]
+        end 
       else
-        @object = @client.build_invoice_from_unbilled(params[:line_item_ids])
+        @client.build_invoice_from_unbilled(params[:line_item_ids])
       end
     end
 

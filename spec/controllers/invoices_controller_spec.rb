@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe InvoicesController do
   include ControllerSpecHelpers
-  
+
   describe "should not error out" do
     before :each do
       @client = Client.make
@@ -10,7 +10,7 @@ describe InvoicesController do
       5.times { Work.make :invoice => @invoice }
       Adjustment.make :invoice => @invoice
     end
-    
+
     it "on index" do
       get :index, :client_id => @client.id
       response.should be_success
@@ -19,7 +19,7 @@ describe InvoicesController do
       get :new, :client_id => @client.id
       response.should be_success
     end
-    
+
     it "on show" do
       get :show, :id => @invoice.id
       response.should be_success
@@ -32,7 +32,7 @@ describe InvoicesController do
       get :show, :id => @invoice.id, :format => 'pdf'
       response.should be_success
     end
-    
+
     it "on edit" do
       get :edit, :id => @invoice.id
       response.should be_success
@@ -41,7 +41,7 @@ describe InvoicesController do
       get :edit, :id => @invoice.id, :format => 'js'
       response.should be_success
     end
-    
+
     it "on create" do
       post :create, :client_id => @client.id, :invoice => @invoice.attributes
       response.should be_redirect
@@ -70,7 +70,7 @@ describe InvoicesController do
     get :show, :id => @invoice.id, :format => 'pdf'
     response.headers["Content-Disposition"].should =~ /micah-geisel_invoice-\#123\.pdf/
   end
-  
+
   describe "on create" do
     it "should allow adjustment via total field" do
       @client = Client.make
@@ -78,12 +78,11 @@ describe InvoicesController do
       total = @client.works.to_a.sum(&:total)+50
       attrs = {
         "line_item_ids" => @client.works.collect(&:id),
-        "project_name" => "testing site",
         "total" => total
       }
       post :create, :client_id => @client.id, :invoice => attrs
       assigns(:invoice).should have(:no).errors
-	    response.should redirect_to(invoices_path(@client))
+      response.should redirect_to(invoices_path(@client))
       assigns(:invoice).should have(1).adjustments
       assigns(:invoice).adjustments.first.total.should == 50
       assigns(:invoice).total.should == total
