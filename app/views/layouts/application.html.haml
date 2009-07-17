@@ -19,7 +19,7 @@
           .line_item_selected {background-color:##{current_user.color};}
        
       
-    %link{:rel => "shortcut icon", :href => "/favicon.png", :type => "image/x-icon"}
+    %link{:rel => "shortcut icon", :href => image_path("/favicon.png"), :type => "image/x-icon"}
 
   %body
     #flash_notice{ :style => "display: none" }= flash[:notice]
