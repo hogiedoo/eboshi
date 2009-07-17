@@ -2,7 +2,7 @@ body
   :margin 0
   :padding 0
   :font-size 0.9em
-  :background #58595b #{image_url(bg.gif)} repeat-y center
+  :background #58595b #{image_url("bg.gif")} repeat-y center
   :font-family "Arial", sans-serif
 
 
@@ -11,7 +11,7 @@ th, td, input, textarea, .dummy, select, option
   :font-family "Arial", sans-serif
 
 a, h1, h2, h3
-  :font-family Arial, sans-serif
+  :font-family "Arial", sans-serif
   :font-weight bold
 
 h1, h2, h3, ul, li, p
@@ -58,7 +58,7 @@ img
   :border 0
   
 !content_width= 1000px
-!var_border= 3px double #666666
+!var_border= 3px "double" #666666
 
 .red
   :color red
@@ -80,7 +80,7 @@ img
 .button, input.button
   :cursor pointer
   :font-weight bold
-  :border= 2px solid !a_lt
+  :border= 2px "solid" !a_lt
   :background #ffffff
   :margin 3px 1px
   :padding 1px 9px
@@ -153,7 +153,7 @@ img
       :line-height 1
       :margin 3px 0
       :padding 2px 5px 1px 5px
-      :border-top 1px dashed #ccc
+      :border-top 1px "dashed" #ccc
       :background #f0f0f0
 
 #breadcrumbs_container
@@ -211,7 +211,7 @@ img
   :color #646464
   :padding 10px 10px
   :height 48px
-  :background #{image_url(img06.gif)} no-repeat left top
+  :background #{image_url("img06.gif")} no-repeat left top
 
   &.more
     :padding-left 20px
