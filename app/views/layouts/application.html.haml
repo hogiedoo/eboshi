@@ -44,7 +44,7 @@
               %h2
                 Latest news from the Eboshi Blog
                 %a{:href => "http://eboshi-app.blogspot.com/feeds/posts/default"}
-                  = image_tag "feed-icon.gif"
+                  = image_tag "feed-icon.gif", :size => "16x16"
               %p
                 = @blog_feed.updated.to_date.to_s(:long)
                 \:
