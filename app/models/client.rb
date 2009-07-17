@@ -34,8 +34,8 @@ class Client < ActiveRecord::Base
   end
 
   def invoices_with_unbilled
-    invoices # fetch first
-    [build_invoice_from_unbilled] + invoices
+    invoices.unshift(build_invoice_from_unbilled).pop # YUCK
+    invoices
   end
 
   def balance
