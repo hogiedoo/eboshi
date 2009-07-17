@@ -13,4 +13,5 @@ converage/**/*
 Capfile
 public/logos
 public/signatures
+public/stylesheets/*.css
 *[~]
