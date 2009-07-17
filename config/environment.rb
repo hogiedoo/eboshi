@@ -13,7 +13,7 @@ Rails::Initializer.run do |config|
   config.gem 'paperclip', :version => '>=2.1.2'
   config.gem 'RedCloth'
   config.gem 'ratom', :lib => "atom"
-
+  config.gem "chriseppstein-compass", :version => ">=0.8.6", :lib => "compass", :source => "http://gems.github.com"
   config.gem 'cucumber', :version => '>=0.3.0'
   config.gem 'notahat-machinist', :lib => 'machinist', :version => '>=1.0'
   config.gem 'relevance-rcov', :lib => 'rcov', :source => 'http://gems.github.com'
