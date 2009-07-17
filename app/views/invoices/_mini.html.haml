@@ -7,9 +7,6 @@
     = invoice.status
     %span
       - unless invoice.payments.empty?
-        - unless invoice.paid?
-          / = number_to_currency invoice.total
-          / total
         - invoice.payments.each do |p|
           %span= number_to_currency(p.total)+' paid on '+p.created_at.to_s(:slash)
   = link_to 'Export PDF', invoice_path(:id => invoice.id, :format => :pdf), :class=>"button right"

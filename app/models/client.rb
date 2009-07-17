@@ -44,7 +44,7 @@ class Client < ActiveRecord::Base
 
   def unbilled_balance
     return 0.0 if line_items.empty?
-    line_items.unbilled.to_a.sum(&:total)
+    line_items.to_a.select(&:unbilled?).sum(&:total)
   end
 
   def overdue_balance

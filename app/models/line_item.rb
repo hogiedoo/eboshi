@@ -40,8 +40,12 @@ class LineItem < ActiveRecord::Base
     target == id
   end
   
-  def checked?
+  def unbilled?
     invoice_id.nil?
+  end
+
+  def checked?
+    unbilled?
   end
   
   def user_name=(name)
