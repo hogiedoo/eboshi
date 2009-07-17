@@ -27,3 +27,5 @@ Rails::Initializer.run do |config|
   config.time_zone = "Pacific Time (US & Canada)"
 
 end
+
+ExceptionNotifier.exception_recipients = %w(micah@botandrose.com)
