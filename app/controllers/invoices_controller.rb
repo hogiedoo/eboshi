@@ -18,7 +18,7 @@ class InvoicesController < ResourceController::Base
       html_string = render_to_string :template => 'invoices/show.html.haml', :layout => false
 
       # Make all paths relative, on disk paths...
-      html_string.gsub!("src=\"", "src=\"#{RAILS_ROOT}/public")
+      html_string.gsub!("src=\"", "src=\"#{RAILS_ROOT}/public") unless Rails.env == "production"
       
       # Send the generated PDF file from our html string.
       send_data(
