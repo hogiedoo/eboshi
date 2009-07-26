@@ -2,7 +2,7 @@ class InvoicesController < ResourceController::Base
   before_filter :get_client
   before_filter :authorized?
 
-  index.before { current_user.update_attribute(:last_client, @client) if current_user.last_client != @client }
+  index.before { current_user.update_attribute(:last_client, @client) }
   index.wants.js { render @client.invoices.paid }
   
   show.response do |wants|

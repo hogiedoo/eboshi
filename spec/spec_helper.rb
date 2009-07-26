@@ -13,9 +13,9 @@ module ControllerSpecHelpers
       integrate_views
       
       before :each do
-        user = User.make :business_name => "Micah Geisel"
-        user.stub!(:authorized?).and_return(true)
-        controller.stub!(:current_user).and_return(user)        
+        @current_user = User.make :business_name => "Micah Geisel"
+        @current_user.stub!(:authorized?).and_return(true)
+        controller.stub!(:current_user).and_return(@current_user)        
       end
     end_eval
   end
