@@ -63,9 +63,7 @@ describe InvoicesController do
   end
 
   it "should name the pdf correctly" do
-    @client = Client.make
-    @invoice = Invoice.make :client => @client, :id => 123
-    5.times { Work.make :invoice => @invoice }
+    @invoice = Invoice.make :id => 123
     Adjustment.make :invoice => @invoice
     get :show, :id => @invoice.id, :format => 'pdf'
     response.headers["Content-Disposition"].should =~ /micah-geisel_invoice-\#123\.pdf/

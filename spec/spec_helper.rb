@@ -5,6 +5,7 @@ require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_
 require 'spec/autorun'
 require 'spec/rails'
 require 'spec/blueprints'
+require "spec/mock_atom"
 
 module ControllerSpecHelpers
   def self.included(klass)
@@ -15,8 +16,6 @@ module ControllerSpecHelpers
         user = User.make :business_name => "Micah Geisel"
         user.stub!(:authorized?).and_return(true)
         controller.stub!(:current_user).and_return(user)        
-
-        require 'spec/atom_mock'
       end
     end_eval
   end
@@ -29,7 +28,10 @@ Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
-  config.before(:each) { Sham.reset }
+  config.before(:each) do
+    Sham.reset
+    mock_atom
+  end
 
   # == Fixtures
   #

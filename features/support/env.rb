@@ -28,10 +28,12 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec/blueprints')
 require 'ruby-debug'
 require 'cucumber_rails_debug/steps'
 
+require "spec/mocks"
+$rspec_mocks ||= Spec::Mocks::Space.new
+require File.expand_path(File.dirname(__FILE__) + '/../../spec/mock_atom')
+
 Before do
-  require "spec/mocks"
-  $rspec_mocks ||= Spec::Mocks::Space.new
-  require File.expand_path(File.dirname(__FILE__) + '/../../spec/atom_mock')
+  mock_atom
 end
 
 After do
