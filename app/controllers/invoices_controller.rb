@@ -1,5 +1,4 @@
 class InvoicesController < ResourceController::Base
-  before_filter :get_invoice, :except => [:index, :new, :create]
   before_filter :get_client
   before_filter :authorized?
 
@@ -40,12 +39,8 @@ class InvoicesController < ResourceController::Base
       @client ||= if params[:client_id]
         Client.find params[:client_id], :include => :assignments
       else
-        @invoice.client
+        object.client
       end
-    end
-
-    def get_invoice
-      @invoice ||= Invoice.find params[:id]
     end
 
     def collection
