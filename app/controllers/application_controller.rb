@@ -68,29 +68,21 @@ class ApplicationController < ActionController::Base
     end
     
     def rescue_action_in_public(exception)
-      respond_to do |want|
-        want.html {
-          super(exception)
-        }
-        want.js {
-          render :update do |page|
-            page.alert "We're sorry, but something went wrong.\nWe've been notified about this issue and we'll take a look at it shortly.\n\nPlease check that any update you tried has not been successful before trying it again."
-          end
-        }
-      end
+      rescue_action_with_message exception, "We're sorry, but something went wrong.\nWe've been notified about this issue and we'll take a look at it shortly.\n\nPlease check that any update you tried has not been successful before trying it again."
     end
 
     def rescue_action_locally(exception)
+      rescue_action_with_message exception, "Oops! I made a mistake\n#{exception.class}: #{exception.message}\nCheck the logs for more detail."
+    end
+
+    def rescue_action_with_message(exception, message)
       respond_to do |want|
-        want.html {
-          super(exception)
-        }
+        want.html { super(exception) }
         want.js {
           render :update do |page|
-            page.alert "Oops! I made a mistake\n#{exception.class}: #{exception.message}\nCheck the logs for more detail."
+            page.alert message
           end
         }
       end
     end
-
 end

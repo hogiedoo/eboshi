@@ -62,18 +62,12 @@ class Client < ActiveRecord::Base
   def clock_in(user)
     returning line_item = Work.new do
       now = Time.now
-      line_item.attributes = { :start => now, :finish => now, :user => user, :rate => default_rate(user) }
+      line_item.attributes = { :start => now, :finish => now, :user => user, :rate => user.default_rate_for(self) }
       self.line_items << line_item
     end
   end
 
-  def default_rate(user)
-    # look for last rate for this client / agent combo. fallback to default user rate.
-    line_items.first(:conditions => "type='Work' AND start <> finish AND user_id=#{user.id} AND rate IS NOT NULL", :order => "start DESC").try(:rate) || user.rate
-  end
-
   def default_project_name
-    # look for last project name for this client
     invoices.last.try(:project_name)
   end
 end

@@ -47,11 +47,6 @@ describe Client do
     @client.debits.should == 50
   end
 
-  it "should calculate a default rate given a user" do
-    @client.default_rate(@user).should == 50
-    Client.new.default_rate(@user).should == 65
-  end
-
   it "should return a incomplete work item on clock_in" do
     li = @client.clock_in(@user)
     li.class.should == Work

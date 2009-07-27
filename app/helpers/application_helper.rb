@@ -1,7 +1,7 @@
 module ApplicationHelper
   def number_to_per_hour(value)
-    return nil if value.nil?
-    precision = (value % 1 == 0 ? 0 : 2)
+    return nil unless value
+    precision = (value.round == value ? 0 : 2)
     number_to_currency(value, :precision => precision)+"/hr"
   end
   

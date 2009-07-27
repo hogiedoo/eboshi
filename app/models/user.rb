@@ -47,6 +47,11 @@ class User < ActiveRecord::Base
     :path => ":rails_root/public/:attachment/:id/:style.:extension",
     :url => "/:attachment/:id/:style.:extension"
     
+  def default_rate_for(client)
+    last_work = client.works.complete.first :conditions => { :user_id => self }, :order => "start DESC"
+    last_work.try(:rate) || rate
+  end
+
   def related_users
     clients.collect(&:users).flatten.uniq - [self]
   end
