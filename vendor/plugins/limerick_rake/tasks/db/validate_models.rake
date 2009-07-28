@@ -10,7 +10,7 @@ namespace :db do
     end
   
     Object.subclasses_of(ActiveRecord::Base).select { |c| c.base_class == c}.sort_by(&:name).each do |klass|
-      next if klass.name == "CGI::Session::ActiveRecordStore::Session"
+      next if ["CGI::Session::ActiveRecordStore::Session", "ActiveRecord::SessionStore::Session"].include? klass.name
       invalid_count = 0
       total = klass.count
       chunk_size = 1000
