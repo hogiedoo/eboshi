@@ -6,6 +6,7 @@ require 'spec/autorun'
 require 'spec/rails'
 require 'spec/blueprints'
 require "spec/mock_atom"
+mock_atom
 
 module ControllerSpecHelpers
   def self.included(klass)
@@ -30,7 +31,6 @@ Spec::Runner.configure do |config|
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
   config.before(:each) do
     Sham.reset
-    mock_atom
   end
 
   # == Fixtures
