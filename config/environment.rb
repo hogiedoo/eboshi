@@ -17,6 +17,8 @@ Rails::Initializer.run do |config|
   config.gem 'cucumber', :version => '>=0.3.0'
   config.gem 'notahat-machinist', :lib => 'machinist', :version => '>=1.0'
   config.gem 'relevance-rcov', :lib => 'rcov', :source => 'http://gems.github.com'
+  config.gem 'chronic', :version => '>= 0.2.3'
+  config.gem 'javan-whenever', :lib => false, :source => 'http://gems.github.com'
   #config.gem 'jscruggs-metric_fu', :version => '0.9.0', :lib => 'metric_fu', :source => 'http://gems.github.com'
 
   config.action_controller.session = {
