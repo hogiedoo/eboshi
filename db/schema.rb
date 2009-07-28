@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090628211435) do
+ActiveRecord::Schema.define(:version => 20090728084016) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -17,6 +17,9 @@ ActiveRecord::Schema.define(:version => 20090628211435) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "assignments", ["client_id"], :name => "index_assignments_on_client_id"
+  add_index "assignments", ["user_id"], :name => "index_assignments_on_user_id"
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -40,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20090628211435) do
     t.boolean  "include_times", :default => false, :null => false
   end
 
+  add_index "invoices", ["client_id"], :name => "index_invoices_on_client_id"
+
   create_table "line_items", :force => true do |t|
     t.integer  "client_id"
     t.integer  "user_id"
@@ -53,12 +58,18 @@ ActiveRecord::Schema.define(:version => 20090628211435) do
     t.string   "type"
   end
 
+  add_index "line_items", ["client_id"], :name => "index_line_items_on_client_id"
+  add_index "line_items", ["invoice_id"], :name => "index_line_items_on_invoice_id"
+  add_index "line_items", ["user_id"], :name => "index_line_items_on_user_id"
+
   create_table "payments", :force => true do |t|
     t.integer  "invoice_id"
     t.decimal  "total",      :precision => 10, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "payments", ["invoice_id"], :name => "index_payments_on_invoice_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -94,5 +105,7 @@ ActiveRecord::Schema.define(:version => 20090628211435) do
     t.string   "state"
     t.string   "zip"
   end
+
+  add_index "users", ["last_client_id"], :name => "index_users_on_last_client_id"
 
 end
