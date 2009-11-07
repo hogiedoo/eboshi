@@ -1,0 +1,10 @@
+development: &login
+  adapter: mysql
+  database: eboshi
+  username: root
+  password:
+  socket: /var/run/mysqld/mysqld.sock
+
+test: &TEST
+  <<: *login
+  database: eboshi_test
