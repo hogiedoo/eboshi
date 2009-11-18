@@ -1,10 +1,13 @@
 development: &login
   adapter: mysql
-  database: eboshi
+  database: invoice
   username: root
   password:
   socket: /var/run/mysqld/mysqld.sock
 
-test: &TEST
+test: &test
   <<: *login
-  database: eboshi_test
+  database: invoice_test
+
+cucumber:
+  <<: *test
