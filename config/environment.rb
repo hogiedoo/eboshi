@@ -10,16 +10,12 @@ Rails::Initializer.run do |config|
   config.gem 'haml'
   config.gem 'authlogic'
   config.gem "giraffesoft-resource_controller", :lib => "resource_controller", :source => "http://gems.github.com"
-  config.gem 'paperclip', :version => '>=2.1.2'
+  config.gem 'paperclip', :version => '=2.1.2'
   config.gem 'RedCloth'
   config.gem 'ratom', :lib => "atom"
   config.gem "chriseppstein-compass", :version => ">=0.8.6", :lib => "compass", :source => "http://gems.github.com"
-  config.gem 'cucumber', :version => '>=0.3.0'
-  config.gem 'notahat-machinist', :lib => 'machinist', :version => '>=1.0'
-  config.gem 'relevance-rcov', :lib => 'rcov', :source => 'http://gems.github.com'
   config.gem 'chronic', :version => '>= 0.2.3'
   config.gem 'javan-whenever', :lib => false, :source => 'http://gems.github.com'
-  #config.gem 'jscruggs-metric_fu', :version => '0.9.0', :lib => 'metric_fu', :source => 'http://gems.github.com'
 
   config.action_controller.session = {
     :session_key => '_invoice_session',

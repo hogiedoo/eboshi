@@ -5,7 +5,7 @@ Feature: Invoices should include a users optional customized logo and signature
     And there is a client named "bossanova"
     And the user "Micah" is assigned to "bossanova"
     And an invoice exists for "bossanova"
-    And I am on "/"
+    And I am on /
     When I follow "My Account"
     And I fill in "Business Name" with "Bot & Rose"
     And I fill in "Business Email" with "info@botandrose.com"

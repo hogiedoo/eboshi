@@ -7,7 +7,8 @@ Feature: Administrator User Status
       | Tony    |
     And I am signed in as an Admin
     Then I should see "All Users"
-    Given I am on "/users"
+
+    When I go to /users
     Then I should see "Micah"
     And I should see "Michael"
     And I should see "Tony"
@@ -20,4 +21,4 @@ Feature: Administrator User Status
       | Tony    |
     And I am signed in as "Micah"
     Then I should not see "All Users"
-    And I should not be able to go to "/users"
+    And I should not be able to go to /users

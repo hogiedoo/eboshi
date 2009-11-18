@@ -1,8 +1,4 @@
-Given /^I am on "(.+)"$/ do |url|
-  visit url
-end
-
-Then /^I should not be able to go to "([^\"]*)"$/ do |url|
+Then /^I should not be able to go to (.+)$/ do |url|
   visit url
   response.code.should == "403"
 end

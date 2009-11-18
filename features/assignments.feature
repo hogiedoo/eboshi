@@ -24,7 +24,7 @@ Feature: Manage client-user associations
       | fashions weekly |
   
   Scenario: View assigned clients
-    Given I am on "/"
+    Given I am on /
     Then I should see "cheapbowlingballs.com" under "Clients"
     And I should see "bossanova" under "Clients"
     And I should not see "g2a" under "Clients"
