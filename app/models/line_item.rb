@@ -27,6 +27,7 @@ class LineItem < ActiveRecord::Base
     
   named_scope :unbilled, :conditions => "invoice_id IS NULL", :order => 'start DESC'
   named_scope :on_date, lambda { |date| { :conditions => "DATE(`start`)='#{date.to_s}'" } }
+  named_scope :on_month, lambda { |date| { :conditions => "MONTH(`start`)=MONTH('#{date.to_s}') AND YEAR(`start`)=YEAR('#{date.to_s}')" } }
 
   def total
     0

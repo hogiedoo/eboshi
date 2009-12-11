@@ -19,5 +19,9 @@
     - works = current_user.works.on_date(d).to_a
     - unless works.empty?
       %p= pluralize number_with_precision(works.sum(&:hours), 0), 'hour'
-      %p= number_to_currency current_user.works.on_date(d).to_a.sum(&:total)
+      %p= number_to_currency works.sum(&:total)
 
+%h2 Total
+- works = current_user.works.on_month(@date).to_a
+%p= pluralize number_with_precision(works.sum(&:hours), 0), 'hour'
+%p= number_to_currency works.sum(&:total)
