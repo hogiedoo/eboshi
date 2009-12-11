@@ -15,13 +15,12 @@
       - Date::DAYNAMES.each do |name|
         %th{ :scope => "col" }
           %abbr{ :title => name }= name[0..2]
-  - calendar :year => @date.year, :month => @date.month do |d|
-    - works = current_user.works.on_date(d).to_a
-    - unless works.empty?
-      %p= pluralize number_with_precision(works.sum(&:hours), 0), 'hour'
-      %p= number_to_currency works.sum(&:total)
+  - calendar :year => @date.year, :month => @date.month do |date|
+    - unless current_user.works.on_date(date).empty?
+      %p= pluralize number_with_precision(current_user.hours_by_date(date), :precision => 0), 'hour'
+      %p= number_to_currency current_user.total_by_date(date)
 
-%h3 Total
-- works = current_user.works.on_month(@date).to_a
-%p= pluralize number_with_precision(works.sum(&:hours), 0), 'hour'
-%p= number_to_currency works.sum(&:total)
+- unless current_user.works.on_month(@date).empty?
+  %h2 Total
+  %p= pluralize number_with_precision(current_user.hours_by_month(@date), :precision => 0), 'hour'
+  %p= number_to_currency current_user.total_by_month(@date)

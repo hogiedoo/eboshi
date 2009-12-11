@@ -76,4 +76,20 @@ class User < ActiveRecord::Base
   def business_email_or_email
     business_email.blank? ? email : business_email
   end
+
+  def hours_by_date(date)
+    works.on_date(date).to_a.sum(&:hours)
+  end
+
+  def total_by_date(date)
+    works.on_date(date).to_a.sum(&:total)
+  end
+
+  def hours_by_month(date)
+    works.on_month(date).to_a.sum(&:hours)
+  end
+
+  def total_by_month(date)
+    works.on_month(date).to_a.sum(&:total)
+  end
 end
