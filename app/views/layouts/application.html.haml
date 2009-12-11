@@ -68,6 +68,19 @@
           
       #all_content
         #sidebar
+          - if current_user
+            %h2 This Month
+            - works = current_user.works.on_month(Date.today).to_a
+            %table{:width=>"100%", :border=>"0", :cellspacing=>"0", :cellpadding=>"0"}
+              %col{:width=>"60%"}
+              %col{:width=>"20%"}
+              %col{:width=>"20%"}
+                %tr
+                  %td= pluralize number_with_precision(works.sum(&:hours), 0), 'hour'
+                  %td= currency_or_empty works.sum(&:total)
+                  %td= link_to "details", "/calendar"
+            %br
+
           - if @client and !@client.new_record?
             %h2 Collaborators
             - @client.users.each do |user|
@@ -76,7 +89,7 @@
                 = link_to 'delete', Assignment.find_by_cuplet(@client, user), :method => :delete
             = link_to '+ Invite collaborator', new_assignment_path(@client), :class=>"button right"
             .clear
-              
+
           - if current_user
             %h2 Clients  
             %table{:width=>"100%", :border=>"0", :cellspacing=>"0", :cellpadding=>"0"}
