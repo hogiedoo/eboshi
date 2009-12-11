@@ -1,7 +1,7 @@
 - content_for :css do
   = stylesheet_link_merged :calendar
 
-%h1 Calendar
+%h2 Calendar
 
 %table.calendar{ :border => 0, :cellspacing => 0, :cellpadding => 0 }
   %thead
@@ -21,7 +21,7 @@
       %p= pluralize number_with_precision(works.sum(&:hours), 0), 'hour'
       %p= number_to_currency works.sum(&:total)
 
-%h2 Total
+%h3 Total
 - works = current_user.works.on_month(@date).to_a
 %p= pluralize number_with_precision(works.sum(&:hours), 0), 'hour'
 %p= number_to_currency works.sum(&:total)
