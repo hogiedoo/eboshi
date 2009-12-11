@@ -33,3 +33,13 @@ end
 Given /^there is a client named "([^\"]*)"$/ do |name|
   Client.make :name => name
 end
+
+Given /^today is "([^\"]*)"$/ do |date|
+  Date.stub!(:today).and_return(Date.parse(date))
+end
+
+Given /^I worked (\d+) hours for "([^\"]*)" today$/ do |hours, client_name|
+  client = Client.find_by_name(client_name)
+  client.works.make :start => Date.today, :finish => Date.today + hours.to_f.hours, :user => @user
+end
+

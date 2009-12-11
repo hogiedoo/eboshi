@@ -20,3 +20,5 @@ stylesheets:
   - invoices
 - invoice:
   - invoice
+- calendar:
+  - calendar

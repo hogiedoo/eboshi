@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   belongs_to :last_client, :class_name => "Client"
   has_many :assignments, :dependent => :destroy
   has_many :clients, :through => :assignments, :include => [:line_items, :payments]
+  has_many :works
   
   has_attached_file :logo,
     :styles => { :pdf => "200x200>" },

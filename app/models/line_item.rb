@@ -26,6 +26,7 @@ class LineItem < ActiveRecord::Base
   validates_presence_of :client, :rate
     
   named_scope :unbilled, :conditions => "invoice_id IS NULL", :order => 'start DESC'
+  named_scope :on_date, lambda { |date| { :conditions => "DATE(`start`)='#{date.to_s}'" } }
 
   def total
     0

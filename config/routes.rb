@@ -34,6 +34,8 @@ ActionController::Routing::Routes.draw do |map|
   map.clock_in '/clients/:client_id/clock_in.:format', :controller => 'works', :action => 'clock_in'
   map.clock_out '/clients/:client_id/works/:id/clock_out.:format', :controller => 'works', :action => 'clock_out'
 
+  map.calendar '/calendar/:year/:month', :controller => 'calendar', :action => 'index'
+
   map.resources :users
   map.resource :account, :controller => "users"
   map.resource :user_session
