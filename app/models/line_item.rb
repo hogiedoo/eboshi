@@ -26,8 +26,8 @@ class LineItem < ActiveRecord::Base
   validates_presence_of :client, :rate
     
   named_scope :unbilled, :conditions => "invoice_id IS NULL", :order => 'start DESC'
-  named_scope :on_date, lambda { |date| { :conditions => "DATE(CONVERT_TZ(`start`,'+00:00','#{Time.zone.formatted_offset}'))='#{date.to_s}'" } }
-  named_scope :on_month, lambda { |date| { :conditions => "MONTH(CONVERT_TZ(`start`,'+00:00','#{Time.zone.formatted_offset}'))=MONTH('#{date.to_s}') AND YEAR(CONVERT_TZ(`start`,'+00:00','-08:00'))=YEAR('#{date.to_s}')" } }
+  named_scope :on_date, lambda { |date| { :conditions => "DATE(CONVERT_TZ(`start`,'+00:00','#{Time.zone.formatted_offset}'))='#{date.to_date}'" } }
+  named_scope :on_month, lambda { |date| { :conditions => "MONTH(CONVERT_TZ(`start`,'+00:00','#{Time.zone.formatted_offset}'))=MONTH('#{date.to_date}') AND YEAR(CONVERT_TZ(`start`,'+00:00','-08:00'))=YEAR('#{date.to_date}')" } }
 
   def total
     0
