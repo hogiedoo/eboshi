@@ -16,11 +16,3 @@ Given /^a[n]? (.+) exists for "(.+)"$/ do |model_name, name|
   client = Client.find_by_name name
   client.send(model_name.gsub(/ /, '_').pluralize.to_sym) << model.make
 end
-
-Then /^I should see "(.+)" under "(.+)"$/ do |name, heading|
-  response.should have_selector "h2:contains('#{heading}') ~ *:contains('#{name}')"
-end
-
-Then /^I should not see "(.+)" under "(.+)"$/ do |name, heading|
-  response.should_not have_selector "h2:contains('#{heading}') ~ *:contains('#{name}')"
-end

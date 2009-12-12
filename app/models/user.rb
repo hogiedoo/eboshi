@@ -85,11 +85,27 @@ class User < ActiveRecord::Base
     works.on_date(date).to_a.sum(&:total)
   end
 
+  def hours_by_week(date)
+    works.on_week(date).to_a.sum(&:hours)
+  end
+
+  def total_by_week(date)
+    works.on_week(date).to_a.sum(&:total)
+  end
+
   def hours_by_month(date)
     works.on_month(date).to_a.sum(&:hours)
   end
 
   def total_by_month(date)
     works.on_month(date).to_a.sum(&:total)
+  end
+
+  def hours_by_year(date)
+    works.on_year(date).to_a.sum(&:hours)
+  end
+
+  def total_by_year(date)
+    works.on_year(date).to_a.sum(&:total)
   end
 end

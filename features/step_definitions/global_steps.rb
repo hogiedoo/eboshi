@@ -38,8 +38,25 @@ Given /^today is "([^\"]*)"$/ do |date|
   Date.stub!(:today).and_return(Date.parse(date))
 end
 
+Given /^I worked (\d+) hours for "([^\"]*)" on "([^\"]*)"$/ do |hours, client_name, date|
+  date = Date.parse(date)
+  client = Client.find_by_name(client_name)
+  client.works.make :start => date, :finish => date + hours.to_f.hours, :user => @user
+end
+
 Given /^I worked (\d+) hours for "([^\"]*)" today$/ do |hours, client_name|
   client = Client.find_by_name(client_name)
   client.works.make :start => Date.today + 1.hour, :finish => Date.today + 1.hour + hours.to_f.hours, :user => @user
 end
 
+Then /^I should see "([^\"]*)" next to "([^\"]*)"$/ do |text, context|
+  response.should have_selector "*:contains('#{context}') ~ *:contains('#{text}')"
+end
+
+Then /^I should see "(.+)" under "(.+)"$/ do |name, heading|
+  response.should have_selector "h2:contains('#{heading}') ~ *:contains('#{name}')"
+end
+
+Then /^I should not see "(.+)" under "(.+)"$/ do |name, heading|
+  response.should_not have_selector "h2:contains('#{heading}') ~ *:contains('#{name}')"
+end
