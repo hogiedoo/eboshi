@@ -6,8 +6,8 @@ module CalendarHelper
     block ||= Proc.new {|d| nil}
 
     defaults = {
-      :year => Date.today.year,
-      :month => Date.today.month,
+      :year => Time.zone.today.year,
+      :month => Time.zone.today.month,
       :previous_month_text => nil,
       :next_month_text => nil
     }

@@ -11,7 +11,7 @@ describe CalendarHelper do
     end
 
     it "should accept a block for date html" do
-      Date.stub!(:today).and_return(Date.parse("06/19/1983"))
+      Time.zone.stub!(:today).and_return(Time.zone.parse("06/19/1983"))
       opts = {
         :year => 1983, 
         :month => 6

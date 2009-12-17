@@ -28,7 +28,7 @@ class Invoice < ActiveRecord::Base
   
   def initialize(options = {})
     options = {} if options.nil?
-    options.reverse_merge!(:date => Date.today)
+    options.reverse_merge!(:date => Time.zone.today)
     super
   end
 

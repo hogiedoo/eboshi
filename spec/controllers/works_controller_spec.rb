@@ -60,12 +60,12 @@ describe WorksController do
     end
 
     it "on clock_out" do
-      @work = Work.make :start => Date.today, :finish => Date.today
+      @work = Work.make :start => Time.zone.today, :finish => Time.zone.today
       get :clock_out, :client_id => @client.id, :id => @work.id
       response.should be_redirect
     end
     it "on js clock_out" do
-      @work = Work.make :start => Date.today, :finish => Date.today
+      @work = Work.make :start => Time.zone.today, :finish => Time.zone.today
       get :clock_out, :client_id => @client.id, :id => @work.id, :format => 'js'
       response.should be_success
     end

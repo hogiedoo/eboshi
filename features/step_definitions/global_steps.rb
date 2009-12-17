@@ -35,18 +35,18 @@ Given /^there is a client named "([^\"]*)"$/ do |name|
 end
 
 Given /^today is "([^\"]*)"$/ do |date|
-  Date.stub!(:today).and_return(Date.parse(date))
+  Time.zone.stub!(:today).and_return(Time.zone.parse(date))
 end
 
 Given /^I worked (\d+) hours for "([^\"]*)" on "([^\"]*)"$/ do |hours, client_name, date|
-  date = Date.parse(date)
+  date = Time.zone.parse(date)
   client = Client.find_by_name(client_name)
   client.works.make :start => date, :finish => date + hours.to_f.hours, :user => @user
 end
 
 Given /^I worked (\d+) hours for "([^\"]*)" today$/ do |hours, client_name|
   client = Client.find_by_name(client_name)
-  client.works.make :start => Date.today + 1.hour, :finish => Date.today + 1.hour + hours.to_f.hours, :user => @user
+  client.works.make :start => Time.zone.today + 1.hour, :finish => Time.zone.today + 1.hour + hours.to_f.hours, :user => @user
 end
 
 Then /^I should see "([^\"]*)" next to "([^\"]*)"$/ do |text, context|

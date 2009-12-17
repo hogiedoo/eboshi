@@ -4,11 +4,11 @@ describe User do
   it "should return a default rate for a client" do
     @user = User.make
     @client = Client.make
-    @client.works.make :rate => 60, :start => Date.today - 2.days, :user => @user
-    @client.works.make :rate => 70, :start => Date.today + 1.days, :user => @user
-    @client.works.make :rate => 50, :start => Date.today - 1.days, :user => @user
-    @client.works.make :rate => 100, :start => Date.today + 2.days, :user => User.make
-    Client.make.works.make :rate => 120, :start => Date.today + 3.days, :user => @user
+    @client.works.make :rate => 60, :start => Time.zone.today - 2.days, :user => @user
+    @client.works.make :rate => 70, :start => Time.zone.today + 1.days, :user => @user
+    @client.works.make :rate => 50, :start => Time.zone.today - 1.days, :user => @user
+    @client.works.make :rate => 100, :start => Time.zone.today + 2.days, :user => User.make
+    Client.make.works.make :rate => 120, :start => Time.zone.today + 3.days, :user => @user
     @user.default_rate_for(@client).should == 70
   end
 
@@ -28,17 +28,17 @@ describe User do
   describe "totals by date" do
     before do
       @it = User.make
-      @it.works.make :rate => 60, :start => Date.today, :finish => Date.today + 1.hour
-      @it.works.make :rate => 70, :start => Date.today, :finish => Date.today + 1.hour
-      @it.works.make :rate => 50, :start => Date.today, :finish => Date.today + 1.hour
+      @it.works.make :rate => 60, :start => Time.zone.today, :finish => Time.zone.today + 1.hour
+      @it.works.make :rate => 70, :start => Time.zone.today, :finish => Time.zone.today + 1.hour
+      @it.works.make :rate => 50, :start => Time.zone.today, :finish => Time.zone.today + 1.hour
     end
 
     it "should return the total money earned" do
-      @it.total_by_date(Date.today).should == 180.0
+      @it.total_by_date(Time.zone.today).should == 180.0
     end
 
     it "should return the total hours" do
-      @it.hours_by_date(Date.today).should == 3
+      @it.hours_by_date(Time.zone.today).should == 3
     end
   end
 

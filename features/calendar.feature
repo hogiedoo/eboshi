@@ -6,11 +6,11 @@ Feature: Calendar that shows a summary of hours logged each day
 
   Scenario: A user views a calendar
     Given today is "1983-06-19"
-    And I worked 13 hours for "bossanova" today
+    And I worked 6 hours for "bossanova" today
     When I go to /calendar
-    Then I should see "13 hours" within ".today"
-    And I should see "13 hours" under "Total"
-    And I should see "$650.00" under "Total"
+    Then I should see "6 hours" within ".today"
+    And I should see "6 hours" under "Total"
+    And I should see "$300.00" under "Total"
 
   Scenario: A user views a calendar of a specific month
     When I go to /calendar/2009/11

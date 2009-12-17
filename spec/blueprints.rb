@@ -44,7 +44,7 @@ end
 
 Invoice.blueprint do
   client
-  date Date.today
+  date Time.zone.today
   project_name { Faker::Company.name }
 end
 

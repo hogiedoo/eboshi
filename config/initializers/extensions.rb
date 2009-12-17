@@ -87,7 +87,7 @@ class Date
   end
   
   def today?
-    self == Date.today
+    self.to_date == Time.zone.today.to_date
   end
 end
 
