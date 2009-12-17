@@ -28,6 +28,10 @@ describe User do
   describe "totals by date" do
     before do
       @it = User.make
+      @it.works.make :rate => 50, :start => Time.zone.today + 1.year, :finish => Time.zone.today + 1.hour + 1.year
+      @it.works.make :rate => 50, :start => Time.zone.today + 1.month, :finish => Time.zone.today + 1.hour + 1.month
+      @it.works.make :rate => 50, :start => Time.zone.today + 1.week, :finish => Time.zone.today + 1.hour + 1.week
+
       @it.works.make :rate => 60, :start => Time.zone.today, :finish => Time.zone.today + 1.hour
       @it.works.make :rate => 70, :start => Time.zone.today, :finish => Time.zone.today + 1.hour
       @it.works.make :rate => 50, :start => Time.zone.today, :finish => Time.zone.today + 1.hour
@@ -42,9 +46,33 @@ describe User do
     end
   end
 
+  describe "totals by week" do
+    before do
+      @it = User.make
+      @it.works.make :rate => 60, :start => Time.parse("1982-06-15 12:00:00"), :finish => Time.parse("1982-06-15 13:00:00")
+      @it.works.make :rate => 60, :start => Time.parse("1983-05-13 12:00:00"), :finish => Time.parse("1983-05-13 13:00:00")
+      @it.works.make :rate => 60, :start => Time.parse("1983-06-07 12:00:00"), :finish => Time.parse("1983-06-07 13:00:00")
+
+      @it.works.make :rate => 60, :start => Time.parse("1983-06-13 12:00:00"), :finish => Time.parse("1983-06-13 13:00:00")
+      @it.works.make :rate => 70, :start => Time.parse("1983-06-15 12:00:00"), :finish => Time.parse("1983-06-15 13:00:00")
+      @it.works.make :rate => 50, :start => Time.parse("1983-06-17 12:00:00"), :finish => Time.parse("1983-06-17 13:00:00")
+    end
+
+    it "should return the total money earned" do
+      @it.total_by_week(Date.parse("1983-06-15")).should == 180.0
+    end
+
+    it "should return the total hours" do
+      @it.hours_by_week(Date.parse("1983-06-15")).should == 3
+    end
+  end
+
   describe "totals by month" do
     before do
       @it = User.make
+      @it.works.make :rate => 60, :start => Time.parse("1982-06-10 12:00:00"), :finish => Time.parse("1982-06-10 13:00:00")
+      @it.works.make :rate => 60, :start => Time.parse("1983-05-15 12:00:00"), :finish => Time.parse("1983-05-15 13:00:00")
+
       @it.works.make :rate => 60, :start => Time.parse("1983-06-10 12:00:00"), :finish => Time.parse("1983-06-10 13:00:00")
       @it.works.make :rate => 70, :start => Time.parse("1983-06-11 12:00:00"), :finish => Time.parse("1983-06-11 13:00:00")
       @it.works.make :rate => 50, :start => Time.parse("1983-06-12 12:00:00"), :finish => Time.parse("1983-06-12 13:00:00")
@@ -56,6 +84,25 @@ describe User do
 
     it "should return the total hours" do
       @it.hours_by_month(Date.parse("1983-06-19")).should == 3
+    end
+  end
+
+  describe "totals by year" do
+    before do
+      @it = User.make
+      @it.works.make :rate => 60, :start => Time.parse("1982-06-10 12:00:00"), :finish => Time.parse("1982-03-10 13:00:00")
+
+      @it.works.make :rate => 60, :start => Time.parse("1983-03-10 12:00:00"), :finish => Time.parse("1983-03-10 13:00:00")
+      @it.works.make :rate => 70, :start => Time.parse("1983-06-11 12:00:00"), :finish => Time.parse("1983-06-11 13:00:00")
+      @it.works.make :rate => 50, :start => Time.parse("1983-09-12 12:00:00"), :finish => Time.parse("1983-09-12 13:00:00")
+    end
+
+    it "should return the total money earned" do
+      @it.total_by_year(Date.parse("1983-06-19")).should == 180.0
+    end
+
+    it "should return the total hours" do
+      @it.hours_by_year(Date.parse("1983-06-19")).should == 3
     end
   end
 
