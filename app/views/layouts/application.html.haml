@@ -69,8 +69,8 @@
       #all_content
         #sidebar
           - if current_user
-            %h2 Activity Summary
-            %table{:width=>"100%", :border=>"0", :cellspacing=>"0", :cellpadding=>"0"}
+            %h2#summaries_control Activity Summary
+            %table#summaries{:width=>"100%", :border=>"0", :cellspacing=>"0", :cellpadding=>"0", :style => "display: #{current_user.show_summaries ? '' : 'none'}"}
               %col{:width=>"60%"}
               %col{:width=>"20%"}
               %col{:width=>"20%"}

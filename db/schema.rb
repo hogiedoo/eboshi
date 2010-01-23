@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090728084016) do
+ActiveRecord::Schema.define(:version => 20100123011646) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20090728084016) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
+    t.boolean  "show_summaries",                                        :default => true
   end
 
   add_index "users", ["last_client_id"], :name => "index_users_on_last_client_id"
