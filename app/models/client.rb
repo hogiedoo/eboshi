@@ -18,6 +18,8 @@
 #
 
 class Client < ActiveRecord::Base
+  default_scope :order => 'name'
+
   has_many :line_items, :dependent => :destroy
   has_many :works
   has_many :adjustments
