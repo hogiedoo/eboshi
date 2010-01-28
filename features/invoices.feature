@@ -2,7 +2,7 @@ Feature: Invoices
   
   Background:
     Given I am signed in as "Micah"
-    And there is a client named "bossanova"
+    And a client exists with name: "bossanova"
     And the user "Micah" is assigned to "bossanova"
     And a time item for "bossanova"
     And a time item for "bossanova"

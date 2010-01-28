@@ -60,3 +60,15 @@
     %td.align_left
       %b Current Balance
   = render invoice.line_items.sort
+  - invoice.users.each_with_index do |user, i|
+    %tr.breakdown
+      %td
+      %td= user ? h(user.name) : "<em>Ambiguous</em>"
+      %td
+      %td.total_hours= number_with_precision invoice.total_hours_for_user(user), :precision => 2  
+      %td &nbsp 
+      %td.total= number_to_currency invoice.total_for_user(user)
+      - if i == 0
+        %td.align_left{ :rowspan => invoice.users.count, :valign => "middle" }
+          %b Breakdown
+

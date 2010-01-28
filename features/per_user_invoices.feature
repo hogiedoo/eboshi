@@ -2,7 +2,7 @@ Feature: Invoices should include a users optional customized logo and signature
 
   Scenario: User updates account and views an invoice
     Given I am signed in as "Micah"
-    And there is a client named "bossanova"
+    And a client exists with name: "bossanova"
     And the user "Micah" is assigned to "bossanova"
     And an invoice exists for "bossanova"
     And I am on /
@@ -28,7 +28,7 @@ Feature: Invoices should include a users optional customized logo and signature
 
   Scenario: User with no logo or signature views an invoice
     Given I am signed in as "Micah"
-    And there is a client named "bossanova"
+    And a client exists with name: "bossanova"
     And the user "Micah" is assigned to "bossanova"
     And an invoice exists for "bossanova"
     When I go to the first invoice for "bossanova"

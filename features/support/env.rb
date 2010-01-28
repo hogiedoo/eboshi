@@ -46,11 +46,3 @@ Webrat.configure do |config|
   config.mode = :rails
   config.open_error_files = false # Set to true if you want error pages to pop up in the browser
 end
-
-require File.expand_path(File.dirname(__FILE__) + '/../../spec/blueprints')
-
-require 'ruby-debug'
-require 'cucumber_rails_debug/steps'
-
-require File.expand_path(File.dirname(__FILE__) + '/../../spec/mock_atom')
-mock_atom

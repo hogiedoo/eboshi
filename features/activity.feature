@@ -2,7 +2,7 @@ Feature: Sidebar should include a summary of user activity
 
   Scenario: A user views the month summary in the sidebar
     Given I am signed in as "Micah"
-    And there is a client named "bossanova"
+    And a client exists with name: "bossanova"
     And the user "Micah" is assigned to "bossanova"
     And today is "1983-02-02"
     And I worked 4 hours for "bossanova" today

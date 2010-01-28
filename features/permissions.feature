@@ -1,7 +1,7 @@
 Feature: User permissions
   Background:
     Given I am signed in as "Micah"
-    And there is a client named "fashions weekly"
+    And a client exists with name: "fashions weekly"
 
   Scenario: Users shouldnt be able to access unassigned clients
     Then visiting the invoices page for "fashions weekly" should return 404

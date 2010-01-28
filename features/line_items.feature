@@ -2,7 +2,7 @@ Feature: Manage line items to contruct invoices
 
   Background: User logs in
     Given I am signed in as "Micah"
-    And there is a client named "bossanova"
+    And a client exists with name: "bossanova"
     And the user "Micah" is assigned to "bossanova"
     And I am on the invoices page for "bossanova"
   

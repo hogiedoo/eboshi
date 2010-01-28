@@ -35,6 +35,10 @@ class Invoice < ActiveRecord::Base
   def total
     line_items.to_a.sum(&:total)
   end
+
+  def total_for_user(user)
+    line_items.to_a.select { |li| li.user == user }.sum(&:total)
+  end
   
   def total=(value)
     difference = value.to_f - total
@@ -59,10 +63,18 @@ class Invoice < ActiveRecord::Base
     line_items.to_a.sum(&:hours)
   end
   
+  def total_hours_for_user(user)
+    line_items.to_a.select { |li| li.user == user }.sum(&:hours)
+  end
+  
   def consistant_rate
     return true if works.empty?
     rates = works.collect(&:rate).uniq
     rates.length == 1 ? rates.first : false
+  end
+
+  def users
+    line_items.collect(&:user).uniq
   end
   
 end

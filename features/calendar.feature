@@ -1,7 +1,7 @@
 Feature: Calendar that shows a summary of hours logged each day
   Background:
     Given I am signed in as "Micah"
-    And there is a client named "bossanova"
+    And a client exists with name: "bossanova"
     And the user "Micah" is assigned to "bossanova"
 
   Scenario: A user views a calendar
