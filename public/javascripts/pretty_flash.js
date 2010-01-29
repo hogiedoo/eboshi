@@ -16,5 +16,5 @@ function hide_flash_error() {
  
 $(function() {
   if($('#flash_error')[0].innerHTML != '') show_flash_error()
-  else if($('#flash_notice')[0].innerHTML != '') show_flash_notice()
+  /* if($('#flash_notice')[0].innerHTML != '') show_flash_notice() */
 });
