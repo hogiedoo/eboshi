@@ -7,15 +7,15 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'haml'
-  config.gem 'authlogic'
-  config.gem "giraffesoft-resource_controller", :lib => "resource_controller", :source => "http://gems.github.com"
-  config.gem 'paperclip', :version => '=2.1.2'
-  config.gem 'RedCloth'
-  config.gem 'ratom', :lib => "atom"
-  config.gem "chriseppstein-compass", :version => ">=0.8.6", :lib => "compass", :source => "http://gems.github.com"
-  config.gem 'chronic', :version => '>= 0.2.3'
-  config.gem 'javan-whenever', :lib => false, :source => 'http://gems.github.com'
+  config.gem "haml", :version => "2.2.17"
+  config.gem "authlogic", :version => "2.1.1"
+  config.gem "resource_controller", :version => "0.6.6"
+  config.gem "paperclip", :version => "2.1.2"
+  config.gem "RedCloth", :version => "4.2.2"
+  config.gem "ratom", :lib => "atom", :version => "0.6.2"
+  config.gem "compass", :version => "0.8.17"
+  config.gem "chronic", :version => "0.2.3"
+  config.gem "javan-whenever", :lib => false, :source => "http://gems.github.com", :version => "0.3.7"
 
   config.action_controller.session = {
     :session_key => '_invoice_session',
