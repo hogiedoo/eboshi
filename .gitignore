@@ -9,9 +9,9 @@ db/data.*
 db/*.sqlite3
 db/blog_feed.atom
 config/database.yml
-config/deploy.rb
 converage/**/*
-public/logos
-public/signatures
 public/stylesheets/*.css
 *[~]
+
+public/logos
+public/signatures
