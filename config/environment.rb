@@ -7,6 +7,7 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
+  config.gem "bard", :version => ">=0.8.10"
   config.gem "haml", :version => "2.2.17"
   config.gem "authlogic", :version => "2.1.1"
   config.gem "resource_controller", :version => "0.6.6"
