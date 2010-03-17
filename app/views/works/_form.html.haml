@@ -1,4 +1,8 @@
 - f = form
+
+- content_for :js do
+  = javascript_include_merged 'friendly_time_select'
+
 = f.hidden_field :type
 
 %p

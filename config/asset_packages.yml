@@ -13,6 +13,8 @@ javascripts:
   - edit_in_place
 - new_invoice:
   - new_invoice_form
+- friendly_time_select:
+  - friendly_time_select
 
 stylesheets: 
 - base: 
