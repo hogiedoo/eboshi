@@ -26,10 +26,10 @@ class LineItem < ActiveRecord::Base
   validates_presence_of :client, :rate
     
   named_scope :unbilled, :conditions => "invoice_id IS NULL", :order => 'start DESC'
-  named_scope :on_date,  lambda { |date| { :conditions => " DATE(CONVERT_TZ(`start`,'+00:00','#{Time.zone.formatted_offset}')  )=      '#{date.to_date}'" } }
-  named_scope :on_week,  lambda { |date| { :conditions => " WEEK(CONVERT_TZ(`start`,'+00:00','#{Time.zone.formatted_offset}'),0)= WEEK('#{date.to_date}',0) AND YEAR(CONVERT_TZ(`start`,'+00:00','#{Time.zone.formatted_offset}'))=YEAR('#{date.to_date}')" } }
-  named_scope :on_month, lambda { |date| { :conditions => "MONTH(CONVERT_TZ(`start`,'+00:00','#{Time.zone.formatted_offset}')  )=MONTH('#{date.to_date}')   AND YEAR(CONVERT_TZ(`start`,'+00:00','#{Time.zone.formatted_offset}'))=YEAR('#{date.to_date}')" } }
-  named_scope :on_year,  lambda { |date| { :conditions => " YEAR(CONVERT_TZ(`start`,'+00:00','#{Time.zone.formatted_offset}')  )= YEAR('#{date.to_date}')" } }
+  named_scope :on_date,  lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_day.utc.to_s(:db)}'" } }
+  named_scope :on_week,  lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_week.yesterday.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_week.yesterday.end_of_day.utc.to_s(:db)}'" } }
+  named_scope :on_month, lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_month.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_month.end_of_day.utc.to_s(:db)}'" } }
+  named_scope :on_year,  lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_year.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_year.end_of_day.utc.to_s(:db)}'" } }
 
   def total
     0
