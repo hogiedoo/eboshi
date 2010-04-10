@@ -1,12 +1,15 @@
-class UserSessionsController < ResourceController::Base
+class UserSessionsController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
 
-  actions :new, :create, :destroy
+  def new
+    @user_session = UserSession.new
+  end
 
-  create do
-    flash "Login successful!"
-    wants.html do
+  def create
+    @user_session = UserSession.new params[:user_session]
+    if @user_session.save
+      flash[:notice] = "Login successful!"
       if object.user.last_client
         redirect_to invoices_path(object.user.last_client)
       else

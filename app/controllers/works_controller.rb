@@ -1,5 +1,51 @@
-class WorksController < ResourceController::Base
-  include LineItemsControllerMethods
+class WorksController < ApplicationController
+  before_filter :get_client
+  before_filter :authorized?
+
+  # actions :all, :except => [:index, :show]
+
+  def new
+    @work = @client.works.build :user => current_user
+  end
+
+  def create
+    @work = @client.works.build params[:work].merge(:user => current_user)
+    if @work.save
+      flash[:notice] = "Successfully created Work."
+      redirect_to invoices_path(@client)
+    else
+      render :new
+    end
+  end
+
+  def edit
+    @work = Work.find params[:id]
+  end
+
+  def update
+    @work = Work.find params[:id]
+    if @work.update_attributes params[:work]
+      flash[:notice] = "Successfully updated Work."
+      respond_to do |wants|
+        wants.html { redirect_to invoices_path(@client) }
+        wants.js { render :nothing => true }
+      end
+    else
+      respond_to do |wants|
+        wants.html { render :edit }
+        wants.js { exit }
+      end
+    end
+  end
+
+  def destroy
+    @work = Work.find params[:id]
+    @work.destroy
+    respond_to do |wants|
+      wants.html { redirect_to invoices_path(@client) }
+      wants.js { render :json => object.invoice_total }
+    end
+  end
 
   def clock_in
     @work = @client.clock_in current_user
@@ -39,9 +85,13 @@ class WorksController < ResourceController::Base
     redirect_to invoices_path(@client)
   end
 
-  protected
-    def build_object
-      @object ||= @client.works.build params[:work]
-      @object.user = current_user
+  private
+
+    def get_client
+      @client ||= (object.try(:client) || Client.find(params[:client_id]))
+    end
+
+    def authorized?
+      current_user.authorized? @client
     end
 end

@@ -1,9 +1,11 @@
-class AssignmentsController < ResourceController::Base
+class AssignmentsController < ApplicationController
   before_filter :get_client, :only => [:new, :create]
   before_filter :authorized?
   
-  actions :new, :create, :destroy
-  
+  def new
+    @assignment = Assignment.new
+  end
+
   def create
     user = begin 
       User.find(params[:assignment][:user_id])
@@ -20,7 +22,9 @@ class AssignmentsController < ResourceController::Base
     end
   end
 
-  destroy.wants.html do
+  def destroy
+    @assignment = Assignment.find params[:id]
+    @assignment.destroy
     path = object.user == current_user ? "/" : :back
     redirect_to path
   end

@@ -1,22 +1,17 @@
-class ClientsController < ResourceController::Base
+class ClientsController < ApplicationController
   before_filter :authorized?, :only => [:show, :edit, :update, :destroy]
   
-  actions :all, :except => :show  
+  def index
+    @clients = current_user.clients
+  end
+  # actions :all, :except => :show  
 
-  create.wants.html { redirect_to clients_path }
-  create.after { object.users << current_user }
-  
-  update.wants.html { redirect_to clients_path }
+  # create.wants.html { redirect_to clients_path }
+  # create.after { object.users << current_user }
+  #
+  # update.wants.html { redirect_to clients_path }
   
   private
-    def object
-      @object ||= Client.find params[:id]
-    end
-    
-    def collection
-      @collection ||= current_user.clients
-    end
-
     def authorized?
       current_user.authorized? object
     end
