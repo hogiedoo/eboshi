@@ -16,25 +16,9 @@ class Array
   end
 end
 
-module ActiveSupport
-  module CoreExtensions
-    module Time 
-      module Conversions
-        DATE_FORMATS[:pretty_time] = '%I:%M&nbsp;%p'
-        DATE_FORMATS[:slash] = '%m/%d/%y'
-      end
-    end
-  end
-end
-
-class Object
-  ##
-  #   @person ? @person.name : nil
-  # vs
-  #   @person.try(:name)
-  def try(method)
-    send method if respond_to? method
-  end
+class Time 
+  DATE_FORMATS[:pretty_time] = '%I:%M&nbsp;%p'
+  DATE_FORMATS[:slash] = '%m/%d/%y'
 end
 
 class Array
@@ -89,11 +73,4 @@ class Date
   def today?
     self.to_date == Time.zone.today.to_date
   end
-end
-
-if RUBY_VERSION < '1.9' then
-  def Time.today
-    t = Time.now
-    t - ((t.to_f + t.gmt_offset) % 86400)
-  end unless defined? Time.today
 end

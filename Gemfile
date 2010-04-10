@@ -1,17 +1,17 @@
 source "http://rubygems.org"
 
-gem "rails", "2.3.4"
+gem 'rails', '3.0.0.beta2'
 
 gem "mysql", "2.8.1"
 gem "haml", "2.2.22"
-gem "authlogic", "2.1.3"
+gem "authlogic", :git => "git://github.com/odorcicd/authlogic.git", :branch => "rails3"
 gem "resource_controller", "0.6.6"
-gem "paperclip", "2.1.2"
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git", :branch => "rails3"
 gem "RedCloth", "4.2.2"
-gem "ratom", "0.6.2", :require => 'atom'
+gem "ratom", "0.6.2", :require => "atom"
 gem "compass", "0.8.17"
 gem "chronic", "0.2.3"
-gem "whenever", "0.3.7"
+gem "whenever", "0.3.7", :require => nil
 
 gem "bard-rake", "0.1.1"
 
