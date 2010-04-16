@@ -12,6 +12,7 @@ config/database.yml
 converage/**/*
 public/stylesheets/*.css
 *[~]
+.bundle
 
 public/logos
 public/signatures
