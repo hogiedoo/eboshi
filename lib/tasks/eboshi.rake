@@ -1,4 +1,7 @@
 namespace :eboshi do
+  desc "Initial setup after install"
+  task :bootstrap => [:"db:create", :"db:schema:load", :"eboshi:cache_blog_feed"]
+
   desc "Fetches eboshi blog feed and caches it locally."
   task :cache_blog_feed do
     require 'open-uri'
