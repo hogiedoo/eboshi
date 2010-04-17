@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # :secret => '777e12608199867e6528eb1a3556d20d'
 
   before_filter :correct_webkit_and_ie_accept_headers
+  before_filter :autoinstall
   before_filter :activate_authlogic
   before_filter :require_user
   before_filter :fetch_blog_feed
@@ -19,6 +20,10 @@ class ApplicationController < ActionController::Base
   private
     def correct_webkit_and_ie_accept_headers
       request.accepts.sort!{ |x, y| y.to_s == 'text/javascript' ? 1 : -1 } if request.xhr?
+    end
+
+    def autoinstall
+      redirect_to new_install_path if User.count == 0
     end
 
     def fetch_blog_feed

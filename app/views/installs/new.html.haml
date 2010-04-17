@@ -1,0 +1,21 @@
+%h1 Installation
+
+%p Fill out the form below to create your user account. This account will have administrative rights to all parts of the program.
+
+= error_messages_for :user
+
+- form_for @user, :url => install_path do |form|
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :email
+    = form.text_field :email
+  .field
+    = form.label :password
+    = form.password_field :password
+  .field
+    = form.label :password_confirmation
+    = form.password_field :password_confirmation
+
+  = form.submit "Create account"
