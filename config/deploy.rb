@@ -11,4 +11,13 @@ namespace :data do
   end
 end
 
+namespace :deploy do
+  desc "Update the crontab file"
+  task :update_crontab, :roles => :db do
+    run "cd #{application} && whenever --update-crontab #{application}"
+  end
+end
+
 after 'data:pull', 'data:pull:assets'
+after "deploy", "deploy:update_crontab"
+
