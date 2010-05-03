@@ -9,6 +9,4 @@ require 'rake/rdoctask'
 
 require 'tasks/rails'
 
-begin
-  require 'bard/rake'
-rescue LoadError; end
+require 'bard/rake'

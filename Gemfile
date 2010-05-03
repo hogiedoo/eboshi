@@ -13,6 +13,8 @@ gem "compass", "0.8.17"
 gem "chronic", "0.2.3"
 gem "whenever", "0.3.7"
 
+gem "bard-rake", "0.1.0"
+
 gem "ruby-debug"
 
 group :test do
