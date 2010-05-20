@@ -4,7 +4,7 @@ gem "rails", "2.3.4"
 
 gem "mysql", "2.8.1"
 gem "haml", "2.2.22"
-gem "authlogic", "2.1.1"
+gem "authlogic", "2.1.3"
 gem "resource_controller", "0.6.6"
 gem "paperclip", "2.1.2"
 gem "RedCloth", "4.2.2"
