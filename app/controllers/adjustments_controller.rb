@@ -4,8 +4,6 @@ class AdjustmentsController < ApplicationController
 
   before_filter [:filter_date, :filter_user], :only => [:create, :update]
 
-  # actions :all, :except => [:index, :show]
-
   def new
     @adjustment = @client.adjustments.build
   end
