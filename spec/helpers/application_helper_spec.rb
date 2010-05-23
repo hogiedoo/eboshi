@@ -1,3 +1,4 @@
+=begin
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ApplicationHelper do
@@ -22,3 +23,4 @@ describe ApplicationHelper do
     end
   end
 end
+=end

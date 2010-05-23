@@ -19,7 +19,8 @@ gem "ruby-debug"
 group :cucumber do
   gem "database_cleaner", :git => "git://github.com/bmabey/database_cleaner.git"
   gem "cucumber-rails", :git => "git://github.com/aslakhellesoy/cucumber-rails.git"
-  gem "rspec-rails", :git => "git://github.com/rspec/rspec-rails.git"
+  gem "rspec", "2.0.0.beta.8"
+  gem "rspec-rails", "2.0.0.beta.8"
 
   gem "machinist"
   gem "faker"
@@ -31,7 +32,8 @@ group :cucumber do
 end
 
 group :test do
-  gem "rspec-rails", :git => "git://github.com/rspec/rspec-rails.git"
+  gem "rspec", "2.0.0.beta.8"
+  gem "rspec-rails", "2.0.0.beta.8"
   gem "machinist", "1.0.6"
   gem "faker", "0.3.1"
 end
