@@ -43,7 +43,7 @@ class WorksController < ApplicationController
     @work.destroy
     respond_to do |wants|
       wants.html { redirect_to invoices_path(@client) }
-      wants.js { render :json => object.invoice_total }
+      wants.js { render :json => @client.invoice_total }
     end
   end
 
@@ -57,14 +57,15 @@ class WorksController < ApplicationController
   end
   
   def clock_out
-    object.clock_out
+    @work = Work.find params[:id]
+    @work.clock_out
     
     respond_to do |format|
       format.html { redirect_to invoices_path(@client) }
       format.js do
         render :json => {
-          :work => render_to_string(:partial => object),
-          :total => object.invoice_total
+          :work => render_to_string(:partial => @work),
+          :total => @work.invoice_total
         }
       end
     end
@@ -80,7 +81,7 @@ class WorksController < ApplicationController
   end
 
   def convert
-    object.to_adjustment!
+    @work.to_adjustment!
     flash[:notice] = "Time item converted to adjustment"
     redirect_to invoices_path(@client)
   end
@@ -88,7 +89,7 @@ class WorksController < ApplicationController
   private
 
     def get_client
-      @client ||= (object.try(:client) || Client.find(params[:client_id]))
+      @client ||= (@work.try(:client) || Client.find(params[:client_id]))
     end
 
     def authorized?

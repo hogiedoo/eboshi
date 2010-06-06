@@ -4,13 +4,13 @@ gem 'rails', '3.0.0.beta3'
 
 gem "bard-rake", :path => "/home/micah/work/bard-rake"
 gem "mysql", "2.8.1"
-gem "haml", "2.2.22"
+gem "haml", "3.0.4"
 gem "authlogic", :git => "git://github.com/odorcicd/authlogic.git", :branch => "rails3"
 gem "resource_controller", "0.6.6"
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git", :branch => "rails3"
 gem "RedCloth", "4.2.2"
 gem "ratom", "0.6.2", :require => "atom"
-gem "compass", "0.8.17"
+gem "compass", "0.10.1"
 gem "chronic", "0.2.3"
 gem "whenever", "0.3.7", :require => nil
 

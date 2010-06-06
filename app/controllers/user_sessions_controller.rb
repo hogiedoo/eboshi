@@ -10,8 +10,8 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new params[:user_session]
     if @user_session.save
       flash[:notice] = "Login successful!"
-      if object.user.last_client
-        redirect_to invoices_path(object.user.last_client)
+      if @user_session.user.last_client
+        redirect_to invoices_path(@user_session.user.last_client)
       else
         redirect_back_or_default '/'
       end
