@@ -4,6 +4,9 @@ development: &login
   username: root
   password:
 
+staging:
+  <<: *login
+
 test: &test
   <<: *login
   database: eboshi_test
