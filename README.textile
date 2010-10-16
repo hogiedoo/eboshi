@@ -7,8 +7,9 @@ h2. Setup
 h3. Requirements
 
 * Ruby version 1.8.7
-* Bundler gem 0.9
+* Bundler 1.0
 * Prince 7.0 for pdf output "http://www.princexml.com/download/":http://www.princexml.com/download/
+  * TODO: replace with wkhtmltopdf
 
 Other versions of these requirements may work, but have not been tested.
 
@@ -20,7 +21,7 @@ h3. Install gems
 
 Inside the eboshi directory, install gems using Bundler:
 
-bc. bundle install
+bc. bundle
 
 h3. Configure & Finish
 
@@ -38,3 +39,15 @@ h2. Contact & information
 
 "www.botandrose.com":http://www.botandrose.com
 
+
+h2. Note on Patches/Pull Requests
+ 
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so I don't break it in a future version unintentionally.
+* Commit, do not mess with rakefile, version, or history. (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+* Send me a pull request. Bonus points for topic branches.
+
+h2. Copyright
+
+Copyright (c) 2010 Bot and Rose, Inc. See LICENSE for details.
