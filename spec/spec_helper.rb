@@ -1,12 +1,11 @@
-# This file is copied to ~/spec when you run 'ruby script/generate rspec'
-# from the project root directory.
+# This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
-require File.dirname(__FILE__) + "/../config/environment" unless defined?(Rails)
+require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 
-# Requires supporting files with custom matchers and macros, etc,
-# in ./support/ and its subdirectories.
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+# Requires supporting ruby files with custom matchers and macros, etc,
+# in spec/support/ and its subdirectories.
+Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
   # == Mock Framework
@@ -18,32 +17,15 @@ RSpec.configure do |config|
   # config.mock_with :rr
   config.mock_with :rspec
 
-  # If you'd prefer not to run each of your examples within a transaction,
-  # uncomment the following line.
-  # config.use_transactional_examples = false
+  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  # If you're not using ActiveRecord, or you'd prefer not to run each of your
+  # examples within a transaction, remove the following line or assign false
+  # instead of true.
+  config.use_transactional_fixtures = true
 
   config.before(:each) do
     Sham.reset
   end
 end
-
-module ControllerSpecHelpers
-  def self.included(klass)
-    klass.instance_eval do
-      # integrate_views
-      
-      before :each do
-        @current_user = User.make :business_name => "Micah Geisel"
-        @current_user.stub!(:authorized?).and_return(true)
-        controller.stub!(:current_user).and_return(@current_user)        
-      end
-    end
-  end
-end
-=begin
-require 'spec/autorun'
-require 'spec/rails'
-require 'spec/blueprints'
-require "spec/mock_atom"
-mock_atom
-=end

@@ -2,13 +2,16 @@
 # Configure your app in config/environment.rb and config/environments/*.rb
 require 'thread' # work with rubygems 1.5+
 
-rescue LoadError
-  # Otherwise, use RubyGems.
-  require 'rubygems'
+require 'rubygems'
 
-  # And set up the gems listed in the Gemfile.
-  if File.exist?(File.expand_path('../../Gemfile', __FILE__))
-    require 'bundler'
-    Bundler.setup
-  end
-end
+# Set up gems listed in the Gemfile.
+gemfile = File.expand_path('../../Gemfile', __FILE__)
+begin
+  ENV['BUNDLE_GEMFILE'] = gemfile
+  require 'bundler'
+  Bundler.setup
+rescue Bundler::GemNotFound => e
+  STDERR.puts e.message
+  STDERR.puts "Try running `bundle install`."
+  exit!
+end if File.exist?(gemfile)
