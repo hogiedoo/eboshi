@@ -154,6 +154,10 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
+    webrat (0.7.2)
+      nokogiri (>= 1.2.0)
+      rack (>= 1.0)
+      rack-test (>= 0.5.3)
     whenever (0.3.7)
       chronic (>= 0.2.3)
     xpath (0.1.2)
@@ -185,4 +189,5 @@ DEPENDENCIES
   rspec-rails
   ruby-debug
   test-unit
+  webrat
   whenever (= 0.3.7)

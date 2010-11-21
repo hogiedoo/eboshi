@@ -1,12 +1,11 @@
 class AssignmentsController < ApplicationController
-  before_filter :get_client, :only => [:new, :create]
-  before_filter :authorized?
-  
   def new
-    @assignment = Assignment.new
+    @client = current_user.clients.find params[:client_id]
+    @assignment = @client.assignments.build :user => current_user
   end
 
   def create
+    @client = current_user.clients.find params[:client_id]
     user = begin 
       User.find(params[:assignment][:user_id])
     rescue ActiveRecord::RecordNotFound
@@ -23,18 +22,9 @@ class AssignmentsController < ApplicationController
   end
 
   def destroy
-    @assignment = Assignment.find params[:id]
+    @assignment = current_user.assignments.find params[:id]
     @assignment.destroy
     path = object.user == current_user ? "/" : :back
     redirect_to path
   end
-  
-  private
-    def get_client
-      @client ||= Client.find params[:client_id]
-    end
-    
-    def authorized?
-      current_user.authorized? object || @client
-    end
 end

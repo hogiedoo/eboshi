@@ -23,13 +23,13 @@ describe CalendarHelper do
         end
       end
 
-      out.should have_tag "tbody tr", :count => 5
-      out.should have_tag "tbody tr:first-child td", :count => 7
-      out.should have_tag "tbody tr:first-child td.otherMonth", :count => 3
-      out.should have_tag "tbody tr:last-child td.otherMonth", :count => 2
+      out.should have_selector "tbody tr", :count => 5
+      out.should have_selector "tbody tr:first-child td", :count => 7
+      out.should have_selector "tbody tr:first-child td.otherMonth", :count => 3
+      out.should have_selector "tbody tr:last-child td.otherMonth", :count => 2
 
-      out.should have_tag "tbody td.today", :count => 1
-      out.should have_tag "tbody tr:nth-child(4) td:first-child.today", :text => /19/, :count => 1
+      out.should have_selector "tbody td.today", :count => 1
+      out.should have_selector "tbody tr:nth-child(4) td:first-child.today", :count => 1
     end
 
     it "should not suck" do
@@ -44,8 +44,8 @@ describe CalendarHelper do
         end
       end
 
-      out.should have_tag "tbody tr", :count => 5
-      out.should have_tag "tbody tr:first-child td", :count => 7
+      out.should have_selector "tbody tr", :count => 5
+      out.should have_selector "tbody tr:first-child td", :count => 7
     end
   end
   

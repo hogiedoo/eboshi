@@ -19,14 +19,15 @@ group :test, :cucumber do
   gem "rspec-rails"
   gem "machinist", "1.0.6"
   gem "faker", "0.3.1"
+  gem "webrat"
 
   gem "test-unit"
 end
 
 group :cucumber do
   gem "cucumber-rails"
-  gem "capybara"
   gem "database_cleaner"
+  gem "capybara"
   gem "pickle"
   gem "nokogiri"
 end

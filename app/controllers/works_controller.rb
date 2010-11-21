@@ -1,8 +1,7 @@
 class WorksController < ApplicationController
+  before_filter :get_work, :only => [:edit, :update, :destroy]
   before_filter :get_client
   before_filter :authorized?
-
-  # actions :all, :except => [:index, :show]
 
   def new
     @work = @client.works.build :user => current_user
@@ -43,7 +42,7 @@ class WorksController < ApplicationController
     @work.destroy
     respond_to do |wants|
       wants.html { redirect_to invoices_path(@client) }
-      wants.js { render :json => @client.invoice_total }
+      wants.js { render :json => @work.invoice.total }
     end
   end
 
@@ -87,6 +86,10 @@ class WorksController < ApplicationController
   end
 
   private
+
+    def get_work
+      @work = current_user.works.find params[:id]
+    end
 
     def get_client
       @client ||= (@work.try(:client) || Client.find(params[:client_id]))

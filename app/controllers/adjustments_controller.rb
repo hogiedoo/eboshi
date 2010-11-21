@@ -1,8 +1,10 @@
 class AdjustmentsController < ApplicationController
+  before_filter :get_adjustment, :only => [:edit, :update, :destroy]
   before_filter :get_client
   before_filter :authorized?
 
-  before_filter [:filter_date, :filter_user], :only => [:create, :update]
+  before_filter :filter_date, :only => [:create, :update]
+  before_filter :filter_user, :only => [:create, :update]
 
   def new
     @adjustment = @client.adjustments.build
@@ -41,7 +43,7 @@ class AdjustmentsController < ApplicationController
     @adjustment = Adjustment.find params[:id]
     respond_to do |wants|
       wants.html { redirect_to invoices_path(@client) }
-      wants.js { render :json => object.invoice_total }
+      wants.js { render :json => @adjustment.invoice_total }
     end
   end
 
@@ -60,8 +62,12 @@ class AdjustmentsController < ApplicationController
       a[:user_id] = nil if a.delete(:no_user) == "1"
     end
 
+    def get_adjustment
+      @adjustment = Adjustment.find params[:id]
+    end
+
     def get_client
-      @client ||= (object.try(:client) || Client.find(params[:client_id]))
+      @client = params[:client_id] ? Client.find(params[:client_id]) : @adjustment.client
     end
 
     def authorized?

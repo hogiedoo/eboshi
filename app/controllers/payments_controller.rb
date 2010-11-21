@@ -7,7 +7,7 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    @payment = Payment.new params[:payment]
+    @payment = @invoice.payments.build params[:payment]
     if @payment.save
       flash[:notice] = "Payment successfully created."
       redirect_to invoices_path(@invoice.client)

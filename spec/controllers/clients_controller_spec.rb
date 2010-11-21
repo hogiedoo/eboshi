@@ -5,6 +5,7 @@ describe ClientsController do
   
 	before(:each) do
 		@client = Client.make
+    @client.users << @current_user
 	end
 
   describe "should not error out" do

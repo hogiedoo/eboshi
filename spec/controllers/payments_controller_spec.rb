@@ -16,7 +16,7 @@ describe PaymentsController do
       :total => "50"
     }
     post :create, :invoice_id => @invoice.id, :payment => payment_attributes
-    assigns(:invoice).balance.should == 450
+    assigns(:invoice).balance.to_i.should == 450
   end
   
 end
