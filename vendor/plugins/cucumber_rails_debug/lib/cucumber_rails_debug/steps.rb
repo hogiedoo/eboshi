@@ -1,14 +1,14 @@
 module CucumberRailsDebug
   def where
-    puts "#{@request.env["SERVER_NAME"]}#{@request.env["REQUEST_URI"]}" 
+    # puts "#{request.env["SERVER_NAME"]}#{@request.env["REQUEST_URI"]}" 
   end
 
   def how
-    puts @request.parameters.inspect 
+    # puts @request.parameters.inspect 
   end
 
   def html
-    puts @response.body.gsub("\n", "\n            ")
+    puts body.gsub("\n", "\n            ")
   end
 
   def display(decoration="\n#{'*' * 80}\n\n")

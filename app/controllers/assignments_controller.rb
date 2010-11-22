@@ -22,9 +22,10 @@ class AssignmentsController < ApplicationController
   end
 
   def destroy
-    @assignment = current_user.assignments.find params[:id]
+    @assignment = Assignment.find params[:id]
+    raise ActiveRecord::RecordNotFound unless current_user.clients.include? @assignment.client
     @assignment.destroy
-    path = object.user == current_user ? "/" : :back
+    path = @assignment.user == current_user ? "/" : :back
     redirect_to path
   end
 end

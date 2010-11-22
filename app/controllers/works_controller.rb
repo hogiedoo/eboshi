@@ -1,5 +1,5 @@
 class WorksController < ApplicationController
-  before_filter :get_work, :only => [:edit, :update, :destroy]
+  before_filter :get_work, :only => [:edit, :update, :destroy, :convert]
   before_filter :get_client
   before_filter :authorized?
 
@@ -18,7 +18,6 @@ class WorksController < ApplicationController
   end
 
   def edit
-    @work = Work.find params[:id]
   end
 
   def update
@@ -88,11 +87,11 @@ class WorksController < ApplicationController
   private
 
     def get_work
-      @work = current_user.works.find params[:id]
+      @work = Work.find params[:id]
     end
 
     def get_client
-      @client ||= (@work.try(:client) || Client.find(params[:client_id]))
+      @client = (@work.try(:client) || Client.find(params[:client_id]))
     end
 
     def authorized?

@@ -11,7 +11,7 @@ Feature: Invoices
 
   Scenario: User creates an invoice with dates and times
     When I follow "Create Invoice"
-    And I fill in "Project Name" with "Testing Invoice"
+    And I fill in "Project name" with "Testing Invoice"
     And I check "Include dates"
     And I check "Include times"
     And I press "Create"
@@ -21,7 +21,7 @@ Feature: Invoices
 
   Scenario: User creates an invoice without dates or time
     When I follow "Create Invoice"
-    And I fill in "Project Name" with "Testing Invoice"
+    And I fill in "Project name" with "Testing Invoice"
     And I uncheck "Include dates"
     And I uncheck "Include times"
     And I press "Create"
@@ -31,7 +31,7 @@ Feature: Invoices
 
   Scenario: User removes items from existing invoice via checkboxes
     When I follow "Create Invoice"
-    And I fill in "Project Name" with "Testing Invoice"
+    And I fill in "Project name" with "Testing Invoice"
     And I press "Create"
     And I edit the first invoice for "bossanova"
     And I uncheck the first line item

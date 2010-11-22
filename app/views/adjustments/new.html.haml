@@ -2,10 +2,7 @@
   =h @client.name
   &raquo; New Flat Fee
 
-= error_messages_for :adjustment
-- form_for @adjustment do |f|
-  = render :partial => 'form', :object => f
-  %p= f.submit "Create"
+= render "form"
 
 = link_to 'Back', invoices_path(@client)
 

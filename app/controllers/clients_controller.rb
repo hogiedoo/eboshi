@@ -4,7 +4,7 @@ class ClientsController < ApplicationController
   end
 
   def new
-    @client = current_user.clients.build
+    @client = Client.new
   end
 
   def edit
@@ -12,8 +12,9 @@ class ClientsController < ApplicationController
   end
 
   def create
-    @client = current_user.clients.build params[:client]
+    @client = Client.new params[:client]
     if @client.save
+      @client.users << current_user
       flash[:notice] = "Client successfully created."
       redirect_to clients_path
     else

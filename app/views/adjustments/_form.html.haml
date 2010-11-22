@@ -1,24 +1,27 @@
-- f = form
+= error_messages_for :adjustment
 
-%p
-  %label User
-  = @adjustment.user ? @adjustment.user.name : current_user.name
-  = f.hidden_field :user_id
-  
-  = f.check_box :no_user
-  = f.label :no_user
+- form_for @adjustment do |form|
+  %p
+    %label User
+    = @adjustment.user ? @adjustment.user.name : current_user.name
+    = form.hidden_field :user_id
+    
+    = form.check_box :no_user
+    = form.label :no_user
 
-%p
-  = f.label :start, "Date"
-  = f.date_select :start
-  
-  = f.check_box :no_date
-  = f.label :no_date
+  %p
+    = form.label :start, "Date"
+    = form.date_select :start
+    
+    = form.check_box :no_date
+    = form.label :no_date
 
-%p
-  = f.label :rate, "Amount"
-  ==$#{f.text_field :rate}
-  
-%p
-  = f.label :notes
-  = f.text_area :notes
+  %p
+    = form.label :rate, "Amount"
+    ==$#{form.text_field :rate}
+    
+  %p
+    = form.label :notes
+    = form.text_area :notes
+
+  %p= form.submit @adjustment.new_record? ? "Create" : "Update"
