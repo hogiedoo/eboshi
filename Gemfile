@@ -13,6 +13,8 @@ gem "RedCloth", "4.2.2"
 gem "ratom", "0.6.2", :require => "atom"
 gem "chronic", "0.2.3"
 gem "whenever", "0.3.7", :require => nil
+gem "exception_notification"
+gem "limerick_rake"
 
 group :test, :cucumber do
   gem "autotest-rails"

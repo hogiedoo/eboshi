@@ -91,6 +91,7 @@ GEM
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    exception_notification (2.3.3.0)
     faker (0.3.1)
     ffi (0.6.3)
       rake (>= 0.8.7)
@@ -105,6 +106,7 @@ GEM
     json (1.4.6)
     json_pure (1.4.6)
     libxml-ruby (1.1.4)
+    limerick_rake (0.0.2)
     linecache (0.43)
     machinist (1.0.6)
     mail (2.2.10)
@@ -179,7 +181,7 @@ GEM
       chronic (>= 0.2.3)
     xpath (0.1.2)
       nokogiri (~> 1.3)
-    yard (0.6.2)
+    yard (0.6.3)
 
 PLATFORMS
   ruby
@@ -195,8 +197,10 @@ DEPENDENCIES
   cucumber-rails!
   database_cleaner
   delorean
+  exception_notification
   faker (= 0.3.1)
   haml
+  limerick_rake
   machinist (= 1.0.6)
   mysql
   nokogiri

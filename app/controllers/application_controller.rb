@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  include ExceptionNotifiable
-
   helper_method :current_user_session, :current_user
 	
   helper :all

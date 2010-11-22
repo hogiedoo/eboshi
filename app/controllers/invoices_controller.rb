@@ -18,14 +18,14 @@ class InvoicesController < ApplicationController
       wants.pdf do
         require 'prince'
         prince = Prince.new()
-        prince.add_style_sheets "#{RAILS_ROOT}/public/stylesheets/invoice.css"
+        prince.add_style_sheets "#{Rails.root}/public/stylesheets/invoice.css"
         # Set RAILS_ASSET_ID to blank string or rails appends some time after 
         # to prevent file caching, fucking up local - disk requests.
         ENV["RAILS_ASSET_ID"] = ''
         html_string = render_to_string :template => 'invoices/show.html.haml', :layout => false
 
         # Make all paths relative, on disk paths...
-        html_string.gsub!("src=\"", "src=\"#{RAILS_ROOT}/public") unless Rails.env == "production"
+        html_string.gsub!("src=\"", "src=\"#{Rails.root}/public") unless Rails.env == "production"
         
         # Send the generated PDF file from our html string.
         send_data(

@@ -62,7 +62,7 @@ class Client < ActiveRecord::Base
   end
 
   def clock_in(user)
-    returning line_item = Work.new do
+    Work.new.tap do |line_item|
       now = Time.now
       line_item.attributes = { :start => now, :finish => now, :user => user, :rate => user.default_rate_for(self) }
       self.line_items << line_item
