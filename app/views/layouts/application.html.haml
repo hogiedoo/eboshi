@@ -96,10 +96,11 @@
 
           - if @client and !@client.new_record?
             %h2 Collaborators
-            - @client.users.each do |user|
+            - @client.assignments.each do |assignment|
+              - next if assignment.new_record?
               %li
-                = h user.name
-                = link_to 'delete', Assignment.find_by_cuplet(@client, user), :method => :delete
+                = h assignment.user.name
+                = link_to 'delete', assignment, :method => :delete
             = link_to '+ Invite collaborator', new_assignment_path(@client), :class=>"button right"
             .clear
 

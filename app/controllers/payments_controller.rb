@@ -18,7 +18,7 @@ class PaymentsController < ApplicationController
   
   protected
     def get_invoice
-      @invoice ||= Invoice.find params[:invoice_id]
+      @invoice = Invoice.find params[:invoice_id]
     end
     
     def authorized?

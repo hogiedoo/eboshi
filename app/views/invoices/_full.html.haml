@@ -14,9 +14,9 @@
           %h2 Building Invoice
       %tr
         %td{ :colspan => 7 }
-          = button_to 'Clock In', clock_in_path(@client), :id => 'clock_in', :class=>"button left"
-          = link_to 'New Time Item', new_work_path(@client), :class=>"button left"
-          = link_to 'New Flat Fee', new_adjustment_path(@client), :class=>"button left"
+          = button_to 'Clock In', clock_in_path(@client), :id => 'clock_in', :class => "button left"
+          = link_to 'New Time Item', new_client_work_path(@client), :class => "button left"
+          = link_to 'New Flat Fee', new_client_adjustment_path(@client), :class => "button left"
           .clear          
     - else
       %tr

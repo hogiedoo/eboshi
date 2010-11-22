@@ -10,7 +10,7 @@
       - unless invoice.payments.empty?
         - invoice.payments.each do |p|
           %span= number_to_currency(p.total)+' paid on '+p.created_at.to_s(:slash)
-  = link_to 'Export PDF', invoice_path(:id => invoice.id, :format => :pdf), :class=>"button right"
+  = link_to 'Export PDF', invoice_path(invoice, :format => :pdf), :class=>"button right"
   - unless invoice.paid?
     = link_to 'Log payment', new_payment_path(invoice), :class => 'mini_invoice_make_payment button right'
   .clear

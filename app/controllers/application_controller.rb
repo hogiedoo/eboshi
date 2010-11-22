@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   include ExceptionNotifiable
 
-  filter_parameter_logging :password, :password_confirmation
   helper_method :current_user_session, :current_user
 	
-  helper :all # include all helpers, all the time
+  helper :all
+  include ShallowRouteHelper
 
   self.allow_forgery_protection = false
   # See ActionController::RequestForgeryProtection for details
@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
     end
 
     def store_location
-      session[:return_to] = request.request_uri
+      session[:return_to] = request.fullpath
     end
 
     def redirect_back_or_default(default)

@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  before_filter :get_invoice, :get_client, :authorized?
+  before_filter :get_client, :authorized?
 
   def index
     @invoices = @client.invoices_with_unbilled
@@ -11,6 +11,7 @@ class InvoicesController < ApplicationController
   end
 
   def show
+    @invoice = @client.invoices.find params[:id]
     respond_to do |wants|
       wants.html { render :layout => false }
       wants.js { render :partial => 'mini', :locals => { :invoice => @invoice } } 
@@ -52,6 +53,7 @@ class InvoicesController < ApplicationController
   end
 
   def edit
+    @invoice = @client.invoices.find params[:id]
     respond_to do |wants|
       wants.html
       wants.js { render :partial => 'full', :locals => { :invoice => @invoice } } 
@@ -59,6 +61,7 @@ class InvoicesController < ApplicationController
   end
 
   def update
+    @invoice = @client.invoices.find params[:id]
     if @invoice.update_attributes params[:invoice]
       flash[:notice] = "Invoice successfully updated."
       redirect_to invoices_path(@client)
@@ -68,21 +71,14 @@ class InvoicesController < ApplicationController
   end
 
   def destroy
+    @invoice = @client.invoices.find params[:id]
     @invoice.destroy
     redirect_to invoices_path(@client)
   end
 
   private
-    def get_invoice
-      @invoice = Invoice.find params[:id] rescue nil
-    end
-
     def get_client
-      @client = if params[:client_id]
-        Client.find params[:client_id], :include => :assignments
-      else
-        @invoice.client
-      end
+      @client = Client.find params[:client_id], :include => :assignments
     end
 
     def authorized?

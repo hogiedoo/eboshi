@@ -2,7 +2,7 @@
   = @client.name
   &raquo; Invite Collaborator
   
-- form_for @assignment do |f|
+= form_for [@client, @assignment] do |f|
   %h2 Existing User
   - current_user.related_users.each do |user|
     %div

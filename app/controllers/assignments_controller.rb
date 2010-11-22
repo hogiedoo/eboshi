@@ -13,7 +13,7 @@ class AssignmentsController < ApplicationController
     end
     unless user
       flash[:error] = "A user with that email address does not exist!"
-      redirect_to new_assignment_path
+      redirect_to new_assignment_path(@client)
     else
       @client.users << user
       flash[:notice] = "Successfully created!"

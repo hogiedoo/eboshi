@@ -19,7 +19,7 @@
 class Work < LineItem
   validates_presence_of :user, :start, :finish
 
-  named_scope :complete, :conditions => "start <> finish"
+  scope :complete, :conditions => "start <> finish"
   
   def self.merge_from_ids(ids)
     works = Work.find ids, :order => "finish DESC"

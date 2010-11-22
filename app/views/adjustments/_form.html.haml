@@ -1,6 +1,6 @@
 = error_messages_for :adjustment
 
-- form_for @adjustment do |form|
+= form_for [@client, @adjustment] do |form|
   %p
     %label User
     = @adjustment.user ? @adjustment.user.name : current_user.name

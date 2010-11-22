@@ -42,3 +42,4 @@ module NavigationHelpers
 end
 
 World(NavigationHelpers)
+World(ShallowRouteHelper)
