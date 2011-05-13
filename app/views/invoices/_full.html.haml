@@ -21,7 +21,9 @@
     - else
       %tr
         %td{ :colspan => 7 }
-          %h2== Invoice ##{invoice.id}
+          %h2
+            = Invoice ##{invoice.id}
+            = invoice.project_name.to_s.empty? ? "" : " - #{invoice.project_name}"
       %tr
         %td{ :colspan => 5 }
           = link_to 'Hide Details', invoice, :class => 'invoice_hide_details button'
