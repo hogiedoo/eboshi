@@ -8,7 +8,7 @@ Client.blueprint do
   city { Faker::Address.city }
   state { Faker::Address.us_state }
   zip { Faker::Address.zip_code }
-  country { Faker::Address.uk_country }
+  country { Faker::Address.country }
   email { Faker::Internet.email }
   contact { Faker::Name.name }
   phone { Faker::PhoneNumber.phone_number }  

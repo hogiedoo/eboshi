@@ -9,15 +9,15 @@ module NavigationHelpers
     case page_name
 
     when /the home\s?page/
-      '/'
+      "/"
 
     when /the invoices page for "(.+)"$/
       client = Client.find_by_name $1
-      "/clients/#{client.id}/invoices"
+      invoices_path client
 
     when /the first invoice for "([^\"]*)"$/
       client = Client.find_by_name $1
-      invoice_path(client.invoices.first)
+      invoice_path client.invoices.first 
 
     when /^\//
       page_name
@@ -30,10 +30,10 @@ module NavigationHelpers
 
     else
       begin
-        page_name =~ /the (.*) page/
+        page_name =~ /^the (.*) page$/
         path_components = $1.split(/\s+/)
         self.send(path_components.push('path').join('_').to_sym)
-      rescue Object => e
+      rescue NoMethodError, ArgumentError
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
           "Now, go and add a mapping in #{__FILE__}"
       end

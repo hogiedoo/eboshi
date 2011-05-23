@@ -2,6 +2,7 @@ source "http://rubygems.org"
 
 gem "rails", "~>3.0.0"
 gem "bard-rake"
+gem "rake", "0.8.7"
 gem "ruby-mysql", "2.9.3"
 gem "ruby-debug", :group => [:development, :test]
 
@@ -29,4 +30,5 @@ group :test do
   gem "capybara"
   gem "pickle"
   gem "nokogiri"
+  gem "launchy"
 end
