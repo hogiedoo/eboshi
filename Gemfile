@@ -14,7 +14,7 @@ gem "RedCloth"
 gem "ratom", :require => "atom"
 gem "chronic"
 gem "whenever", :require => nil
-gem "exception_notification"
+gem "exception_notifier"
 gem "limerick_rake"
 
 group :test do
