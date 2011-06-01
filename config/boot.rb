@@ -5,6 +5,10 @@ require 'thread' # work with rubygems 1.5+
 require 'rubygems'
 
 # Set up gems listed in the Gemfile.
+# Install dependencies if needed
+`bundle check`
+system "bundle install" if not $?.success?
+
 gemfile = File.expand_path('../../Gemfile', __FILE__)
 begin
   ENV['BUNDLE_GEMFILE'] = gemfile
