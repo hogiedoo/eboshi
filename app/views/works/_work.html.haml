@@ -16,7 +16,7 @@
     %td.rate= number_to_per_hour work.rate
     %td.total= number_to_currency work.total
   %td.notes
-    %textarea.dummy{ :id => "notes_#{work.id}", :autocomplete => "off" }
+    %textarea.dummy{ :id => "notes_#{work.id}", :autocomplete => "off", :data => { :url => line_item_path(work) } }
       =h work.notes
       
   %td

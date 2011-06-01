@@ -50,6 +50,11 @@ module ShallowRouteHelper
     convert_client_work_path(work.client, work, options)
   end
 
+  
+  def line_item_path(work, options = {})
+    client_line_item_path(work.client, work, options)
+  end
+
 
   def assignments_path(client, options = {})
     client_assignments_path(client, options)
