@@ -39,9 +39,11 @@ class WorksController < ApplicationController
   def destroy
     @work = Work.find params[:id]
     @work.destroy
+    invoice = @work.invoice || @client.build_invoice_from_unbilled
+
     respond_to do |wants|
       wants.html { redirect_to invoices_path(@client) }
-      wants.js { render :json => @work.invoice.total }
+      wants.js { render :json => invoice.total }
     end
   end
 
