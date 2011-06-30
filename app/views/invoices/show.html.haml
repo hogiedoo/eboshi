@@ -88,7 +88,7 @@
                     - if @invoice.include_dates
                       %td= line_item.start.to_s(:slash) if line_item.start
                     - if line_item.is_a? Work
-                      %td.li= textilize line_item.notes
+                      %td.li= raw textilize(line_item.notes)
                       %td.center_align
                         - if @invoice.include_times and line_item.is_a? Work
                           = line_item.start.to_s(:pretty_time)
