@@ -7,11 +7,11 @@ Then /^I should not see any dates on the invoice$/ do
 end
 
 Then /^I should see times on the invoice$/ do
-  page.body.should match /\d{1,2}:\d{2}&amp;nbsp;[ap]m/i
+  page.body.should match /\d{1,2}:\d{2}.[ap]m/i
 end
 
 Then /^I should not see any times on the invoice$/ do
-  page.body.should_not match /\d{1,2}:\d{2}&amp;nbsp;[ap]m/i
+  page.body.should_not match /\d{1,2}:\d{2}.[ap]m/i
 end
 
 When /^I edit the first invoice for "([^\"]*)"$/ do |name|
