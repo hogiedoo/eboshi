@@ -15,6 +15,8 @@ class UserSessionsController < ApplicationController
       else
         redirect_back_or_default '/'
       end
+    else
+      render "new"
     end
   end
 
