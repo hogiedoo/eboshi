@@ -1,8 +1,6 @@
 --- 
 javascripts: 
 - base:
-  - jquery
-  - jquery-ui
   - jquery.livequery
   - application
   - pretty_flash

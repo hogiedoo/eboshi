@@ -129,5 +129,7 @@
         #footer
           = yield :footer
 
-      = javascript_include_merged 'base'
-      = yield :js
+    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"
+    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"
+    = javascript_include_merged 'base'
+    = yield :js
