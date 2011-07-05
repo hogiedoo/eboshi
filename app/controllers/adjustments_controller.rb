@@ -41,6 +41,7 @@ class AdjustmentsController < ApplicationController
 
   def destroy
     @adjustment = Adjustment.find params[:id]
+    @adjustment.destroy
     respond_to do |wants|
       wants.html { redirect_to invoices_path(@client) }
       wants.js { render :json => @adjustment.invoice_total }
