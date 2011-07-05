@@ -1,10 +1,9 @@
 source "http://rubygems.org"
 
 gem "rails", "~>3.0.0"
+gem "rake"
+gem "mysql2", "~>0.2.7"
 gem "bard-rake"
-gem "rake", "0.8.7"
-gem "ruby-mysql", "2.9.3"
-gem "ruby-debug", :group => [:development, :test]
 
 gem "haml"
 gem "compass"
@@ -14,8 +13,9 @@ gem "RedCloth"
 gem "ratom", :require => "atom"
 gem "chronic"
 gem "whenever", :require => nil
-gem "exception_notification"
 gem "limerick_rake"
+
+gem "hpricot", :group => :development
 
 group :test do
   gem "autotest-rails"
@@ -30,5 +30,9 @@ group :test do
   gem "capybara"
   gem "pickle"
   gem "nokogiri"
+
+  gem "ruby-debug"
   gem "launchy"
 end
+
+gem "exception_notification", :group => :production

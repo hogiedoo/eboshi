@@ -1,5 +1,5 @@
 development: &login
-  adapter: mysql
+  adapter: mysql2
   database: eboshi
   username: root
   password:
@@ -11,6 +11,3 @@ staging:
 test: &test
   <<: *login
   database: eboshi_test
-
-cucumber:
-  <<: *test

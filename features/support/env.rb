@@ -6,7 +6,6 @@
 
 require 'cucumber/rails'
 
-require 'capybara'
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd
 # prefer to use XPath just remove this line and adjust any selectors in your
@@ -42,7 +41,7 @@ end
 # See the DatabaseCleaner documentation for details. Example:
 #
 #   Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
-#     DatabaseCleaner.strategy = :truncation, :except => %w[widgets]
+#     DatabaseCleaner.strategy = :truncation, {:except => %w[widgets]}
 #   end
 #
 #   Before('~@no-txn', '~@selenium', '~@culerity', '~@celerity', '~@javascript') do
