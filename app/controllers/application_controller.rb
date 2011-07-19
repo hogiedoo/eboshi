@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     end
 
     def fetch_blog_feed
-      return true if `hostname`.starts_with? "theia"
+      return true if `hostname`.starts_with? "Theia"
       @blog_feed = Atom::Feed.load_feed(File.open("#{Rails.root}/db/blog_feed.atom"))
       @blog_feed = @blog_feed.entries.first
     end
