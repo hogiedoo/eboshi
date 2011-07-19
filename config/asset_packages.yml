@@ -17,7 +17,7 @@ javascripts:
 
 stylesheets: 
 - base: 
-  - default
+  - application
   - pretty_flash
 - invoices:
   - invoices
