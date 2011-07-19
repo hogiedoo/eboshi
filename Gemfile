@@ -29,7 +29,7 @@ group :test do
   gem "database_cleaner"
   gem "capybara"
   gem "pickle"
-  gem "nokogiri"
+  gem "nokogiri", "1.4.7"
 
   gem "ruby-debug"
   gem "launchy"

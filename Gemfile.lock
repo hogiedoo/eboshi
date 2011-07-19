@@ -103,7 +103,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     mysql2 (0.2.11)
-    nokogiri (1.5.0)
+    nokogiri (1.4.7)
     paperclip (2.3.12)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
@@ -198,7 +198,7 @@ DEPENDENCIES
   limerick_rake
   machinist
   mysql2 (~> 0.2.7)
-  nokogiri
+  nokogiri (= 1.4.7)
   paperclip
   pickle
   rails (~> 3.0.0)
