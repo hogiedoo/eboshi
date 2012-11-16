@@ -7,8 +7,8 @@ Feature: Invoices should include a users optional customized logo and signature
     And an invoice exists for "bossanova"
     And I am on /
     When I follow "My Account"
-    And I fill in "Business Name" with "Bot & Rose"
-    And I fill in "Business Email" with "info@botandrose.com"
+    And I fill in "Business name" with "Bot & Rose"
+    And I fill in "Business email" with "info@botandrose.com"
     And I fill in "Address" with "625 NW Everett St #346"
     And I fill in "user_address2" with ""
     And I fill in "City" with "Portland"
@@ -17,12 +17,12 @@ Feature: Invoices should include a users optional customized logo and signature
     And I upload a logo image
     And I upload a signature
     And I press "Update"
-    Then I should see "Account updated"
+    # Then I should see "Account updated"
     When I go to the first invoice for "bossanova"
-    And I should see "Bot & Rose"
+    And I should see "Bot &amp; Rose"
     And I should see "info@botandrose.com"
     And I should see "625 NW Everett St #346"
-    And I should see "Portland, Oregon  97209"
+    And I should see "Portland, Oregon 97209"
     Then the logo should be an image
     And the signature should be an image
 

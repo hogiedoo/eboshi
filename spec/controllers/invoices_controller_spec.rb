@@ -21,33 +21,33 @@ describe InvoicesController do
     end
 
     it "on show" do
-      get :show, :id => @invoice.id
+      get :show, :client_id => @client.id, :id => @invoice.id
       response.should be_success
     end
     it "on js show" do
-      get :show, :id => @invoice.id, :format => 'js'
+      get :show, :client_id => @client.id, :id => @invoice.id, :format => 'js'
       response.should be_success
     end
 
     it "on edit" do
-      get :edit, :id => @invoice.id
+      get :edit, :client_id => @client.id, :id => @invoice.id
       response.should be_success
     end
     it "on js edit" do
-      get :edit, :id => @invoice.id, :format => 'js'
+      get :edit, :client_id => @client.id, :id => @invoice.id, :format => 'js'
       response.should be_success
     end
 
     it "on create" do
-      post :create, :client_id => @client.id, :invoice => @invoice.attributes
+      post :create, :client_id => @client.id, :client_id => @client.id, :invoice => @invoice.attributes
       response.should be_redirect
     end
     it "on update" do
-      put :update, :id => @invoice.id, :invoice => @invoice.attributes
+      put :update, :client_id => @client.id, :id => @invoice.id, :invoice => @invoice.attributes
       response.should be_redirect
     end
     it "on destroy" do
-      delete :destroy, :id => @invoice.id
+      delete :destroy, :client_id => @client.id, :id => @invoice.id
       response.should be_redirect
     end
   end
@@ -57,7 +57,9 @@ describe InvoicesController do
     @invoice = @client.invoices.make :id => 123
     @invoice.works.make :client => @client, :user => @current_user
     @invoice.adjustments.make :client => @client
-    get :show, :id => @invoice.id, :format => 'pdf'
+
+    get :show, :client_id => @client.id, :id => @invoice.id, :format => 'pdf'
+
     response.headers["Content-Disposition"].should =~ /micah-geisel_invoice-\#123\.pdf/
     response.should be_success
   end

@@ -1,5 +1,51 @@
-class WorksController < ResourceController::Base
-  include LineItemsControllerMethods
+class WorksController < ApplicationController
+  before_filter :get_work, :only => [:edit, :update, :destroy, :convert]
+  before_filter :get_client
+  before_filter :authorized?
+
+  def new
+    @work = @client.works.build :user => current_user
+  end
+
+  def create
+    @work = @client.works.build params[:work].merge(:user => current_user)
+    if @work.save
+      flash[:notice] = "Successfully created Work."
+      redirect_to invoices_path(@client)
+    else
+      render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    @work = Work.find params[:id]
+    if @work.update_attributes params[:work]
+      flash[:notice] = "Successfully updated Work."
+      respond_to do |wants|
+        wants.html { redirect_to invoices_path(@client) }
+        wants.js { render :nothing => true }
+      end
+    else
+      respond_to do |wants|
+        wants.html { render :edit }
+        wants.js { exit }
+      end
+    end
+  end
+
+  def destroy
+    @work = Work.find params[:id]
+    @work.destroy
+    invoice = @work.invoice || @client.build_invoice_from_unbilled
+
+    respond_to do |wants|
+      wants.html { redirect_to invoices_path(@client) }
+      wants.js { render :json => invoice.total }
+    end
+  end
 
   def clock_in
     @work = @client.clock_in current_user
@@ -11,14 +57,15 @@ class WorksController < ResourceController::Base
   end
   
   def clock_out
-    object.clock_out
+    @work = Work.find params[:id]
+    @work.clock_out
     
     respond_to do |format|
       format.html { redirect_to invoices_path(@client) }
       format.js do
         render :json => {
-          :work => render_to_string(:partial => object),
-          :total => object.invoice_total
+          :work => render_to_string(:partial => @work),
+          :total => @work.invoice_total
         }
       end
     end
@@ -34,14 +81,22 @@ class WorksController < ResourceController::Base
   end
 
   def convert
-    object.to_adjustment!
+    @work.to_adjustment!
     flash[:notice] = "Time item converted to adjustment"
     redirect_to invoices_path(@client)
   end
 
-  protected
-    def build_object
-      @object ||= @client.works.build params[:work]
-      @object.user = current_user
+  private
+
+    def get_work
+      @work = Work.find params[:id]
+    end
+
+    def get_client
+      @client = (@work.try(:client) || Client.find(params[:client_id]))
+    end
+
+    def authorized?
+      current_user.authorized? @client
     end
 end

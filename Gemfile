@@ -1,35 +1,38 @@
 source "http://rubygems.org"
 
-gem "rails", "2.3.4"
+gem "rails", "~>3.0.0"
+gem "rake"
+gem "mysql2", "~>0.2.7"
+gem "bard-rake"
 
-gem "mysql", "2.8.1"
-gem "haml", "2.2.22"
-gem "authlogic", "2.1.3"
-gem "resource_controller", "0.6.6"
-gem "paperclip", "2.1.2"
-gem "RedCloth", "4.2.2"
-gem "ratom", "0.6.2", :require => 'atom'
-gem "compass", "0.8.17"
-gem "chronic", "0.2.3"
-gem "whenever", "0.3.7"
+gem "haml"
+gem "compass"
+gem "authlogic", :path => "vendor/gems/authlogic-2.1.6"
+gem "paperclip"
+gem "RedCloth"
+gem "ratom", :require => "atom"
+gem "chronic"
+gem "whenever", :require => nil
+gem "limerick_rake"
 
-gem "bard-rake", "0.1.1"
-
-gem "ruby-debug"
+gem "hpricot", :group => :development
 
 group :test do
-  gem "rspec", "1.2.9"
-  gem "rspec-rails", "1.2.9"
-  gem "machinist", "1.0.6"
-  gem "faker", "0.3.1"
+  gem "autotest-rails"
+  gem "rspec-rails"
+  gem "machinist"
+  gem "faker"
+  gem "webrat"
+  gem "delorean"
+
+  gem "cucumber-rails"
+  gem "database_cleaner"
+  gem "capybara"
+  gem "pickle"
+  gem "nokogiri"
+
+  gem "ruby-debug"
+  gem "launchy"
 end
 
-group :cucumber do
-  gem "rspec", "1.2.9"
-  gem "rspec-rails", "1.2.9"
-  gem "cucumber", "0.4.3"
-  gem "webrat", "0.5.3"
-  gem "pickle", "0.2.1"
-  gem "machinist", "1.0.6"
-  gem "faker", "0.3.1"
-end
+gem "exception_notification", :group => :production

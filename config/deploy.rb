@@ -1,4 +1,5 @@
 set :application, "eboshi"
+set :rvm_ruby_string, "ree-1.8.7-2010.02@eboshi"
 set :asset_paths, ["public/logos", "public/signatures"]
 role :production, "www@botandrose.com:22022"
 

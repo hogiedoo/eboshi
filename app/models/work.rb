@@ -19,12 +19,12 @@
 class Work < LineItem
   validates_presence_of :user, :start, :finish
 
-  named_scope :complete, :conditions => "start <> finish"
+  scope :complete, :conditions => "start <> finish"
   
   def self.merge_from_ids(ids)
     works = Work.find ids, :order => "finish DESC"
 
-    returning work = works.first do
+    works.first.tap do |work|
       work.update_attributes(
         :hours => works.sum(&:hours),
         :notes => works.collect(&:notes_with_period) * ' '

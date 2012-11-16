@@ -1,10 +1,11 @@
-class AssignmentsController < ResourceController::Base
-  before_filter :get_client, :only => [:new, :create]
-  before_filter :authorized?
-  
-  actions :new, :create, :destroy
-  
+class AssignmentsController < ApplicationController
+  def new
+    @client = current_user.clients.find params[:client_id]
+    @assignment = @client.assignments.build :user => current_user
+  end
+
   def create
+    @client = current_user.clients.find params[:client_id]
     user = begin 
       User.find(params[:assignment][:user_id])
     rescue ActiveRecord::RecordNotFound
@@ -12,7 +13,7 @@ class AssignmentsController < ResourceController::Base
     end
     unless user
       flash[:error] = "A user with that email address does not exist!"
-      redirect_to new_assignment_path
+      redirect_to new_assignment_path(@client)
     else
       @client.users << user
       flash[:notice] = "Successfully created!"
@@ -20,17 +21,11 @@ class AssignmentsController < ResourceController::Base
     end
   end
 
-  destroy.wants.html do
-    path = object.user == current_user ? "/" : :back
+  def destroy
+    @assignment = Assignment.find params[:id]
+    raise ActiveRecord::RecordNotFound unless current_user.clients.include? @assignment.client
+    @assignment.destroy
+    path = @assignment.user == current_user ? "/" : :back
     redirect_to path
   end
-  
-  private
-    def get_client
-      @client ||= Client.find params[:client_id]
-    end
-    
-    def authorized?
-      current_user.authorized? object || @client
-    end
 end

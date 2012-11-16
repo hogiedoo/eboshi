@@ -1,32 +1,26 @@
 Then /^I should not be able to go to (.+)$/ do |url|
   visit url
-  response.code.should == "403"
+  page.status_code.should == 403
 end
 
 Given /^I am signed in as "Micah"$/ do
   Given 'a user "Micah" exists with name: "Micah"'
   @user = User.find_by_name "Micah"
   visit "/"
-  fill_in "email", :with => @user.email
-  fill_in "password", :with => "secret"
+  fill_in "Email", :with => @user.email
+  fill_in "Password", :with => "secret"
   click_button "Login"
-  response.should contain "Welcome,"
-  response.should contain "Micah!"
+  Then 'I should see "Welcome, Micah!"'
 end
 
 Given /^I am signed in as an Admin$/ do
   Given 'a user "Admin" exists with name: "Admin", admin: true'
   @user = User.find_by_name "Admin"
   visit "/"
-  fill_in "email", :with => @user.email
-  fill_in "password", :with => "secret"
+  fill_in "Email", :with => @user.email
+  fill_in "Password", :with => "secret"
   click_button "Login"
-  response.should contain "Welcome,"
-  response.should contain "Admin!"
-end
-
-Given /^today is "([^\"]*)"$/ do |date|
-  Time.zone.stub!(:today).and_return(Time.zone.parse(date))
+  Then 'I should see "Welcome, Admin!"'
 end
 
 Given /^I worked (\d+) hours for "([^\"]*)" on "([^\"]*)"$/ do |hours, client_name, date|
@@ -41,13 +35,13 @@ Given /^I worked (\d+) hours for "([^\"]*)" today$/ do |hours, client_name|
 end
 
 Then /^I should see "([^\"]*)" next to "([^\"]*)"$/ do |text, context|
-  response.should have_selector "*:contains('#{context}') ~ *:contains('#{text}')"
+  page.should have_css("*:contains('#{context}') ~ *:contains('#{text}')")
 end
 
 Then /^I should see "(.+)" under "(.+)"$/ do |name, heading|
-  response.should have_selector "h2:contains('#{heading}') ~ *:contains('#{name}')"
+  page.should have_css("h2:contains('#{heading}') ~ *:contains('#{name}')")
 end
 
 Then /^I should not see "(.+)" under "(.+)"$/ do |name, heading|
-  response.should_not have_selector "h2:contains('#{heading}') ~ *:contains('#{name}')"
+  page.should_not have_css("h2:contains('#{heading}') ~ *:contains('#{name}')")
 end

@@ -1,5 +1,6 @@
 $(function() {
   $("td.notes textarea").livequery(function() {
+    this.url = $(this).attr("data-url")
     this.buffer = this.value
     this.wait = false
     // grab line_item id from tr
@@ -17,7 +18,7 @@ $(function() {
         ', 500)
       } else {
         this.buffer = this.value
-        $.post('/line_items/'+this.line_item_id, '_method=put&line_item[notes]='+escape(this.value))
+        $.post(this.url, '_method=put&line_item[notes]='+escape(this.value))
         this.wait = true
       }
     }
