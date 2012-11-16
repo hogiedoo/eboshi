@@ -25,7 +25,7 @@ group :test do
   gem "webrat"
   gem "delorean"
 
-  gem "cucumber-rails"
+  gem "cucumber-rails", :require => false
   gem "database_cleaner"
   gem "capybara"
   gem "pickle"
