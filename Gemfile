@@ -1,38 +1,42 @@
 source "http://rubygems.org"
 
-gem "rails", "~>3.0.0"
-gem "rake"
-gem "mysql2", "~>0.2.7"
+gem "rails"
+gem "haml-rails"
+gem "mysql2"
 gem "bard-rake"
-
-gem "haml"
-gem "compass"
-gem "authlogic", :path => "vendor/gems/authlogic-2.1.6"
-gem "paperclip"
+gem "authlogic"
+gem "paperclip", "~>2.7"
 gem "RedCloth"
 gem "ratom", :require => "atom"
 gem "chronic"
-gem "whenever", :require => nil
-gem "limerick_rake"
 
-gem "hpricot", :group => :development
+gem "sprockets-image_compressor"
+gem "sass-rails"
+gem "compass-rails"
+gem "coffee-rails"
+gem "therubyracer"
+gem "uglifier"
+
+group :test, :development do
+  gem "pry"
+  gem "ruby-debug"
+  gem "quiet_assets"
+
+  gem "rspec-rails"
+end
 
 group :test do
-  gem "autotest-rails"
-  gem "rspec-rails"
-  gem "machinist"
+  gem "machinist", "~>1.0"
   gem "faker"
-  gem "webrat"
   gem "delorean"
 
   gem "cucumber-rails", :require => false
   gem "database_cleaner"
   gem "capybara"
   gem "pickle"
-  gem "nokogiri", "1.4.7"
-
-  gem "ruby-debug"
-  gem "launchy"
 end
 
-gem "exception_notification", :group => :production
+group :production do
+  gem "exception_notification"
+  gem "whenever", :require => false
+end
