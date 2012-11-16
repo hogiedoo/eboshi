@@ -11,7 +11,7 @@
 
 class Invoice < ActiveRecord::Base
   belongs_to :client
-  has_many :line_items, :dependent => :nullify
+  has_many :line_items
   has_many :works
   has_many :adjustments
   has_many :payments, :dependent => :destroy, :order => 'created_at DESC'
