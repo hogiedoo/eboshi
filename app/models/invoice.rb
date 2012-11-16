@@ -18,6 +18,8 @@ class Invoice < ActiveRecord::Base
   
   validates_presence_of :client, :date
 
+  default_value_for(:date) { Time.zone.today }
+
   def self.unpaid
     self.all(:order => "`date` DESC").reject(&:paid?)
   end
@@ -26,12 +28,6 @@ class Invoice < ActiveRecord::Base
     self.all(:order => "`date` DESC").select(&:paid?)
   end
   
-  def initialize(options = {})
-    options = {} if options.nil?
-    options.reverse_merge!(:date => Time.zone.today)
-    super
-  end
-
   def total
     line_items.to_a.sum(&:total)
   end

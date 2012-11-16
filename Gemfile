@@ -9,6 +9,7 @@ gem "paperclip", "~>2.7"
 gem "RedCloth"
 gem "ratom", :require => "atom"
 gem "chronic"
+gem "default_value_for"
 
 gem "sprockets-image_compressor"
 gem "sass-rails"
