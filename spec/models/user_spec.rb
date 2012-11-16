@@ -4,11 +4,11 @@ describe User do
   it "should return a default rate for a client" do
     @user = User.make
     @client = Client.make
-    @client.works.make :rate => 60, :start => Time.zone.today - 2.days, :user => @user
-    @client.works.make :rate => 70, :start => Time.zone.today + 1.days, :user => @user
-    @client.works.make :rate => 50, :start => Time.zone.today - 1.days, :user => @user
-    @client.works.make :rate => 100, :start => Time.zone.today + 2.days, :user => User.make
-    Client.make.works.make :rate => 120, :start => Time.zone.today + 3.days, :user => @user
+    @client.works.make :rate => 60, :start => Time.zone.today.midnight - 2.days, :user => @user
+    @client.works.make :rate => 70, :start => Time.zone.today.midnight + 1.days, :user => @user
+    @client.works.make :rate => 50, :start => Time.zone.today.midnight - 1.days, :user => @user
+    @client.works.make :rate => 100, :start => Time.zone.today.midnight + 2.days, :user => User.make
+    Client.make.works.make :rate => 120, :start => Time.zone.today.midnight + 3.days, :user => @user
     @user.default_rate_for(@client).should == 70
   end
 
@@ -28,21 +28,21 @@ describe User do
   describe "totals by date" do
     before do
       @it = User.make
-      @it.works.make :rate => 50, :start => Time.zone.today + 1.year, :finish => Time.zone.today + 1.hour + 1.year
-      @it.works.make :rate => 50, :start => Time.zone.today + 1.month, :finish => Time.zone.today + 1.hour + 1.month
-      @it.works.make :rate => 50, :start => Time.zone.today + 1.week, :finish => Time.zone.today + 1.hour + 1.week
+      @it.works.make :rate => 50, :start => Time.zone.today.midnight + 1.year, :finish => Time.zone.today.midnight + 1.hour + 1.year
+      @it.works.make :rate => 50, :start => Time.zone.today.midnight + 1.month, :finish => Time.zone.today.midnight + 1.hour + 1.month
+      @it.works.make :rate => 50, :start => Time.zone.today.midnight + 1.week, :finish => Time.zone.today.midnight + 1.hour + 1.week
 
-      @it.works.make :rate => 60, :start => Time.zone.today, :finish => Time.zone.today + 1.hour
-      @it.works.make :rate => 70, :start => Time.zone.today, :finish => Time.zone.today + 1.hour
-      @it.works.make :rate => 50, :start => Time.zone.today, :finish => Time.zone.today + 1.hour
+      @it.works.make :rate => 60, :start => Time.zone.today.midnight, :finish => Time.zone.today.midnight + 1.hour
+      @it.works.make :rate => 70, :start => Time.zone.today.midnight, :finish => Time.zone.today.midnight + 1.hour
+      @it.works.make :rate => 50, :start => Time.zone.today.midnight, :finish => Time.zone.today.midnight + 1.hour
     end
 
-    it "should return the total money earned" do
-      @it.total_by_date(Time.zone.today).should == 180.0
+    it "should return the total money earned", :wip => true do
+      @it.total_by_date(Time.zone.today.midnight).to_f.should == 180.0
     end
 
     it "should return the total hours" do
-      @it.hours_by_date(Time.zone.today).should == 3
+      @it.hours_by_date(Time.zone.today.midnight).to_f.should == 3.0
     end
   end
 
