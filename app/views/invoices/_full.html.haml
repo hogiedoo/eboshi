@@ -14,18 +14,20 @@
           %h2 Building Invoice
       %tr
         %td{ :colspan => 7 }
-          = button_to 'Clock In', clock_in_path(@client), :id => 'clock_in', :class=>"button left"
-          = link_to 'New Time Item', new_work_path(@client), :class=>"button left"
-          = link_to 'New Flat Fee', new_adjustment_path(@client), :class=>"button left"
+          = button_to 'Clock In', clock_in_path(@client), :id => 'clock_in', :class => "button left"
+          = link_to 'New Time Item', new_client_work_path(@client), :class => "button left"
+          = link_to 'New Flat Fee', new_client_adjustment_path(@client), :class => "button left"
           .clear          
     - else
       %tr
         %td{ :colspan => 7 }
-          %h2== Invoice ##{invoice.id}
+          %h2
+            Invoice ##{invoice.id}
+            = " - #{invoice.project_name}" unless invoice.project_name.blank?
       %tr
         %td{ :colspan => 5 }
           = link_to 'Hide Details', invoice, :class => 'invoice_hide_details button'
-          = link_to 'Export PDF', invoice_path(:id => invoice.id, :format => :pdf), :class=>"button"
+          = link_to 'Export PDF', invoice_path(invoice, :format => :pdf), :class=> "button"
           = link_to 'Edit', edit_invoice_path(invoice), :class=>"button"
           = link_to 'Delete', invoice_path(invoice), :method => :delete, :confirm => 'Are you certain you want to delete this invoice? Its line items will not be deleted and will go back in your unassigned list.', :class=>"button"
         %td.total= number_to_currency invoice.total
@@ -55,7 +57,7 @@
   %tr#totals
     %td{:colspan => "3"}
     %td.total_hours= number_with_precision invoice.total_hours, :precision => 2  
-    %td &nbsp 
+    %td &nbsp;
     %td.total= number_to_currency invoice.balance
     %td.align_left
       %b Current Balance
@@ -63,10 +65,10 @@
   - invoice.users.each_with_index do |user, i|
     %tr.breakdown
       %td
-      %td= user ? h(user.name) : "<em>Ambiguous</em>"
+      %td= user ? h(user.name) : "<em>Ambiguous</em>".html_safe
       %td
       %td.total_hours= number_with_precision invoice.total_hours_for_user(user), :precision => 2  
-      %td &nbsp 
+      %td &nbsp;
       %td.total= number_to_currency invoice.total_for_user(user)
       - if i == 0
         %td.align_left{ :rowspan => invoice.users.count, :valign => "middle" }

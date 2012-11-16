@@ -1,9 +1,8 @@
 --- 
 javascripts: 
 - base:
-  - jquery
-  - jquery-ui
   - jquery.livequery
+  - jquery_ujs
   - application
   - pretty_flash
   - toggle_summaries

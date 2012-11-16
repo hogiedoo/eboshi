@@ -5,7 +5,8 @@ describe WorksController do
 
   before :each do
     @client = Client.make
-    @work = Work.make :client => @client
+    @client.users << @current_user
+    @work = Work.make :client => @client, :user => @current_user
   end
 
   describe "should not error out" do

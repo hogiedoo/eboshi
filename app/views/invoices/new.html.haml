@@ -3,7 +3,7 @@
 
 = error_messages_for :invoice
 
-- form_for @invoice do |f|
+= form_for [@client, @invoice] do |f|
   = render :partial => 'form', :object => f
 
 = link_to 'Cancel', invoices_path(@client), :class=>"button left"

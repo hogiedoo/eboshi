@@ -39,11 +39,11 @@ blockquote
     :line-height normal
     :font-style italic
 
-!a= #333333
-!a_lt= #000000
+$a: #333333
+$a_lt: #000000
 
 a
-  :color= !a
+  color: $a
   :text-decoration none
   &:hover
     :text-decoration underline
@@ -57,8 +57,8 @@ th
 img
   :border 0
   
-!content_width= 1000px
-!var_border= 3px "double" #666666
+$content_width: 1000px
+$var_border: 3px double #666666
 
 .red
   :color red
@@ -80,7 +80,7 @@ img
 .button, input.button
   :cursor pointer
   :font-weight bold
-  :border= 2px "solid" !a_lt
+  border: 2px solid $a_lt
   :background #ffffff
   :margin 3px 1px
   :padding 1px 9px
@@ -89,7 +89,7 @@ img
   :-moz-border-radius 12px
   :-webkit-border-radius 12px
   &:hover
-    :border-color= !a
+    border-color: $a
     :text-decoration none
     
 .button
@@ -102,12 +102,12 @@ img
 #header_container
   :width 100%
   :margin 0 auto
-  :border-bottom= !var_border
+  border-bottom: $var_border
 
 #header
   :display block
   :position relative
-  :width= !content_width
+  width: $content_width
   :margin 0 auto
   #title
     :display block
@@ -159,23 +159,23 @@ img
 #breadcrumbs_container
   :width 100%
   :background #000000
-  :border-bottom= !var_border
+  border-bottom: $var_border
 
 
 #breadcrumbs
   :display block
-  :width= !content_width
+  width: $content_width
   :margin 0 auto
   :color #e4e4e4
 
 #actions
   :display block
-  :width= !content_width
+  width: $content_width
   :margin 0 auto
 
 #all_content
   :display block
-  :width= !content_width
+  width: $content_width
   :margin 10px auto
 
 #content
@@ -264,8 +264,8 @@ table.invoice
       :border-bottom 3px double #000
   tr
     th
-      :border-top= !var_border
-      :border-bottom= !var_border
+      border-top: $var_border
+      border-bottom: $var_border
   tr
     td
       :border-bottom 1px solid #666666

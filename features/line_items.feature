@@ -8,8 +8,8 @@ Feature: Manage line items to contruct invoices
   
   Scenario: User creates new time item    
     When I follow "New Time Item"
-    And I select "1pm" as the "Start" date and time
-    And I select "3pm" as the "End" date and time
+    And I select "1pm" as the "Start" time
+    And I select "3pm" as the "End" time
     And I fill in "Rate" with "75"
     And I fill in "Notes" with "testing new time item"
     And I press "Create"
@@ -28,7 +28,7 @@ Feature: Manage line items to contruct invoices
 
   Scenario: User creates new flat fee with date and user
     When I follow "New Flat Fee"
-    And I select "2009-01-01" as the date
+    And I select "2009-01-01" as the "Date" date
     And I fill in "Amount" with "300"
     And I fill in "Notes" with "testing new flat fee"
     And I press "Create"
@@ -48,7 +48,7 @@ Feature: Manage line items to contruct invoices
   Scenario: User creates new flat fee without date and user
     When I follow "New Flat Fee"
     And I check "No user"
-    And I select "2009-01-01" as the date
+    And I select "2009-01-01" as the "Date" date
     And I check "No date"
     And I fill in "Amount" with "300"
     And I fill in "Notes" with "testing new flat fee"
@@ -62,7 +62,7 @@ Feature: Manage line items to contruct invoices
     When I follow "Edit"
     And I uncheck "No user"
     And I uncheck "No date"
-    And I select "2009-01-01" as the date
+    And I select "2009-01-01" as the "Date" date
     And I press "Update"
     Then I should see "Micah" in a line item
     And I should see "01/01/09" in a line item

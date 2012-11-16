@@ -11,13 +11,9 @@ Given /^a time item for "(.+)"$/ do |client_name|
 end
 
 Then /^I should see "(.+)" in a line item$/ do |text|
-  within ".line_item" do |scope|
-    scope.should contain(text)
-  end
+  page.should have_css(".line_item:contains('#{text}')")
 end
 
 Then /^I should not see "(.+)" in a line item$/ do |text|
-  within ".line_item" do |scope|
-    scope.should_not contain(text)
-  end
+  page.should_not have_css(".line_item:contains('#{text}')")
 end

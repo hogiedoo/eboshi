@@ -1,8 +1,38 @@
-class UsersController < ResourceController::Base
-  before_filter :require_admin, :only => :index
-  actions :all, :except => :destroy
+class UsersController < ApplicationController
+  def index
+    require_admin
+    @users = User.all
+  end
 
-  create.flash "Account registered!"
-  update.flash "Account updated!"
-  update.wants.html { redirect_to root_path }
+  def show
+    @user = User.find params[:id]
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new params[:user]
+    if @user.save
+      flash[:notice] = "Account registered!"
+      redirect_to @user
+    else
+      render :new
+    end
+  end
+
+  def edit
+    @user = User.find params[:id]
+  end
+
+  def update
+    @user = User.find params[:id]
+    if @user.update_attributes params[:user]
+      flash[:notice] = "Account updated!"
+      redirect_to User
+    else
+      render :edit
+    end
+  end
 end

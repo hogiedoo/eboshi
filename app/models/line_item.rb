@@ -25,11 +25,11 @@ class LineItem < ActiveRecord::Base
 
   validates_presence_of :client, :rate
     
-  named_scope :unbilled, :conditions => "invoice_id IS NULL", :order => 'start DESC'
-  named_scope :on_date,  lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_day.utc.to_s(:db)}'" } }
-  named_scope :on_week,  lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_week.yesterday.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_week.yesterday.end_of_day.utc.to_s(:db)}'" } }
-  named_scope :on_month, lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_month.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_month.end_of_day.utc.to_s(:db)}'" } }
-  named_scope :on_year,  lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_year.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_year.end_of_day.utc.to_s(:db)}'" } }
+  scope :unbilled, :conditions => "invoice_id IS NULL", :order => 'start DESC'
+  scope :on_date,  lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_day.utc.to_s(:db)}'" } }
+  scope :on_week,  lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_week.yesterday.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_week.yesterday.end_of_day.utc.to_s(:db)}'" } }
+  scope :on_month, lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_month.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_month.end_of_day.utc.to_s(:db)}'" } }
+  scope :on_year,  lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_year.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_year.end_of_day.utc.to_s(:db)}'" } }
 
   def total
     0
@@ -63,9 +63,11 @@ class LineItem < ActiveRecord::Base
   end
   
   def notes_with_period
-    returning notes do
-      notes += '.' unless notes.nil? or notes.last.match(/[.?]/)
-    end    
+    if notes.nil? or notes.last.match(/[.?]/)
+      notes
+    else
+      "#{notes}."
+    end
   end
 
   def <=> target

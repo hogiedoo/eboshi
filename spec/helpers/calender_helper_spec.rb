@@ -11,25 +11,26 @@ describe CalendarHelper do
     end
 
     it "should accept a block for date html" do
-      Time.zone.stub!(:today).and_return(Time.zone.parse("06/19/1983"))
-      opts = {
-        :year => 1983, 
-        :month => 6
-      }
+      Delorean.time_travel_to "6/19/1983" do
+        opts = {
+          :year => 1983, 
+          :month => 6
+        }
 
-      out = helper.capture_haml do
-        helper.calendar(opts) do |date|
-          helper.haml_concat "day"
+        out = helper.capture_haml do
+          helper.calendar(opts) do |date|
+            helper.haml_concat "day"
+          end
         end
+
+        out.should have_selector "tbody tr", :count => 5
+        out.should have_selector "tbody tr:first-child td", :count => 7
+        out.should have_selector "tbody tr:first-child td.otherMonth", :count => 3
+        out.should have_selector "tbody tr:last-child td.otherMonth", :count => 2
+
+        out.should have_selector "tbody td.today", :count => 1
+        out.should have_selector "tbody tr:nth-child(4) td:first-child.today", :count => 1
       end
-
-      out.should have_tag "tbody tr", :count => 5
-      out.should have_tag "tbody tr:first-child td", :count => 7
-      out.should have_tag "tbody tr:first-child td.otherMonth", :count => 3
-      out.should have_tag "tbody tr:last-child td.otherMonth", :count => 2
-
-      out.should have_tag "tbody td.today", :count => 1
-      out.should have_tag "tbody tr:nth-child(4) td:first-child.today", :text => /19/, :count => 1
     end
 
     it "should not suck" do
@@ -44,8 +45,8 @@ describe CalendarHelper do
         end
       end
 
-      out.should have_tag "tbody tr", :count => 5
-      out.should have_tag "tbody tr:first-child td", :count => 7
+      out.should have_selector "tbody tr", :count => 5
+      out.should have_selector "tbody tr:first-child td", :count => 7
     end
   end
   

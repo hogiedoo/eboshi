@@ -1,19 +1,24 @@
-- f = form
-
 - content_for :js do
   = javascript_include_merged 'friendly_time_select'
 
-= f.hidden_field :type
+= error_messages_for :work
 
-%p
-  = f.label :start
-  = f.datetime_select :start
-%p
-  = f.label :finish, "End"
-  = f.datetime_select :finish
-%p
-  = f.label :rate
-  ==$#{f.text_field :rate}
-%p
-  = f.label :notes
-  = f.text_area :notes
+= form_for [@client, @work] do |form|
+
+  = form.hidden_field :type
+
+  %p
+    = form.label :start
+    = form.datetime_select :start
+  %p
+    = form.label :finish, "End"
+    = form.datetime_select :finish
+  %p
+    = form.label :rate
+    ==$#{form.text_field :rate}
+  %p
+    = form.label :notes
+    = form.text_area :notes
+
+  %p= form.submit @work.new_record? ? "Create" : "Update"
+

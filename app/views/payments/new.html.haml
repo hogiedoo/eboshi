@@ -3,7 +3,7 @@
 
 = error_messages_for :payment
 
-- form_for @payment do |f|
+= form_for @payment, :url => payments_path(@invoice) do |f|
   = render :partial => 'form', :object => f
 
 = link_to 'Cancel', invoices_path(@invoice.client)
