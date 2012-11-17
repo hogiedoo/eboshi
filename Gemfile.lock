@@ -91,6 +91,8 @@ GEM
       multipart-post (~> 1.1)
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
+    faye-websocket (0.4.6)
+      eventmachine (>= 0.12.0)
     ffi (1.1.5)
     fssm (0.2.9)
     gherkin (2.11.5)
@@ -132,6 +134,12 @@ GEM
     pickle (0.4.11)
       cucumber (>= 0.8)
       rake
+    poltergeist (1.0.2)
+      capybara (~> 1.1)
+      childprocess (~> 0.3)
+      faye-websocket (~> 0.4, >= 0.4.4)
+      http_parser.rb (~> 0.5.3)
+      multi_json (~> 1.0)
     polyglot (0.3.3)
     pry (0.9.10)
       coderay (~> 1.0.5)
@@ -241,7 +249,6 @@ DEPENDENCIES
   RedCloth
   authlogic
   bard-rake
-  capybara (~> 1.0)
   chronic
   coffee-rails
   compass-rails
@@ -257,6 +264,7 @@ DEPENDENCIES
   mysql2
   paperclip (~> 2.7)
   pickle
+  poltergeist
   pry
   quiet_assets
   rails

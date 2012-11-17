@@ -36,7 +36,7 @@ group :test do
 
   gem "cucumber-rails", :require => false
   gem "database_cleaner"
-  gem "capybara", "~>1.0"
+  gem "poltergeist"
   gem "pickle"
 end
 

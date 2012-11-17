@@ -14,8 +14,8 @@ module Cucumber
       def select_time(field, options = {})
         id = find("label:contains('#{field}')")["for"]
         time = Time.parse(options[:with])
-        find("select##{id}_4i").find(:xpath, ::XPath::HTML.option(time.hour.to_s.rjust(2,'0'))).select_option
-        find("select##{id}_5i").find(:xpath, ::XPath::HTML.option(time.min.to_s.rjust(2,'0'))).select_option
+        find("select##{id}_4i option[value='#{time.hour.to_s.rjust(2,'0')}']").select_option
+        find("select##{id}_5i option[value='#{time.min.to_s.rjust(2,'0')}']").select_option
       end
 
       def select_datetime(field, options = {})
