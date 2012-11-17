@@ -7,8 +7,8 @@ describe InvoicesController do
     before :each do
       @client = Client.make
       @invoice = @client.invoices.make
-      @invoice.works.make :client => @client, :user => @current_user
-      @invoice.adjustments.make :client => @client
+      Work.make :invoice => @invoice, :client => @client, :user => @current_user
+      Adjustment.make :invoice => @invoice, :client => @client
     end
 
     it "on index" do
@@ -55,8 +55,8 @@ describe InvoicesController do
   it "should name the pdf correctly" do
     @client = Client.make
     @invoice = @client.invoices.make :id => 123
-    @invoice.works.make :client => @client, :user => @current_user
-    @invoice.adjustments.make :client => @client
+    Work.make :invoice => @invoice, :client => @client, :user => @current_user
+    Adjustment.make :invoice => @invoice, :client => @client
 
     get :show, :client_id => @client.id, :id => @invoice.id, :format => 'pdf'
 

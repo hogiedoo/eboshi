@@ -57,14 +57,14 @@ describe Invoice do
     @client = Client.make
 
     @unpaid = @client.invoices.make
-    @unpaid.works.make
+    Work.make :invoice => @unpaid
 
     @partpaid = @client.invoices.make
-    @partpaid.works.make
+    Work.make :invoice => @partpaid
     @partpaid.payments.make :total => 25
 
     @paid = @client.invoices.make
-    @paid.works.make
+    Work.make :invoice => @paid
     @paid.payments.make :total => 50
 
     Invoice.unpaid.should have(2).invoices
@@ -74,7 +74,7 @@ describe Invoice do
 
   it "should default date and paid to false" do
     @invoice = Invoice.new
-    @invoice.date.should eql Time.today
+    @invoice.date.should eql Time.zone.today.midnight
     @invoice.should_not be_paid
   end
 
@@ -88,7 +88,7 @@ describe Invoice do
 
   it "should handle the total attribute through mass assignment" do
     @invoice = Invoice.make
-    5.times { @invoice.works.make }
+    5.times { Work.make :invoice => @invoice }
     total = @invoice.total
     @invoice.attributes = { :total => total-50 }
     @invoice.save

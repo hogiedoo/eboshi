@@ -12,13 +12,11 @@
 class Invoice < ActiveRecord::Base
   belongs_to :client
   has_many :line_items
-  has_many :works
-  has_many :adjustments
   has_many :payments, :dependent => :destroy, :order => 'created_at DESC'
   
   validates_presence_of :client, :date
 
-  default_value_for(:date) { Time.zone.today }
+  default_value_for(:date) { Time.zone.today.midnight }
 
   def self.unpaid
     self.all(:order => "`date` DESC").reject(&:paid?)
@@ -28,6 +26,14 @@ class Invoice < ActiveRecord::Base
     self.all(:order => "`date` DESC").select(&:paid?)
   end
   
+  def works
+    line_items.where(:type => "Work")
+  end
+
+  def adjustments
+    line_items.where(:type => "Adjustment")
+  end
+
   def total
     line_items.to_a.sum(&:total)
   end
@@ -39,7 +45,7 @@ class Invoice < ActiveRecord::Base
   def total=(value)
     difference = value.to_f - total
     return total if difference.abs < 0.01
-    line_items << adjustments.build(:total => difference, :client_id => client_id)
+    line_items << Adjustment.new(:total => difference, :client_id => client_id)
   end
   
   def balance

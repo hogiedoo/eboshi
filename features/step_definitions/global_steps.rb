@@ -4,23 +4,23 @@ Then /^I should not be able to go to (.+)$/ do |url|
 end
 
 Given /^I am signed in as "Micah"$/ do
-  Given 'a user "Micah" exists with name: "Micah"'
+  step 'a user "Micah" exists with name: "Micah"'
   @user = User.find_by_name "Micah"
   visit "/"
   fill_in "Email", :with => @user.email
   fill_in "Password", :with => "secret"
   click_button "Login"
-  Then 'I should see "Welcome, Micah!"'
+  step 'I should see "Welcome, Micah!"'
 end
 
 Given /^I am signed in as an Admin$/ do
-  Given 'a user "Admin" exists with name: "Admin", admin: true'
+  step 'a user "Admin" exists with name: "Admin", admin: true'
   @user = User.find_by_name "Admin"
   visit "/"
   fill_in "Email", :with => @user.email
   fill_in "Password", :with => "secret"
   click_button "Login"
-  Then 'I should see "Welcome, Admin!"'
+  step 'I should see "Welcome, Admin!"'
 end
 
 Given /^I worked (\d+) hours for "([^\"]*)" on "([^\"]*)"$/ do |hours, client_name, date|
