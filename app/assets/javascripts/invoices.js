@@ -1,3 +1,7 @@
+//= require_self
+//= require auto_resize_textareas
+//= require edit_in_place
+
 $(function() {
   $("tr.line_item").live('mouseover', function() {
     $(this).addClass("line_item_over");

@@ -1,3 +1,9 @@
+//= require jquery.livequery
+//= require jquery_ujs
+//= require application
+//= require pretty_flash
+//= require toggle_summaries
+
 // jQuery extensions //////////////////////////////////////////////////////////
 
 jQuery.ajaxSetup({ 
