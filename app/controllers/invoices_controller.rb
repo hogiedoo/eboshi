@@ -22,7 +22,7 @@ class InvoicesController < ApplicationController
         # Set RAILS_ASSET_ID to blank string or rails appends some time after 
         # to prevent file caching, fucking up local - disk requests.
         ENV["RAILS_ASSET_ID"] = ''
-        html_string = render_to_string :template => 'invoices/show.html.haml', :layout => false
+        html_string = render_to_string :template => 'invoices/show.html', :layout => false
 
         # Make all paths relative, on disk paths...
         html_string = html_string.gsub("src=\"", "src=\"#{Rails.root}/public") unless Rails.env == "production"
