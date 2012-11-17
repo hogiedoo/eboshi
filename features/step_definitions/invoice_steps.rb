@@ -26,5 +26,5 @@ end
 
 Then /^I should see ([a-z]+) line items?$/ do |number|
   number = english_to_number number
-  page.should have_css(".line_item", :count => number)
+  page.all(".line_item").length.should == number
 end
