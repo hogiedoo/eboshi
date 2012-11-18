@@ -21,6 +21,9 @@ gem "coffee-rails"
 gem "therubyracer"
 gem "uglifier"
 
+gem "jquery-rails"
+gem "jquery-ui-rails"
+
 group :test, :development do
   gem "pry"
   gem "ruby-debug"

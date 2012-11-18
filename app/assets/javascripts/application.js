@@ -1,5 +1,6 @@
-//= require jquery.livequery
+//= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require application
 //= require pretty_flash
 //= require toggle_summaries

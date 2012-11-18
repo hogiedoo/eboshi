@@ -1,3 +1,5 @@
+//= require jquery.livequery
+
 $(function() {
   $("td.notes textarea").livequery(function() {
     new AutoResizeTextArea.init(this)
