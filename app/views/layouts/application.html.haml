@@ -5,8 +5,6 @@
     %title
       Eboshi &raquo;
       = yield :title
-    %meta{:name => "keywords", :content => ""}
-    %meta{:name => "description", :content => ""}
     = csrf_meta_tag
 
     = stylesheet_link_tag "application"
@@ -32,13 +30,12 @@
           #login
             #account.right
               - if current_user
-                ==#{link_to 'Logout', logout_path, :method => :delete, :class=>"button right"}
+                = link_to 'Logout', logout_path, :method => :delete, :class => "button right"
                 - if current_user.admin?
-                  ==#{link_to 'All Users', users_path, :class=>"button right"}
-                ==#{link_to 'My Account', edit_user_path(current_user), :class=>"button right"}
-                .user_name.right.sm_pad{:style => "color: \##{current_user.color}"}
-                  %span Welcome, 
-                  ==#{current_user.name}!
+                  = link_to 'All Users', users_path, :class => "button right"
+                = link_to 'My Account', edit_user_path(current_user), :class => "button right"
+                .user_name.right.sm_pad{:style => "color: ##{current_user.color}"}
+                  %span Welcome, #{current_user.name}!
                 .clear
             .clear
             - unless `hostname`.starts_with? "Theia"
