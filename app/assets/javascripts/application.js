@@ -1,9 +1,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
-//= require application
+
+//= require_self
 //= require pretty_flash
 //= require toggle_summaries
+//= require friendly_time_select
+//= require invoices
+//= require new_invoice
 
 // jQuery extensions //////////////////////////////////////////////////////////
 

@@ -1,3 +1,5 @@
+//= require friendly_time_select
+
 $(function() {
   $("table input:checkbox").click(function() {
     var total = 0.0;
